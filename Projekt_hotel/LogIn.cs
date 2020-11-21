@@ -45,6 +45,7 @@ namespace Projekt_hotel
         {
             try
             {
+                // pobieranie nazwy uzytkownika oraz hasla z bazy
                 var usr = context.UserData.Where(c => c.Username == login_text.Text && c.Password == password_text.Text).Single();
 
                 if(usr != null)
