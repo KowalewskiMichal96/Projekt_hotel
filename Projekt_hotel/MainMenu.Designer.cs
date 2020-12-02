@@ -28,34 +28,218 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mENUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rEZERWACJEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gOŚCIEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pŁATNIKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cHECKINToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cHECKOUTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.lOGOUTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oPTIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lISTOFUSERSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.nEWROOMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nEWUSERToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // menuStrip1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Lato", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(247, 203);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(242, 48);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "OKNO NR 2";
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mENUToolStripMenuItem,
+            this.oPTIONToolStripMenuItem,
+            this.toolStripTextBox1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1902, 28);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // mENUToolStripMenuItem
+            // 
+            this.mENUToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rEZERWACJEToolStripMenuItem,
+            this.gOŚCIEToolStripMenuItem,
+            this.pŁATNIKToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.cHECKINToolStripMenuItem,
+            this.cHECKOUTToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.lOGOUTToolStripMenuItem});
+            this.mENUToolStripMenuItem.Name = "mENUToolStripMenuItem";
+            this.mENUToolStripMenuItem.Size = new System.Drawing.Size(65, 27);
+            this.mENUToolStripMenuItem.Text = "MENU";
+            // 
+            // rEZERWACJEToolStripMenuItem
+            // 
+            this.rEZERWACJEToolStripMenuItem.Name = "rEZERWACJEToolStripMenuItem";
+            this.rEZERWACJEToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rEZERWACJEToolStripMenuItem.Text = "RESERVATION";
+            // 
+            // gOŚCIEToolStripMenuItem
+            // 
+            this.gOŚCIEToolStripMenuItem.Name = "gOŚCIEToolStripMenuItem";
+            this.gOŚCIEToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gOŚCIEToolStripMenuItem.Text = "GUEST";
+            // 
+            // pŁATNIKToolStripMenuItem
+            // 
+            this.pŁATNIKToolStripMenuItem.Name = "pŁATNIKToolStripMenuItem";
+            this.pŁATNIKToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.pŁATNIKToolStripMenuItem.Text = "PAYER";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(221, 6);
+            // 
+            // cHECKINToolStripMenuItem
+            // 
+            this.cHECKINToolStripMenuItem.Name = "cHECKINToolStripMenuItem";
+            this.cHECKINToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cHECKINToolStripMenuItem.Text = "CHECK IN";
+            // 
+            // cHECKOUTToolStripMenuItem
+            // 
+            this.cHECKOUTToolStripMenuItem.Name = "cHECKOUTToolStripMenuItem";
+            this.cHECKOUTToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cHECKOUTToolStripMenuItem.Text = "CHECK OUT";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(221, 6);
+            // 
+            // lOGOUTToolStripMenuItem
+            // 
+            this.lOGOUTToolStripMenuItem.Name = "lOGOUTToolStripMenuItem";
+            this.lOGOUTToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.lOGOUTToolStripMenuItem.Text = "LOGOUT";
+            // 
+            // oPTIONToolStripMenuItem
+            // 
+            this.oPTIONToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lISTOFUSERSToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.nEWUSERToolStripMenuItem,
+            this.nEWROOMToolStripMenuItem});
+            this.oPTIONToolStripMenuItem.Name = "oPTIONToolStripMenuItem";
+            this.oPTIONToolStripMenuItem.Size = new System.Drawing.Size(76, 27);
+            this.oPTIONToolStripMenuItem.Text = "OPTION";
+            // 
+            // lISTOFUSERSToolStripMenuItem
+            // 
+            this.lISTOFUSERSToolStripMenuItem.Name = "lISTOFUSERSToolStripMenuItem";
+            this.lISTOFUSERSToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.lISTOFUSERSToolStripMenuItem.Text = "LIST OF USERS";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            // 
+            // nEWROOMToolStripMenuItem
+            // 
+            this.nEWROOMToolStripMenuItem.Name = "nEWROOMToolStripMenuItem";
+            this.nEWROOMToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nEWROOMToolStripMenuItem.Text = "NEW ROOM";
+            // 
+            // nEWUSERToolStripMenuItem
+            // 
+            this.nEWUSERToolStripMenuItem.Name = "nEWUSERToolStripMenuItem";
+            this.nEWUSERToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nEWUSERToolStripMenuItem.Text = "NEW USER";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackgroundImage = global::Projekt_hotel.Properties.Resources.tlo_5;
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 28);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1902, 1005);
+            this.panel1.TabIndex = 2;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(336, 945);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(228, 48);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Usuń Rezerwację";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(102, 945);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(228, 48);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Dodaj Nowa Rezerwację";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(32, 24);
+            this.toolStripTextBox1.Text = "X";
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainMenu";
-            this.Text = "MainMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "MAINMENU";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainMenu_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mENUToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rEZERWACJEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gOŚCIEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem cHECKINToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cHECKOUTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem lOGOUTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oPTIONToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lISTOFUSERSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem nEWROOMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nEWUSERToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripMenuItem pŁATNIKToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripTextBox1;
     }
 }

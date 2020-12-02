@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DatabaseHotel" Class="databaseHotelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\kowal\Documents\DatabaseHotel.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="Projekt_hotel.Properties.Settings" SettingsPropertyName="DatabaseHotelConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.City" Member="City">
+    <Type Name="City">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CityName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="Country_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="City_Hotel" Member="Hotel" ThisKey="Id" OtherKey="City_ID" Type="Hotel" />
+      <Association Name="Country_City" Member="Country" ThisKey="Country_ID" OtherKey="Id" Type="Country" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Guest" Member="Guest">
+    <Type Name="Guest">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Nationality" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IdProof" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Guest_Invoice" Member="Invoice" ThisKey="Id" OtherKey="Guest_ID" Type="Invoice" />
+      <Association Name="Guest_Reservation" Member="Reservation" ThisKey="Id" OtherKey="Guest_ID" Type="Reservation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Country" Member="Country">
+    <Type Name="Country">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CountryName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Country_City" Member="City" ThisKey="Id" OtherKey="Country_ID" Type="City" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Hotel" Member="Hotel">
+    <Type Name="Hotel">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HotelName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="City_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Hotel_Room" Member="Room" ThisKey="Id" OtherKey="Hotel_ID" Type="Room" />
+      <Association Name="City_Hotel" Member="City" ThisKey="City_ID" OtherKey="Id" Type="City" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoice" Member="Invoice">
+    <Type Name="Invoice">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceAmount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Guest_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Worker_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Payer_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reservation_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Guest_Invoice" Member="Guest" ThisKey="Guest_ID" OtherKey="Id" Type="Guest" IsForeignKey="true" />
+      <Association Name="Payer_Invoice" Member="Payer" ThisKey="Payer_ID" OtherKey="Id" Type="Payer" IsForeignKey="true" />
+      <Association Name="Reservation_Invoice" Member="Reservation" ThisKey="Reservation_ID" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
+      <Association Name="Worker_Invoice" Member="Worker" ThisKey="Worker_ID" OtherKey="Id" Type="Worker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payer" Member="Payer">
+    <Type Name="Payer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AccountNumber" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MethodOfPayment" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Payer_Invoice" Member="Invoice" ThisKey="Id" OtherKey="Payer_ID" Type="Invoice" />
+      <Association Name="Payer_Reservation" Member="Reservation" ThisKey="Id" OtherKey="Payer_ID" Type="Reservation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Reservation" Member="Reservation">
+    <Type Name="Reservation">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Total_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ReservationStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfPeople" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Guest_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Worker_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Room_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Payer_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Reservation_Invoice" Member="Invoice" ThisKey="Id" OtherKey="Reservation_ID" Type="Invoice" />
+      <Association Name="Guest_Reservation" Member="Guest" ThisKey="Guest_ID" OtherKey="Id" Type="Guest" IsForeignKey="true" />
+      <Association Name="Payer_Reservation" Member="Payer" ThisKey="Payer_ID" OtherKey="Id" Type="Payer" IsForeignKey="true" />
+      <Association Name="Room_Reservation" Member="Room" ThisKey="Room_ID" OtherKey="Id" Type="Room" IsForeignKey="true" />
+      <Association Name="Worker_Reservation" Member="Worker" ThisKey="Worker_ID" OtherKey="Id" Type="Worker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Room" Member="Room">
+    <Type Name="Room">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoomNameUnique" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Hotel_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoomType_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Room_Reservation" Member="Reservation" ThisKey="Id" OtherKey="Room_ID" Type="Reservation" />
+      <Association Name="Hotel_Room" Member="Hotel" ThisKey="Hotel_ID" OtherKey="Id" Type="Hotel" IsForeignKey="true" />
+      <Association Name="RoomType_Room" Member="RoomType" ThisKey="RoomType_ID" OtherKey="Id" Type="RoomType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RoomType" Member="RoomType">
+    <Type Name="RoomType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoomName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CurrentPrice" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Capacity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="RoomType_Room" Member="Room" ThisKey="Id" OtherKey="RoomType_ID" Type="Room" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Worker" Member="Worker">
+    <Type Name="Worker">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Manager" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="UserLogin" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserPassword" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Char" DbType="NChar(1) NOT NULL" CanBeNull="false" />
+      <Association Name="Worker_Invoice" Member="Invoice" ThisKey="Id" OtherKey="Worker_ID" Type="Invoice" />
+      <Association Name="Worker_Reservation" Member="Reservation" ThisKey="Id" OtherKey="Worker_ID" Type="Reservation" />
+    </Type>
+  </Table>
+</Database>

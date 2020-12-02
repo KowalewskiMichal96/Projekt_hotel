@@ -13,13 +13,15 @@ namespace Projekt_hotel
 {
     public partial class LogIn : Form
     {
-        UserDBDataContext context = new UserDBDataContext();
+        databaseHotelDataContext contextDC = new databaseHotelDataContext();
         public LogIn()
         {
             InitializeComponent();
 
             panel1.BackColor = Color.FromArgb(155, Color.Black);
             panel2.BackColor = Color.FromArgb(155, Color.Black);
+
+
 
         }
 
@@ -45,8 +47,11 @@ namespace Projekt_hotel
         {
             try
             {
-                // pobieranie nazwy uzytkownika oraz hasla z bazy
-                var usr = context.UserData.Where(c => c.Username == login_text.Text && c.Password == password_text.Text).Single();
+                // sprawdzanie hasla 
+
+                string s;
+                s = AccessOperation.EncryptPassword(password_text.Text);
+                var usr = contextDC.Worker.Where(c => c.UserLogin == login_text.Text && c.UserPassword == s).Single();
 
                 if(usr != null)
                 {
@@ -86,33 +91,36 @@ namespace Projekt_hotel
 // rejestracja uzytkownika do bazy danych za pomoca przycisku w oknie nr2
         private void button_register_new_user_Click(object sender, EventArgs e)
         {
-            if(txtFirstName.Text == null || txtLastName.Text == null || txtEmail.Text == null || txtUsername.Text == null)
+            if(string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text) || string.IsNullOrWhiteSpace(txtEmail.Text)  || string.IsNullOrWhiteSpace(txtUsername.Text))
             {
                 labelRegisterError.Text = "MISTAKE IN NAME OR BLANK";
                 labelRegisterError.Visible = true;
             }
-            else if(txtPassword.Text != txtConfirmPassword.Text || txtPassword.Text == null || txtConfirmPassword.Text == null)
+            else if(txtPassword.Text != txtConfirmPassword.Text || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 labelRegisterError.Text = "MAKE SURE YOU ENTERED THE PASSWORD CORRECTLY";
                 labelRegisterError.Visible = true;
             }
             else
             {
+                // szyfrowanie 
 
+                string s;
+                s = AccessOperation.EncryptPassword(txtPassword.Text);
                 // przekazanie danych do bazy danych
-
-                UserData usr = new UserData()
+                Worker newWorker = new Worker()
                 {
                     FirstName = txtFirstName.Text,
                     LastName = txtLastName.Text,
                     Email = txtEmail.Text,
-                    Username = txtUsername.Text,
-                    Password = txtPassword.Text,
+                    Manager = false,
+                    UserLogin = txtUsername.Text,
+                    UserPassword = s,
                     Type = 'U'
                 };
 
-                context.UserData.InsertOnSubmit(usr);
-                context.SubmitChanges();
+                contextDC.Worker.InsertOnSubmit(newWorker);
+                contextDC.SubmitChanges();
 
 
                 MessageBox.Show("Registration Successfully", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Information);

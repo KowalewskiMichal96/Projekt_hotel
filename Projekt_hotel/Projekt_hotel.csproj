@@ -47,6 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessOperation.cs" />
+    <Compile Include="databaseHotel.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>databaseHotel.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LoadGuest.cs" />
     <Compile Include="LogIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,23 +66,22 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewReservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewReservation.Designer.cs">
+      <DependentUpon>NewReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestLinqToSqlDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestLinqToSqlDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="UserDB.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserDB.dbml</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewReservation.resx">
+      <DependentUpon>NewReservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -85,7 +91,16 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="databaseHotel.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>databaseHotel.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="databaseHotel.dbml.layout">
+      <DependentUpon>databaseHotel.dbml</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -95,31 +110,30 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="TestLinqToSqlDataSet.xsc">
-      <DependentUpon>TestLinqToSqlDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TestLinqToSqlDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TestLinqToSqlDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TestLinqToSqlDataSet.xss">
-      <DependentUpon>TestLinqToSqlDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="UserDB.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>UserDB.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="UserDB.dbml.layout">
-      <DependentUpon>UserDB.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tlo_5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\obraz001.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\obraz002.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\obraz003.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\obraz004.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\obraz005.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

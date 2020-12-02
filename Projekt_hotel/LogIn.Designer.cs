@@ -89,7 +89,7 @@
             this.button_register.Location = new System.Drawing.Point(36, 338);
             this.button_register.Name = "button_register";
             this.button_register.Size = new System.Drawing.Size(203, 52);
-            this.button_register.TabIndex = 9;
+            this.button_register.TabIndex = 4;
             this.button_register.Text = "REGISTER";
             this.button_register.UseVisualStyleBackColor = false;
             this.button_register.Click += new System.EventHandler(this.button_register_Click);
@@ -140,7 +140,7 @@
             this.button_login.Location = new System.Drawing.Point(301, 338);
             this.button_login.Name = "button_login";
             this.button_login.Size = new System.Drawing.Size(203, 52);
-            this.button_login.TabIndex = 5;
+            this.button_login.TabIndex = 3;
             this.button_login.Text = "LOG IN";
             this.button_login.UseVisualStyleBackColor = false;
             this.button_login.Click += new System.EventHandler(this.button_login_Click);
@@ -148,23 +148,22 @@
             // password_text
             // 
             this.password_text.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
-            this.password_text.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.password_text.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.password_text.Location = new System.Drawing.Point(301, 201);
-            this.password_text.Multiline = true;
             this.password_text.Name = "password_text";
-            this.password_text.Size = new System.Drawing.Size(203, 52);
-            this.password_text.TabIndex = 4;
+            this.password_text.PasswordChar = '*';
+            this.password_text.Size = new System.Drawing.Size(203, 43);
+            this.password_text.TabIndex = 2;
             this.password_text.WordWrap = false;
             // 
             // login_text
             // 
             this.login_text.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
-            this.login_text.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.login_text.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.login_text.Location = new System.Drawing.Point(301, 133);
-            this.login_text.Multiline = true;
             this.login_text.Name = "login_text";
-            this.login_text.Size = new System.Drawing.Size(203, 52);
-            this.login_text.TabIndex = 3;
+            this.login_text.Size = new System.Drawing.Size(203, 43);
+            this.login_text.TabIndex = 1;
             this.login_text.WordWrap = false;
             // 
             // label3
@@ -206,6 +205,7 @@
             this.button_exit.Name = "button_exit";
             this.button_exit.Size = new System.Drawing.Size(80, 80);
             this.button_exit.TabIndex = 1;
+            this.button_exit.TabStop = false;
             this.button_exit.Text = "X";
             this.button_exit.UseVisualStyleBackColor = false;
             this.button_exit.Click += new System.EventHandler(this.button_exit_Click);
@@ -233,7 +233,7 @@
             this.panel2.Controls.Add(this.txtLastName);
             this.panel2.Controls.Add(this.txtFirstName);
             this.panel2.Controls.Add(this.labelFirstName);
-            this.panel2.Location = new System.Drawing.Point(223, 94);
+            this.panel2.Location = new System.Drawing.Point(185, 574);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(772, 478);
             this.panel2.TabIndex = 10;
@@ -291,13 +291,13 @@
             // txtConfirmPassword
             // 
             this.txtConfirmPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
-            this.txtConfirmPassword.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.txtConfirmPassword.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtConfirmPassword.Location = new System.Drawing.Point(524, 276);
-            this.txtConfirmPassword.Multiline = true;
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.PasswordChar = '*';
-            this.txtConfirmPassword.Size = new System.Drawing.Size(203, 52);
+            this.txtConfirmPassword.Size = new System.Drawing.Size(203, 43);
             this.txtConfirmPassword.TabIndex = 18;
+            this.txtConfirmPassword.TabStop = false;
             this.txtConfirmPassword.WordWrap = false;
             // 
             // labelConfirmPassword
@@ -363,35 +363,35 @@
             // txtPassword
             // 
             this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
-            this.txtPassword.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.txtPassword.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtPassword.Location = new System.Drawing.Point(524, 218);
-            this.txtPassword.Multiline = true;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(203, 52);
+            this.txtPassword.Size = new System.Drawing.Size(203, 43);
             this.txtPassword.TabIndex = 12;
+            this.txtPassword.TabStop = false;
             this.txtPassword.WordWrap = false;
             // 
             // txtUsername
             // 
             this.txtUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
-            this.txtUsername.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.txtUsername.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtUsername.Location = new System.Drawing.Point(524, 129);
-            this.txtUsername.Multiline = true;
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(203, 52);
+            this.txtUsername.Size = new System.Drawing.Size(203, 43);
             this.txtUsername.TabIndex = 11;
+            this.txtUsername.TabStop = false;
             this.txtUsername.WordWrap = false;
             // 
             // txtEmail
             // 
             this.txtEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
-            this.txtEmail.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.txtEmail.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtEmail.Location = new System.Drawing.Point(122, 276);
-            this.txtEmail.Multiline = true;
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(203, 52);
+            this.txtEmail.Size = new System.Drawing.Size(203, 43);
             this.txtEmail.TabIndex = 10;
+            this.txtEmail.TabStop = false;
             this.txtEmail.WordWrap = false;
             // 
             // button_register_new_user
@@ -423,23 +423,23 @@
             // txtLastName
             // 
             this.txtLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
-            this.txtLastName.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.txtLastName.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtLastName.Location = new System.Drawing.Point(122, 214);
-            this.txtLastName.Multiline = true;
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(203, 52);
+            this.txtLastName.Size = new System.Drawing.Size(203, 43);
             this.txtLastName.TabIndex = 4;
+            this.txtLastName.TabStop = false;
             this.txtLastName.WordWrap = false;
             // 
             // txtFirstName
             // 
             this.txtFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
-            this.txtFirstName.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.txtFirstName.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtFirstName.Location = new System.Drawing.Point(122, 154);
-            this.txtFirstName.Multiline = true;
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(203, 52);
+            this.txtFirstName.Size = new System.Drawing.Size(203, 43);
             this.txtFirstName.TabIndex = 3;
+            this.txtFirstName.TabStop = false;
             this.txtFirstName.WordWrap = false;
             // 
             // labelFirstName
@@ -468,7 +468,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LogIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "d";
+            this.Text = "LOGIN";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
