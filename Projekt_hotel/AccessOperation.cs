@@ -12,6 +12,12 @@ namespace Projekt_hotel
         public static string EncryptPassword(string EP)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+
+// Utwórz tablicę bajtów z danych źródłowych.
+
+//Metoda ComputeHash metody HashAlgorithm oblicza skrót. 
+//Pobiera tablicę bajtów lub strumień jako dane wejściowe i zwraca skrót w postaci tablicy bajtów o długości 256 bitów
+
             md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(EP));
             byte[] Result = md5.Hash;
 
@@ -19,6 +25,8 @@ namespace Projekt_hotel
 
             for(int i = 0; i < Result.Length; i ++)
             {
+// argument „X2” jest „ciągiem formatującym”, który mówi metodzie ToString (), w jaki sposób powinna sformatować ciąg.
+// W tym przypadku „X2” wskazuje, że ciąg powinien być sformatowany w formacie szesnastkowym.
                 str.Append(Result[i].ToString("x2"));
             }
             return str.ToString();

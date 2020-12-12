@@ -29,4 +29,12 @@ namespace Projekt_hotel
             return RoomName;
         }
     }
+
+    partial class Room
+    {
+        public override string ToString()
+        {
+            return RoomNameUnique;
+        }
+    }
 }

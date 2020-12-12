@@ -12,6 +12,7 @@ namespace Projekt_hotel
 {
     public partial class MainMenu : Form
     {
+        databaseHotelDataContext contextDB = new databaseHotelDataContext();
         public MainMenu()
         {
             InitializeComponent();
@@ -19,7 +20,23 @@ namespace Projekt_hotel
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-        
+            var ldb = (from resstat in contextDB.ReservationStatus
+                       where resstat.ReservationStatusCatalog_ID == 1
+                       from res in contextDB.Reservation
+                       where res.Id == resstat.Reservation_ID
+                       select new
+                       {
+                           res.Id,
+                           res.StartDate,
+                           res.EndDate,
+                           res.Total_price,
+                           res.Guest_ID,
+                           res.Worker_ID
+                       }).ToList();
+
+                dataGridView1.DataSource = ldb;
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,9 +55,15 @@ namespace Projekt_hotel
 
 
             // stworz nowa tabele reservationDetails
-            // w niej wyszczegolnione dane o rezerwacji ile pokoi ile osob 
+            // w niej wyszczegolnione dane o rezerwacji ile pokoi ile osob lub 
             // + cena calkowita 
 
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Application.Exit();
         }
     }
 }

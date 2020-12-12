@@ -130,5 +130,12 @@ namespace Projekt_hotel
             }
             
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            panel2.Visible = false;
+            panel1.Visible = true;
+        }
     }
 }
