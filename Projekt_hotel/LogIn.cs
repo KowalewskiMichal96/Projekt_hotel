@@ -22,7 +22,6 @@ namespace Projekt_hotel
             panel2.BackColor = Color.FromArgb(155, Color.Black);
 
 
-
         }
 
 // interakcje z przyciskiem exit

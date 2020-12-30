@@ -356,107 +356,36 @@ namespace Projekt_hotel
         private void button1_Click(object sender, EventArgs e)
         {
             RoomListBox.Items.Clear();
-            // przyklady jakie mamy w tabeli
-            //   02.12.2020  10.12.2020
-            //   13.12.2020  15.12.2020
-            //   15.12.2020  18.12.2020
-            // (13, 12,2020 )   (16, 12,2020 ) 
-            // day,month,year     </>    year, month , day
-            DateTime checkIn = new DateTime(2020, 12, 11);
-            DateTime CheckOut = new DateTime(2020, 12, 16);
+
+            DateTime checkIn;// = new DateTime(2020, 12, 11);
+            DateTime CheckOut;
+
+            checkIn = dateTimePicker1.Value;
+            CheckOut = dateTimePicker2.Value;
 
             //sprawdzamy ktore z pokoi z rezerwacjami mozna zarezerwowac w tym terminie
             //nalezy jeszcze dodac pokoje bez rezerwacji
-            var test2 = (from room in contextDB.Room
-                         where !contextDB.RoomReserved.Any(f => room.Id == f.Room_ID)
-                         select new
-                         {
-                             room.RoomNameUnique
-                         }).Union(
 
 
-                        from x in contextDB.RoomReserved
-                        where contextDB.RoomReserved.All(res =>  
-                      !((res.Reservation.StartDate > checkIn && res.Reservation.StartDate < CheckOut) // jesli w srodku jest start
-                      || 
-                      (res.Reservation.EndDate > checkIn && res.Reservation.EndDate < CheckOut)   // jestli w srodku jest koniec
-                      ||
-                      (res.Reservation.StartDate < checkIn && res.Reservation.EndDate > checkIn))) // jesli start jest wczesniej ale koniec jest w srodku
+            var test5 = (from room in contextDB.Room
+                         select new { room.RoomNameUnique }).Except
+                         (from s in contextDB.RoomReserved
+                        join x in contextDB.Room
+                        on s.Room_ID equals x.Id
+                        where((s.Reservation.StartDate >= checkIn && s.Reservation.StartDate < CheckOut)
+                        ||
+                        (s.Reservation.EndDate > checkIn && s.Reservation.EndDate < CheckOut)
+                        ||
+                        (s.Reservation.StartDate < checkIn && s.Reservation.EndDate > checkIn))
+                        orderby s.Room_ID
+                        select new { s.Room.RoomNameUnique });
 
-                        //where !contextDB.Room.Any(x => res.Reservation.StartDate >= checkIn && res.Reservation.EndDate <= CheckOut)
-                        //where (res.Reservation.StartDate < checkIn && res.Reservation.EndDate < CheckOut)
-                        select new
-                        {
-                            x.Room.RoomNameUnique
-                        }).ToList();
-
-         // var test1 = (from room in contextDB.Room
-         //              where !contextDB.RoomReserved.Any(f => room.Id == f.Room_ID)                         
-         //              select new
-         //              {
-         //                  room.Id
-         //              }).ToList();
-
-            //var extraitems = db.table.Where(t => !list.Select(l => l.EntityID).Contains(t.EntityID));
-
-            // var query = (from rooms in context.RoomTypes
-            //              where (rooms.Id == modelid) &&
-            //              !(context.Reservation_RoomTypes.Any(a => a.ReservationId ==
-            //                        (from reservations in context.Reservations
-            //                         where (reservations.Arrival <= DateTime.Parse("2017-05-18"))
-            //                         && (reservations.Depature => DateTime.Parse("2017-05-18")))
-            //
-
-
-
-         // var test = from a in contextDB.RoomReserved
-         //            where  !contextDB.Room.Any(b => b.Id == a.Room.Id)
-         //            select a.Room;
-         //
-         // var testDate = (from a in contextDB.Reservation
-         //                 where !(a.EndDate > checkIn && a.EndDate <= CheckOut) && !(a.StartDate >= checkIn && a.EndDate <= CheckOut) && !(a.StartDate > checkIn && a.StartDate <= CheckOut)
-         //                 from b in a.RoomReserved
-         //                 where b.Reservation_ID == a.Id && b.Room.Id == b.Room_ID
-         //
-         //
-         //                 // trzeba dodac trzy warunki 
-         //                 // jesli data start byla wczesniej ale end jest po start ale nie przed koncem
-         //                 // jesli start jest po start i end ciagnie sie dalej
-         //                 // i jesli zaczal sie przed i skoczyl daleko po
-         //
-         //                 select new
-         //                 {
-         //                     a.Id
-         //                 }).ToList();
-         //
-         // var lookForRoom = (from a in contextDB.RoomReserved
-         //                    where a.Room.Id == a.Room_ID 
-         //                    where a.Reservation.StartDate < checkIn
-         //                    
-         //                    select new
-         //                    {
-         //                        a.Room.RoomNameUnique
-         //                    }).ToList();
-         //
-         // var data = (from a in contextDB.RoomReserved
-         //             where !(a.Reservation.StartDate > checkIn)
-         //             select new
-         //             {
-         //                 a.Room.RoomNameUnique
-         //             }).ToList();
-         //
-         // var FullJoin = test1.Union(testDate);
-
-
-            foreach (var item in test2)
+            foreach (var item in test5)
             {
-                RoomListBox.Items.Add(item.RoomNameUnique.ToString());
+                RoomListBox.Items.Add(item.RoomNameUnique);
             }
 
-        //   foreach (Room x in contextDB.Room)
-        //   {
-        //       RoomListBox.Items.Add(x);
-        //   }
+
 
         }
     }

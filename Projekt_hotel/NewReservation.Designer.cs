@@ -239,7 +239,7 @@
             this.labelType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelType.Location = new System.Drawing.Point(198, 500);
             this.labelType.Name = "labelType";
-            this.labelType.Size = new System.Drawing.Size(43, 31);
+            this.labelType.Size = new System.Drawing.Size(34, 25);
             this.labelType.TabIndex = 22;
             this.labelType.Text = "??";
             // 
@@ -249,7 +249,7 @@
             this.labelFloor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelFloor.Location = new System.Drawing.Point(198, 456);
             this.labelFloor.Name = "labelFloor";
-            this.labelFloor.Size = new System.Drawing.Size(43, 31);
+            this.labelFloor.Size = new System.Drawing.Size(34, 25);
             this.labelFloor.TabIndex = 21;
             this.labelFloor.Text = "??";
             // 
@@ -259,7 +259,7 @@
             this.labelMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelMax.Location = new System.Drawing.Point(198, 410);
             this.labelMax.Name = "labelMax";
-            this.labelMax.Size = new System.Drawing.Size(43, 31);
+            this.labelMax.Size = new System.Drawing.Size(34, 25);
             this.labelMax.TabIndex = 20;
             this.labelMax.Text = "??";
             // 
@@ -269,7 +269,7 @@
             this.labelRoomName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelRoomName.Location = new System.Drawing.Point(338, 31);
             this.labelRoomName.Name = "labelRoomName";
-            this.labelRoomName.Size = new System.Drawing.Size(43, 31);
+            this.labelRoomName.Size = new System.Drawing.Size(34, 25);
             this.labelRoomName.TabIndex = 19;
             this.labelRoomName.Text = "??";
             // 

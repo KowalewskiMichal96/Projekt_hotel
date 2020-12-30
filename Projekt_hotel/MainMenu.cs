@@ -42,6 +42,7 @@ namespace Projekt_hotel
         private void button1_Click(object sender, EventArgs e)
         {
             NewReservation NR = new NewReservation();
+            //NR.TopMost = true;
             NR.Show();
             
             // open new window with 
@@ -64,6 +65,11 @@ namespace Projekt_hotel
         {
             this.Close();
             Application.Exit();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            button2.Visible = true;
         }
     }
 }
