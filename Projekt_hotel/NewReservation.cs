@@ -357,14 +357,15 @@ namespace Projekt_hotel
         {
             RoomListBox.Items.Clear();
 
-            DateTime checkIn;// = new DateTime(2020, 12, 11);
+            DateTime checkIn;
             DateTime CheckOut;
 
             checkIn = dateTimePicker1.Value;
             CheckOut = dateTimePicker2.Value;
 
             //sprawdzamy ktore z pokoi z rezerwacjami mozna zarezerwowac w tym terminie
-            //nalezy jeszcze dodac pokoje bez rezerwacji
+            //nalezy jeszcze dodac pokoje bez
+
 
 
             var test5 = (from room in contextDB.Room
@@ -390,10 +391,3 @@ namespace Projekt_hotel
         }
     }
 }
-// lista wybranych pokoi z ich nazwa oraz typem
-// po dodaniu brak mozliwosci dodania ponownie
-// zmiana w bazie danych dotyczaca ilosci pokoi
-
-// oraz zmiana w tabeli pokoi LUB nowa tabel room_reserved aby wiedzial kiedy jest przypisany do jakiego pokoju
-// + tabela szczegoly rezerwacji np sniadania barek i tak dalej do faktury
-// data kiedy pokoje sa zajete
