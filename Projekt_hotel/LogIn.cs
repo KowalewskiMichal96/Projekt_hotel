@@ -83,6 +83,8 @@ namespace Projekt_hotel
 // przejscie do okna rejestracji
         private void button_register_Click(object sender, EventArgs e)
         {
+            login_text.Clear();
+            password_text.Clear();
             panel1.Visible = false;
             panel2.Visible = true;
         }
@@ -102,6 +104,9 @@ namespace Projekt_hotel
             }
             else
             {
+                // sprawdzanie czy taki uzytkownik zostal juz stworzony
+
+
                 // szyfrowanie 
 
                 string s;
@@ -132,6 +137,12 @@ namespace Projekt_hotel
 
         private void button1_Click(object sender, EventArgs e)
         {
+            txtConfirmPassword.Clear();
+            txtEmail.Clear();
+            txtFirstName.Clear();
+            txtLastName.Clear();
+            txtPassword.Clear();
+            txtUsername.Clear();
 
             panel2.Visible = false;
             panel1.Visible = true;

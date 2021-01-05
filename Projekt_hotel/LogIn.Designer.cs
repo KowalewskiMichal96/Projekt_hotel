@@ -76,7 +76,7 @@
             this.panel1.Controls.Add(this.login_text);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(310, 592);
+            this.panel1.Location = new System.Drawing.Point(620, 374);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(745, 555);
             this.panel1.TabIndex = 0;
@@ -149,6 +149,7 @@
             // password_text
             // 
             this.password_text.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
+            this.password_text.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.password_text.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.password_text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.password_text.Location = new System.Drawing.Point(401, 228);
@@ -161,6 +162,7 @@
             // login_text
             // 
             this.login_text.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
+            this.login_text.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.login_text.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.login_text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.login_text.Location = new System.Drawing.Point(401, 160);
@@ -237,7 +239,7 @@
             this.panel2.Controls.Add(this.txtLastName);
             this.panel2.Controls.Add(this.txtFirstName);
             this.panel2.Controls.Add(this.labelFirstName);
-            this.panel2.Location = new System.Drawing.Point(310, 34);
+            this.panel2.Location = new System.Drawing.Point(642, 344);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(745, 552);
             this.panel2.TabIndex = 10;
@@ -408,6 +410,7 @@
             // txtEmail
             // 
             this.txtEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
+            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEmail.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtEmail.Location = new System.Drawing.Point(97, 317);
             this.txtEmail.Name = "txtEmail";
@@ -445,6 +448,7 @@
             // txtLastName
             // 
             this.txtLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
+            this.txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLastName.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtLastName.Location = new System.Drawing.Point(97, 235);
             this.txtLastName.Name = "txtLastName";
@@ -456,6 +460,7 @@
             // txtFirstName
             // 
             this.txtFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
+            this.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFirstName.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtFirstName.Location = new System.Drawing.Point(97, 156);
             this.txtFirstName.Name = "txtFirstName";

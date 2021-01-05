@@ -13,18 +13,13 @@ namespace Projekt_hotel
 
     public partial class NewReservation : Form
     {
-        databaseHotelDataContext contextDB = new databaseHotelDataContext();
-        List<SelectedRoom> roomsReserved = new List<SelectedRoom>();
-        
-
+        readonly databaseHotelDataContext contextDB = new databaseHotelDataContext();
+        List<SelectedRoom> AddedRooms = new List<SelectedRoom>();
+        List<string> SelectedRooms = new List<string>();
         public NewReservation()
         {
-
             InitializeComponent();
             LoadForm();
-
-
-
         }
 
         private void LoadForm()
@@ -39,268 +34,16 @@ namespace Projekt_hotel
             // Goscie
             foreach (Guest x in contextDB.Guest)
             {
-                GuestListBox.Items.Add(x);
+                GuestLB.Items.Add(x);
             }
 
-
-            dateTimePicker2.MinDate = dateTimePicker1.Value.AddDays(1);
-
-            //RoomToRight.Enabled = false;
-        }
-
-     // ile osob w pokoju
-     //
-     // public void GetCapacity(string type)
-     // {
-     //     RoomCapacityCombobox.Items.Clear();
-     //     int asn = (from a in contextDB.RoomType
-     //                where a.RoomName == type
-     //                select a).Single().Capacity;
-     //
-     //     for (int i = 1; i <= asn; i++)
-     //         RoomCapacityCombobox.Items.Add(i);
-     //     RoomCapacityCombobox.SelectedIndex = 0;
-     //
-     //     //contextDB.RoomType.Single(a => a.RoomName == type).Capacity;
-     // }
-
-
-
-        // glowne przyciski
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
-
-
-
-
-        ////////////////////////////////////dodawanie tylko unikalnych pokoi bez powtorzen//////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void RoomListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RoomListBox.SelectedItems.Count == 1)
-            {
-                LoadRoom();
-                labelSameRoom.Visible = false;
-                RoomToRight.Enabled = true;
-                //textBox1.Text = "aktualnie wybrany element " + RoomListBox.SelectedItem.ToString();
-
-                // pokaz pokoj wybrany i jego opis
-                // po lewej stronie
-                
-
-            }
-            else if (RoomListBox.SelectedItems.Count == 0)
-            {
-                RoomToRight.Enabled = false;
-            }
-        }
-
-        private void RoomToRight_Click(object sender, EventArgs e)
-        {
-            bool czyistnieje = false;
-            //int licznik1 = 1;
-            //int licznik2 = 1;
-            //int licznik3 = 1;
-            // czy wybrany jeden element
-
-            if (RoomListBox.SelectedItems.Count == 1)
-            {
-                if (RoomSelectedListBox.Items.Count == 0)
-                {
-                    SelectedRoom newRoom = new SelectedRoom();
-
-                    newRoom.Name = RoomListBox.SelectedItem.ToString();
-                    roomsReserved.Add(newRoom);
-                    RoomSelectedListBox.Items.Add(newRoom.Name);
-
-                }
-
-
-
-                else if (RoomSelectedListBox.Items.Count > 0)
-                {
-                    foreach (string listboxitem in RoomSelectedListBox.Items)
-                    {
-                        if (listboxitem == RoomListBox.SelectedItem.ToString())
-                        {
-                            czyistnieje = true;
-                            labelSameRoom.Visible = true;
-                            break;
-                        }
-                    }
-
-                    if (czyistnieje == false)
-                    {
-                        SelectedRoom newRoom = new SelectedRoom();
-
-                        newRoom.Name = RoomListBox.SelectedItem.ToString();
-                        roomsReserved.Add(newRoom);
-                        RoomSelectedListBox.Items.Add(newRoom.Name);
-                    }
-                    else if (czyistnieje == true)
-                    {
-                        // w sumie niepotrzebne na poczatku funkcji jest zmienna false
-                        czyistnieje = false;
-                    }
-                }
-
-
-
-            }
-        }
-
-        private void RoomToLeft_Click(object sender, EventArgs e)
-        {
-            if (RoomSelectedListBox.SelectedItems.Count == 1)
-            {
-                RoomSelectedListBox.Items.RemoveAt(RoomSelectedListBox.SelectedIndex);
-                GuestSelectedListBox.Items.Clear();
-            }
-        }
-
-
-        private void RoomListBox_Leave(object sender, EventArgs e)
-        {
-            // aby stracic focus na listboxie nr 1 ale po kliknieciu przycisku wyslac dane
-            if (RoomToRight.Focused == true)
-                RoomToRight_Click(sender, e);
-            RoomListBox.SelectedIndex = -1;
-
-            labelFloor.Text = "??";
-            labelMax.Text = "??";
-            labelRoomName.Text = "??";
-            labelType.Text = "??";
-            pictureBox1.Image = null;
-        }
-
-        // zarezerwowane pokoje odblokowanie przyciskow i listboxow
-        private void RoomSelectedListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-            // jesli zaznaczysz zarezerwowany pokoj pokaz jego gosci
-            if (RoomSelectedListBox.SelectedItems.Count == 1)
-            {
-                ShowGuest(); // pokaz gosci 1
-                GuestListBox.Enabled = true; // uruchom liste gosci
-                RoomToLeft.Enabled = true; // mozliwosc usuwania pokoju
-            }
-            else if (RoomSelectedListBox.SelectedItems.Count == 0)
-            {
-                GuestListBox.Enabled = false;
-                RoomToLeft.Enabled = false;
-            }
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-        //////////////////////////////////dodawanie gosci `unikalnych` do pokoi///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void GuestListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (GuestListBox.SelectedItems.Count == 1)
-            {
-                GuestToRight.Enabled = true;
-            }
-            else if (GuestListBox.SelectedItems.Count == 0)
-            {
-                GuestToRight.Enabled = false;
-            }
-        }
-
-
-        private void GuestToRight_Click(object sender, EventArgs e)
-        {
-            roomsReserved[RoomID()].guests.Add(GuestListBox.SelectedItem.ToString());
-            ShowGuest();
-
-
-            GuestListBox.Items.RemoveAt(GuestListBox.SelectedIndex);
-            GuestListBox.SelectedIndex = -1;
-
-            // jesli guest to right click
-            // usun z listboxa
-            // podczas usuwania wroc go na miejsce  w guesttoleft
-
-
-            // dodanie osoby do pokoju
-            //sprawdzic czy gosc juz jest w tym pokoju aby go nie przypisywac 
-            // a tak wlasciwie sprawdzic czy jest w jakimkolwiek pokoju bo nie moze byc w dwoch pokojach
-            // najlepiej usunac go tymczasowo z listboxa aby nie moc go wykorzystac 2 razy
-            // to samo mozna zrobic do pokoi aby nie sprawdzac 
-        }
-
-
-
-
-        private void GuestToLeft_Click(object sender, EventArgs e)
-        {
-            if (GuestSelectedListBox.SelectedItems.Count == 1)
-            {
-                
-                GuestListBox.Items.Add(GuestSelectedListBox.SelectedItem);
-                roomsReserved[RoomID()].guests.RemoveAt(GuestSelectedListBox.SelectedIndex); // nie wiem czy dobry indeks
-                GuestSelectedListBox.Items.RemoveAt(GuestSelectedListBox.SelectedIndex);
-            }
-        }
-
-
-
-        // osoby w zarezerwowanym pokoju
-        private void GuestSelectedListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (GuestSelectedListBox.SelectedItems.Count == 1)
-            {
-                GuestToLeft.Enabled = true;
-            }
-            else if (GuestSelectedListBox.SelectedItems.Count == 0)
-            {
-                GuestToLeft.Enabled = false;
-            }
-        }
-
-        private int RoomID()
-        {
-            int i = 0;
-            foreach (SelectedRoom list in roomsReserved)
-            {
-               // textBox1.Text = list.Name + " == " + RoomSelectedListBox.SelectedItem.ToString();
-                if (list.Name == RoomSelectedListBox.SelectedItem.ToString())
-                {
-                    //textBox4.Text = i.ToString();
-                    break;
-                }
-                i++;
-            }
-                return i;
-        }
-
-        private void ShowGuest()
-        {
-
-            GuestSelectedListBox.Items.Clear();
-            if (roomsReserved[RoomID()].guests.Count == 0)
-            {
-                GuestToLeft.Enabled = false;
-            }
-            else
-            {
-                for (int j = 0; j < roomsReserved[RoomID()].guests.Count; j++)
-                    GuestSelectedListBox.Items.Add(roomsReserved[RoomID()].guests[j].ToString());
-
-                GuestToLeft.Enabled = false;
-            }
+            TimePickerEnd.MinDate = TimePickerStart.Value.AddDays(1);
         }
 
         private void LoadRoom()
         {
-
             var checkroom = from a in contextDB.Room
-                            where RoomListBox.SelectedItem.ToString() == a.RoomNameUnique.ToString()
+                            where RoomLB.SelectedItem.ToString() == a.RoomNameUnique.ToString()
                             from b in contextDB.RoomType
                             where a.RoomType_ID == b.Id
                             select new
@@ -347,47 +90,210 @@ namespace Projekt_hotel
             pictureBox1.Refresh();
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        private void TimePickerStart_ValueChanged(object sender, EventArgs e)
         {
-            DateTime start = new DateTime(dateTimePicker1.Value.Ticks);
-            dateTimePicker2.MinDate = start.AddDays(1);
+            DateTime start = new DateTime(TimePickerStart.Value.Ticks);
+            TimePickerEnd.MinDate = start.AddDays(1);
         }
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void button1_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
-            RoomListBox.Items.Clear();
+            RoomLB.Items.Clear();
 
             DateTime checkIn;
             DateTime CheckOut;
 
-            checkIn = dateTimePicker1.Value;
-            CheckOut = dateTimePicker2.Value;
+            checkIn = TimePickerStart.Value;
+            CheckOut = TimePickerEnd.Value;
 
-            //sprawdzamy ktore z pokoi z rezerwacjami mozna zarezerwowac w tym terminie
-            //nalezy jeszcze dodac pokoje bez
-
-
-
-            var test5 = (from room in contextDB.Room
-                         select new { room.RoomNameUnique }).Except
-                         (from s in contextDB.RoomReserved
-                        join x in contextDB.Room
-                        on s.Room_ID equals x.Id
-                        where((s.Reservation.StartDate >= checkIn && s.Reservation.StartDate < CheckOut)
-                        ||
-                        (s.Reservation.EndDate > checkIn && s.Reservation.EndDate < CheckOut)
-                        ||
-                        (s.Reservation.StartDate < checkIn && s.Reservation.EndDate > checkIn))
-                        orderby s.Room_ID
-                        select new { s.Room.RoomNameUnique });
-
-            foreach (var item in test5)
+            List<Rooms> freeRooms = ListManager.LoadSampleRooms(checkIn,CheckOut);
+            foreach (Rooms item in freeRooms)
             {
-                RoomListBox.Items.Add(item.RoomNameUnique);
+                RoomLB.Items.Add(item.RoomName.ToString());
+            }
+        }
+
+
+        private void ListBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            ListBox x = sender as ListBox;
+            e.DrawBackground();
+
+            bool isItemSelected = ((e.State & DrawItemState.Selected) == DrawItemState.Selected);
+            int itemIndex = e.Index;
+            if (itemIndex >= 0 && itemIndex < x.Items.Count)
+            {
+                Graphics g = e.Graphics;
+
+                // Background Color
+                SolidBrush backgroundColorBrush = new SolidBrush((isItemSelected) ? Color.FromArgb(109, 109, 109) : Color.White);
+                g.FillRectangle(backgroundColorBrush, e.Bounds);
+
+                // Set text color
+                string itemText = x.Items[itemIndex].ToString();
+
+                SolidBrush itemTextColorBrush = (isItemSelected) ? new SolidBrush(Color.White) : new SolidBrush(Color.FromArgb(109, 109, 109));
+                g.DrawString(itemText, e.Font, itemTextColorBrush, x.GetItemRectangle(itemIndex).Location);
+
+                
+                // Clean up
+                backgroundColorBrush.Dispose();
+                itemTextColorBrush.Dispose();
             }
 
+            e.DrawFocusRectangle();
+        }
+        // find index
+
+        private int RoomIndex()
+        {
+            int index = 0;
+            for (int i = 0; i < AddedRooms.Count; i++)
+            {
+                if (AddedRooms[i].Name.Contains(RoomSelectedLB.SelectedItem.ToString()))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
 
 
+        // return guests to their listbox
+        private void ReturnGuests()
+        {
+            if(AddedRooms[RoomIndex()].guests.Count > 0)
+            {
+                for(int i = 0; i < AddedRooms[RoomIndex()].guests.Count; i ++)
+                {
+                    GuestLB.Items.Add(AddedRooms[RoomIndex()].guests[i]);
+                }
+            }
+
+        }
+
+
+        // container handling
+        private void RoomLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(RoomLB.SelectedItems.Count > 0)
+            {
+                SelectRoom.Enabled = true;
+
+                textBox1.Clear();
+                foreach (SelectedRoom item in AddedRooms)
+                {
+                    textBox1.Text += item.Name;
+                }
+            }
+            else
+            {
+                SelectRoom.Enabled = false;
+            }    
+        }
+
+
+        private void SelectRoom_Click(object sender, EventArgs e)
+        {
+            if(!RoomSelectedLB.Items.Contains(RoomLB.SelectedItem))
+            {
+                AddedRooms.Add( new SelectedRoom(RoomLB.SelectedItem.ToString()));
+                RoomSelectedLB.Items.Add(RoomLB.SelectedItem);
+                RoomLB.Items.Remove(RoomLB.SelectedItem);
+            }
+            else
+            {
+                                                                                                        // blad
+                                                                                                        // wlasny box
+            }
+        }
+
+        private void RoomSelectedLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RoomSelectedLB.SelectedItems.Count > 0)
+            {
+                GuestSelectedLB.Items.Clear();
+                // wyswietlanie gosci w pokoju 
+                if(AddedRooms[RoomIndex()].guests != null)
+                {
+                    for(int i = 0; i < AddedRooms[RoomIndex()].guests.Count; i++)
+                    {
+                        GuestSelectedLB.Items.Add(AddedRooms[RoomIndex()].guests[i]);
+                    }
+                }
+                                                                                                            // index pokoju i ilosc gosci 
+                textBox1.Text = RoomIndex().ToString();
+                textBox1.Text += " - " + AddedRooms[RoomIndex()].guests.Count;
+
+                ReturnRoom.Enabled = true;
+                GuestLB.Enabled = true;
+                GuestSelectedLB.Enabled = true;
+            }
+            else
+            {
+                ReturnRoom.Enabled = false;
+                GuestLB.Enabled = false;
+                GuestLB.SelectedIndex = -1;
+
+
+            }
+        }
+
+        private void ReturnRoom_Click(object sender, EventArgs e)
+        {
+            // zwroc gosci do listboxu
+            ReturnGuests();
+            GuestSelectedLB.Enabled = false;
+            GuestSelectedLB.Items.Clear();
+
+            // zwroc pokoj do listboxu
+            AddedRooms.RemoveAt(RoomIndex());
+            RoomLB.Items.Add(RoomSelectedLB.SelectedItem);
+            RoomSelectedLB.Items.Remove(RoomSelectedLB.SelectedItem);
+
+        }
+
+        private void GuestLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(GuestLB.SelectedItems.Count > 0)
+            {
+                SelectGuest.Enabled = true;
+                DeleteGB.Enabled = true;
+                EditGB.Enabled = true;
+            }
+            else
+            {
+                SelectGuest.Enabled = false;
+                DeleteGB.Enabled = false;
+                EditGB.Enabled = false;
+            }
+        }
+
+        private void SelectGuest_Click(object sender, EventArgs e)
+        {
+            AddedRooms[RoomIndex()].guests.Add(GuestLB.SelectedItem.ToString());
+            GuestSelectedLB.Items.Add(GuestLB.SelectedItem);
+            GuestLB.Items.RemoveAt(GuestLB.SelectedIndex);
+        }
+
+        private void GuestSelectedLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(GuestSelectedLB.SelectedItems.Count > 0)
+            {
+                ReturnGuest.Enabled = true;
+            }
+            else
+            {
+                ReturnGuest.Enabled = false;
+            }
+        }
+
+        private void ReturnGuest_Click(object sender, EventArgs e)
+        {
+            // metoda znajdujaca id konkretnego goscia na liscie 
+            // usun goscia z listy i listboxu
+            // dodaj go do drugiego 
         }
     }
 }

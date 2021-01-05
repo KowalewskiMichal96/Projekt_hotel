@@ -12,9 +12,9 @@ namespace Projekt_hotel
 {
     public partial class MainMenu : Form
     {
-        databaseHotelDataContext contextDB = new databaseHotelDataContext();
-        DataTable table = new DataTable();
-        List<Reservations> allReservations = ListManager.LoadSampleData();
+        readonly databaseHotelDataContext contextDB = new databaseHotelDataContext();
+        readonly DataTable table = new DataTable();
+        readonly List<Reservations> allReservations = ListManager.LoadSampleReservation();
         public MainMenu()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace Projekt_hotel
             for(int i = 0; i < allReservations.Count; i++)
             {
                 table.Rows.Add(
-                     allReservations[i].id, allReservations[i].startDate, allReservations[i].endDate, allReservations[i].totalPrice, allReservations[i].lastName, allReservations[i].workerId
+                     allReservations[i].Id, allReservations[i].StartDate, allReservations[i].EndDate, allReservations[i].TotalPrice, allReservations[i].LastName, allReservations[i].WorkerId
                     );
             }
 
@@ -92,12 +92,30 @@ namespace Projekt_hotel
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             button2.Visible = true;
+
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            int x = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+            var query = (from roomres in contextDB.RoomReserved
+                         where roomres.Reservation_ID == x
+                         select new
+                         {
+                             roomres.Room.RoomNameUnique
+                         }).ToList();
+
+
+            dataGridView2.DataSource = query; 
+        }
+
 
     }
 }

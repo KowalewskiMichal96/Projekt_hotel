@@ -8,19 +8,17 @@ namespace Projekt_hotel
 {
     public class SelectedRoom
     {
-        private string _Name;
+        //private string _Name;
         public string Name
         {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                _Name = value;
-            }
+            get;
+            set;
         }
-
         public List<string> guests = new List<string>();
+
+        public SelectedRoom(string NAME)
+        {
+            Name = NAME;
+        }
     }
 }
