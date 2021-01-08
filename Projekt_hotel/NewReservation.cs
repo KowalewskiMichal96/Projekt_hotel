@@ -16,9 +16,12 @@ namespace Projekt_hotel
         readonly databaseHotelDataContext contextDB = new databaseHotelDataContext();
         readonly List<SelectedRoom> AddedRooms = new List<SelectedRoom>();
         public static int SelectedButton = 0;
+        public static int WorkerId = 0;
+        public string[] ReservationOn;
 
-        public NewReservation()
+        public NewReservation(int WORKERID)
         {
+            WorkerId = WORKERID;
             InitializeComponent();
             LoadForm();
         }
@@ -44,8 +47,7 @@ namespace Projekt_hotel
                 for(int i = 0; i < GuestSelectedLB.Items.Count; i++)
                 {
                     Guest FromList =  GuestSelectedLB.Items[i] as Guest;
-                    x.Add(FromList.LastName);
-                    textBox1.Text += x[i];                   
+                    x.Add(FromList.LastName);              
                 }
 
                 foreach (Guest z in contextDB.Guest.Where(guest => !x.Contains(guest.LastName)))
@@ -290,10 +292,16 @@ namespace Projekt_hotel
 
         private void ReturnRoom_Click(object sender, EventArgs e)
         {
+
+            // sprawdz w czy w tych pokojach byl gosc ktory
             // return guest to listbox
             ReturnGuests();
             ReturnGuest.Enabled = false;
             GuestSelectedLB.Enabled = false;
+
+            for (int i = 0; i < AddedRooms[RoomIndex()].guests.Count; i++)
+                if (AddedRooms[RoomIndex()].guests[i] == LabelResOn.Text)
+                    LabelResOn.Text = "EMPTY";
             GuestSelectedLB.Items.Clear();
 
             // return room to listbox
@@ -349,7 +357,11 @@ namespace Projekt_hotel
         {
             GuestLB.Items.Add(GuestSelectedLB.SelectedItem);
             AddedRooms[RoomIndex()].guests.RemoveAt(GuestIndex());
+
+            if (GuestSelectedLB.SelectedItem.ToString() == LabelResOn.Text)
+                LabelResOn.Text = "EMPTY";
             GuestSelectedLB.Items.RemoveAt(GuestSelectedLB.SelectedIndex);
+
 
             ReturnGuest.Enabled = false;
         }
@@ -358,7 +370,10 @@ namespace Projekt_hotel
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            Close();
+            var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
+            mainForm.FillData();
+
+            this.Close();
         }
 
         private void PayerLB_SelectedIndexChanged(object sender, EventArgs e)
@@ -466,7 +481,7 @@ namespace Projekt_hotel
 
         private void WhichPanel(int x)
         {
-            textBox1.Text = SelectedButton.ToString();
+
             ClearMenu();
             switch (x)
             {
@@ -581,38 +596,75 @@ namespace Projekt_hotel
             }
 
             TableLP.Visible = false;
-            
-        
-
-         /*   switch (SelectedButton)
-            {
-                case 1:
-                    Guest EditGuest = new Guest();
-                    EditGuest.LastName = Text1.Text;
-                    EditGuest.FirstName = Text2.Text;
-                    EditGuest.Nationality = Text3.Text;
-                    EditGuest.IdProof = Text4.Text;
-                    EditGuest.DateOfBirth = TPDateOfBirth.Value;
-
-                    contextDB.Guest.InsertOnSubmit(EditGuest);
-                    contextDB.SubmitChanges();
-
-                    LoadGuest();
-                    break;
-                case 3:
-                    Guest NewGuest = GuestLB.SelectedItem as Guest;
-
-                    break;
-                case 4:
-                    break;
-                case 6:
-                    break;
-            }
-         */
         }
 
 
+        private void ReservationConfirmButton_Click(object sender, EventArgs e)
+        {
+            if(RoomSelectedLB.Items.Count > 0)
+            {
+                bool AllRoomsGotGuest = true;
+                for(int i = 0; i < AddedRooms.Count; i++)
+                {
+                    if(AddedRooms[i].guests.Count < 1)
+                    {
+                        AllRoomsGotGuest = false;
+                        break;
+                    }
+                }
+
+                if (AllRoomsGotGuest == true && LabelResOn.Text != "EMPTY")
+                {
+                    textBox1.Text = "Rezerwacja dodana";
+                    // dodaj rezerwacje
+
+                    Reservation ResToSave = new Reservation();
+                    ResToSave.StartDate = TimePickerStart.Value;
+                    ResToSave.EndDate = TimePickerEnd.Value;
+                    ResToSave.Total_price = TakePrice();
+                    ResToSave.Guest_ID = contextDB.Guest.First(a => a.LastName == ReservationOn[0]).Id;
+                    ResToSave.Worker_ID = WorkerId;
+
+                    contextDB.Reservation.InsertOnSubmit(ResToSave);
+                    contextDB.SubmitChanges();
 
 
+
+                    var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
+                    mainForm.FillData();
+                    this.Close();
+
+                }
+                else if (AllRoomsGotGuest == false || LabelResOn.Text == "EMPTY")
+                {
+                    textBox1.Text = "Nie udalo sie zarezerowac";
+                    // wystapil blad sprawdz czy wszystkie pokoje maja przypisanego goscia
+                }
+            }
+            else
+            {
+                textBox1.Text = "nie wybrano zadnego pokoju";
+                // blad wypisz ze nie mozna zrobic pustej rezerwacji
+            }
+        }
+            
+            decimal TakePrice()
+            {
+                decimal TotalPrice = 0M;
+                for(int i = 0; i < RoomSelectedLB.Items.Count; i++)
+                {
+                    decimal price = (from room in contextDB.Room
+                                    where room.RoomNameUnique == RoomSelectedLB.Items[i].ToString()
+                                    select (decimal)room.RoomType.CurrentPrice).Single();
+                    TotalPrice += price;                
+                }
+                return TotalPrice;
+            }
+
+        private void GuestSelectedLB_DoubleClick(object sender, EventArgs e)
+        {
+            ReservationOn = GuestSelectedLB.SelectedItem.ToString().Split();
+            LabelResOn.Text = string.Join(" ", ReservationOn);
+        }
     }   //PUBLIC CLASS NEWRESERVATION
 }   // NAMESPACE PROJEKT HOTEL

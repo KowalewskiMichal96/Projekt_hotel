@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 
 namespace Projekt_hotel
-{
+{ 
     public partial class LogIn : Form
     {
-        databaseHotelDataContext contextDC = new databaseHotelDataContext();
+        readonly databaseHotelDataContext contextDC = new databaseHotelDataContext();
         public LogIn()
         {
             InitializeComponent();
@@ -54,7 +54,27 @@ namespace Projekt_hotel
 
                 if(usr != null)
                 {
-                    MainMenu mm = new MainMenu();
+                    int x = 0;
+                    char z = 'U';
+
+
+                    var query = from worker in contextDC.Worker
+                                where worker.UserLogin.Equals(login_text.Text)
+                                select new
+                                {
+                                    worker.Id,
+                                    worker.Type
+                                };
+                    foreach (var item in query)
+                    {
+                        x = item.Id;
+                        z = item.Type;
+                    }
+                    
+                    User user = new User();
+                    user.SetRole(x, z);
+
+                    MainMenu mm = new MainMenu(user);
                     mm.Show();
                     this.Hide();
                 }

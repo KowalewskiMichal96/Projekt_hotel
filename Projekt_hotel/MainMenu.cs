@@ -14,20 +14,19 @@ namespace Projekt_hotel
     {
         readonly databaseHotelDataContext contextDB = new databaseHotelDataContext();
         readonly DataTable table = new DataTable();
-        readonly List<Reservations> allReservations = ListManager.LoadSampleReservation();
-        public MainMenu()
-        {
-            InitializeComponent();
-        }
+        List<Reservations> allReservations;// = ListManager.LoadSampleReservation();
+        readonly User LoggedUser = new User();
 
-        public void fillData()
+        public MainMenu(User user)
         {
-            table.Columns.Add("Id", typeof(string));
-            table.Columns.Add("StartDate", typeof(string));
-            table.Columns.Add("EndDate", typeof(string));
-            table.Columns.Add("TotalPrice", typeof(string));
-            table.Columns.Add("GuestName", typeof(string));
-            table.Columns.Add("WorkerId", typeof(string));
+
+            LoggedUser = user;
+            InitializeComponent();
+            
+        }
+        public void FillComboBox()
+        {
+            categoryCombobox.Items.Clear();
 
             categoryCombobox.Items.Add("Id");
             categoryCombobox.Items.Add("StartDate");
@@ -35,6 +34,22 @@ namespace Projekt_hotel
             categoryCombobox.Items.Add("TotalPrice");
             categoryCombobox.Items.Add("GuestName");
             categoryCombobox.Items.Add("WorkerId");
+
+            table.Columns.Add("Id", typeof(string));
+            table.Columns.Add("StartDate", typeof(string));
+            table.Columns.Add("EndDate", typeof(string));
+            table.Columns.Add("TotalPrice", typeof(string));
+            table.Columns.Add("GuestName", typeof(string));
+            table.Columns.Add("WorkerId", typeof(string));
+        }
+        public void FillData()
+        {
+            allReservations = ListManager.LoadSampleReservation();
+            //table.Reset();
+
+           //table.Columns.Clear();
+           table.Rows.Clear();
+
             
             for(int i = 0; i < allReservations.Count; i++)
             {
@@ -43,13 +58,17 @@ namespace Projekt_hotel
                     );
             }
 
-            dataGridView1.DataSource = table;
+            DGView.DataSource = table;
+            categoryCombobox.SelectedIndex = 0;
 
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            fillData();
+            textBox1.Text = LoggedUser.GetId().ToString() + " " + LoggedUser.GetRole();
+
+            FillComboBox();
+            FillData();
             categoryCombobox.SelectedIndex = 0;
         }
 
@@ -65,7 +84,7 @@ namespace Projekt_hotel
             if(string.IsNullOrWhiteSpace(searchTextbox.Text))
             {
                 table.DefaultView.RowFilter = "";
-                dataGridView1.Sort(dataGridView1.Columns[categoryCombobox.SelectedIndex], ListSortDirection.Ascending);  
+                DGView.Sort(DGView.Columns[categoryCombobox.SelectedIndex], ListSortDirection.Ascending);  
             }
             else
             {
@@ -76,35 +95,31 @@ namespace Projekt_hotel
         }
 
         
-        private void button1_Click(object sender, EventArgs e)
+        private void AddReservation_Click(object sender, EventArgs e)
         {
-            NewReservation NR = new NewReservation();
+            NewReservation NR = new NewReservation(LoggedUser.GetId());
             NR.TopMost = true;
             NR.Show();
 
 
-            // stworz nowa tabele reservationDetails
-            // w niej wyszczegolnione dane o rezerwacji ile pokoi ile osob lub 
-            // + cena calkowita 
-
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private void DGView_SelectionChanged(object sender, EventArgs e)
         {
-            button2.Visible = true;
+            DeleteReservation.Visible = true;
 
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void EditReservation_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void DGView_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
 
-            int x = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+            int x = Convert.ToInt32(DGView.Rows[e.RowIndex].Cells[0].Value);
             var query = (from roomres in contextDB.RoomReserved
                          where roomres.Reservation_ID == x
                          select new
@@ -113,9 +128,9 @@ namespace Projekt_hotel
                          }).ToList();
 
 
-            dataGridView2.DataSource = query; 
+            DGViewRooms.DataSource = query; 
         }
 
-
+        
     }
 }
