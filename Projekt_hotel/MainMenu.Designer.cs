@@ -214,6 +214,7 @@
             this.textBox1.Size = new System.Drawing.Size(278, 43);
             this.textBox1.TabIndex = 13;
             this.textBox1.TabStop = false;
+            this.textBox1.Visible = false;
             this.textBox1.WordWrap = false;
             // 
             // DeleteReservation

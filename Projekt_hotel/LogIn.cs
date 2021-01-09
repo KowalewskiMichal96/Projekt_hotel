@@ -84,6 +84,9 @@ namespace Projekt_hotel
                 login_text.Clear();
                 password_text.Clear();
 
+                //string error1 = "Username or Password is invaild !";
+                //CustomDialog Error = new CustomDialog(error1,1);
+                //Error.ShowDialog();
                 MessageBox.Show("Username or Password is invaild !", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             /*if (login_text.Text == "qwerty" && password_text.Text == "qwerty")

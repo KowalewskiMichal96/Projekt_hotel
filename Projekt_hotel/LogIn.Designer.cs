@@ -76,10 +76,10 @@
             this.panel1.Controls.Add(this.login_text);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(465, 304);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(659, 359);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(559, 451);
+            this.panel1.Size = new System.Drawing.Size(745, 555);
             this.panel1.TabIndex = 0;
             // 
             // button_register
@@ -88,10 +88,10 @@
             this.button_register.FlatAppearance.BorderSize = 0;
             this.button_register.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
             this.button_register.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.button_register.Location = new System.Drawing.Point(76, 320);
-            this.button_register.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_register.Location = new System.Drawing.Point(101, 394);
+            this.button_register.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_register.Name = "button_register";
-            this.button_register.Size = new System.Drawing.Size(171, 80);
+            this.button_register.Size = new System.Drawing.Size(228, 98);
             this.button_register.TabIndex = 4;
             this.button_register.Text = "REGISTER";
             this.button_register.UseVisualStyleBackColor = false;
@@ -103,10 +103,9 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Lato", 8F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.label4.Location = new System.Drawing.Point(107, 280);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(143, 345);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 13);
+            this.label4.Size = new System.Drawing.Size(186, 17);
             this.label4.TabIndex = 7;
             this.label4.Text = "You do not have an account ?";
             // 
@@ -116,10 +115,9 @@
             this.labelError.BackColor = System.Drawing.Color.Transparent;
             this.labelError.Font = new System.Drawing.Font("Lato", 8F, System.Drawing.FontStyle.Bold);
             this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(279, 280);
-            this.labelError.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelError.Location = new System.Drawing.Point(372, 345);
             this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(200, 13);
+            this.labelError.Size = new System.Drawing.Size(253, 17);
             this.labelError.TabIndex = 6;
             this.labelError.Text = "WRONG PASSWORD OR USER NAME";
             this.labelError.Visible = false;
@@ -130,10 +128,9 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Lato", 40F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.label1.Location = new System.Drawing.Point(99, 32);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(132, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(345, 64);
+            this.label1.Size = new System.Drawing.Size(427, 80);
             this.label1.TabIndex = 0;
             this.label1.Text = "USER LOGIN";
             // 
@@ -143,10 +140,10 @@
             this.button_login.FlatAppearance.BorderSize = 0;
             this.button_login.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
             this.button_login.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.button_login.Location = new System.Drawing.Point(293, 320);
-            this.button_login.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_login.Location = new System.Drawing.Point(391, 394);
+            this.button_login.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_login.Name = "button_login";
-            this.button_login.Size = new System.Drawing.Size(176, 80);
+            this.button_login.Size = new System.Drawing.Size(235, 98);
             this.button_login.TabIndex = 3;
             this.button_login.Text = "LOG IN";
             this.button_login.UseVisualStyleBackColor = false;
@@ -158,11 +155,11 @@
             this.password_text.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.password_text.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.password_text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.password_text.Location = new System.Drawing.Point(301, 185);
-            this.password_text.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.password_text.Location = new System.Drawing.Point(401, 228);
+            this.password_text.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.password_text.Name = "password_text";
             this.password_text.PasswordChar = '*';
-            this.password_text.Size = new System.Drawing.Size(153, 36);
+            this.password_text.Size = new System.Drawing.Size(203, 43);
             this.password_text.TabIndex = 2;
             this.password_text.WordWrap = false;
             // 
@@ -172,10 +169,10 @@
             this.login_text.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.login_text.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.login_text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.login_text.Location = new System.Drawing.Point(301, 130);
-            this.login_text.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.login_text.Location = new System.Drawing.Point(401, 160);
+            this.login_text.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.login_text.Name = "login_text";
-            this.login_text.Size = new System.Drawing.Size(153, 36);
+            this.login_text.Size = new System.Drawing.Size(203, 43);
             this.login_text.TabIndex = 1;
             this.login_text.WordWrap = false;
             // 
@@ -185,10 +182,9 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.label3.Location = new System.Drawing.Point(214, 193);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(285, 238);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 19);
+            this.label3.Size = new System.Drawing.Size(95, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "Password";
             // 
@@ -198,10 +194,9 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.label2.Location = new System.Drawing.Point(242, 142);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(323, 175);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 19);
+            this.label2.Size = new System.Drawing.Size(57, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "Login";
             // 
@@ -216,10 +211,10 @@
             this.button_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_exit.Font = new System.Drawing.Font("Lato", 36F, System.Drawing.FontStyle.Bold);
             this.button_exit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.button_exit.Location = new System.Drawing.Point(1371, 10);
-            this.button_exit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_exit.Location = new System.Drawing.Point(1828, 12);
+            this.button_exit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_exit.Name = "button_exit";
-            this.button_exit.Size = new System.Drawing.Size(60, 65);
+            this.button_exit.Size = new System.Drawing.Size(80, 80);
             this.button_exit.TabIndex = 1;
             this.button_exit.TabStop = false;
             this.button_exit.Text = "X";
@@ -250,10 +245,10 @@
             this.panel2.Controls.Add(this.txtLastName);
             this.panel2.Controls.Add(this.txtFirstName);
             this.panel2.Controls.Add(this.labelFirstName);
-            this.panel2.Location = new System.Drawing.Point(482, 280);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Location = new System.Drawing.Point(695, 332);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(559, 448);
+            this.panel2.Size = new System.Drawing.Size(745, 551);
             this.panel2.TabIndex = 10;
             this.panel2.Visible = false;
             // 
@@ -263,10 +258,10 @@
             this.Button1.FlatAppearance.BorderSize = 0;
             this.Button1.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
             this.Button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.Button1.Location = new System.Drawing.Point(61, 355);
-            this.Button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Button1.Location = new System.Drawing.Point(81, 437);
+            this.Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Button1.Name = "Button1";
-            this.Button1.Size = new System.Drawing.Size(186, 58);
+            this.Button1.Size = new System.Drawing.Size(248, 71);
             this.Button1.TabIndex = 23;
             this.Button1.Text = "CANCEL";
             this.Button1.UseVisualStyleBackColor = false;
@@ -278,10 +273,9 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Lato", 8F, System.Drawing.FontStyle.Bold);
             this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(470, 257);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Location = new System.Drawing.Point(627, 316);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(12, 13);
+            this.label15.Size = new System.Drawing.Size(14, 17);
             this.label15.TabIndex = 22;
             this.label15.Text = "*";
             // 
@@ -291,10 +285,9 @@
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Lato", 8F, System.Drawing.FontStyle.Bold);
             this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(470, 193);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Location = new System.Drawing.Point(627, 238);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(12, 13);
+            this.label14.Size = new System.Drawing.Size(14, 17);
             this.label14.TabIndex = 21;
             this.label14.Text = "*";
             // 
@@ -304,10 +297,9 @@
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Lato", 8F, System.Drawing.FontStyle.Bold);
             this.label13.ForeColor = System.Drawing.Color.Red;
-            this.label13.Location = new System.Drawing.Point(470, 125);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Location = new System.Drawing.Point(627, 154);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(12, 13);
+            this.label13.Size = new System.Drawing.Size(14, 17);
             this.label13.TabIndex = 20;
             this.label13.Text = "*";
             // 
@@ -317,10 +309,9 @@
             this.labelRegisterError.BackColor = System.Drawing.Color.Transparent;
             this.labelRegisterError.Font = new System.Drawing.Font("Lato", 8F, System.Drawing.FontStyle.Bold);
             this.labelRegisterError.ForeColor = System.Drawing.Color.Red;
-            this.labelRegisterError.Location = new System.Drawing.Point(149, 325);
-            this.labelRegisterError.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelRegisterError.Location = new System.Drawing.Point(199, 400);
             this.labelRegisterError.Name = "labelRegisterError";
-            this.labelRegisterError.Size = new System.Drawing.Size(237, 13);
+            this.labelRegisterError.Size = new System.Drawing.Size(301, 17);
             this.labelRegisterError.TabIndex = 19;
             this.labelRegisterError.Text = "THE PASSWORD IS DIFFERENT FROM ITSELF";
             this.labelRegisterError.Visible = false;
@@ -330,11 +321,11 @@
             this.txtConfirmPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
             this.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtConfirmPassword.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtConfirmPassword.Location = new System.Drawing.Point(313, 257);
-            this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(417, 316);
+            this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.PasswordChar = '*';
-            this.txtConfirmPassword.Size = new System.Drawing.Size(153, 36);
+            this.txtConfirmPassword.Size = new System.Drawing.Size(203, 43);
             this.txtConfirmPassword.TabIndex = 0;
             this.txtConfirmPassword.TabStop = false;
             this.txtConfirmPassword.WordWrap = false;
@@ -345,10 +336,9 @@
             this.labelConfirmPassword.BackColor = System.Drawing.Color.Transparent;
             this.labelConfirmPassword.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
             this.labelConfirmPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.labelConfirmPassword.Location = new System.Drawing.Point(310, 235);
-            this.labelConfirmPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelConfirmPassword.Location = new System.Drawing.Point(413, 289);
             this.labelConfirmPassword.Name = "labelConfirmPassword";
-            this.labelConfirmPassword.Size = new System.Drawing.Size(140, 19);
+            this.labelConfirmPassword.Size = new System.Drawing.Size(171, 24);
             this.labelConfirmPassword.TabIndex = 17;
             this.labelConfirmPassword.Text = "Confirm Password";
             // 
@@ -358,10 +348,9 @@
             this.labelPassword.BackColor = System.Drawing.Color.Transparent;
             this.labelPassword.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
             this.labelPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.labelPassword.Location = new System.Drawing.Point(310, 171);
-            this.labelPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelPassword.Location = new System.Drawing.Point(413, 210);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(78, 19);
+            this.labelPassword.Size = new System.Drawing.Size(95, 24);
             this.labelPassword.TabIndex = 16;
             this.labelPassword.Text = "Password";
             // 
@@ -371,10 +360,9 @@
             this.labelUsername.BackColor = System.Drawing.Color.Transparent;
             this.labelUsername.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
             this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.labelUsername.Location = new System.Drawing.Point(310, 103);
-            this.labelUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUsername.Location = new System.Drawing.Point(413, 127);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(82, 19);
+            this.labelUsername.Size = new System.Drawing.Size(101, 24);
             this.labelUsername.TabIndex = 15;
             this.labelUsername.Text = "Username";
             // 
@@ -384,10 +372,9 @@
             this.labelEmail.BackColor = System.Drawing.Color.Transparent;
             this.labelEmail.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
             this.labelEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.labelEmail.Location = new System.Drawing.Point(70, 236);
-            this.labelEmail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelEmail.Location = new System.Drawing.Point(93, 290);
             this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(47, 19);
+            this.labelEmail.Size = new System.Drawing.Size(59, 24);
             this.labelEmail.TabIndex = 14;
             this.labelEmail.Text = "Email";
             // 
@@ -397,10 +384,9 @@
             this.labelLastName.BackColor = System.Drawing.Color.Transparent;
             this.labelLastName.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
             this.labelLastName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.labelLastName.Location = new System.Drawing.Point(72, 169);
-            this.labelLastName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelLastName.Location = new System.Drawing.Point(96, 208);
             this.labelLastName.Name = "labelLastName";
-            this.labelLastName.Size = new System.Drawing.Size(84, 19);
+            this.labelLastName.Size = new System.Drawing.Size(104, 24);
             this.labelLastName.TabIndex = 13;
             this.labelLastName.Text = "Last Name";
             // 
@@ -409,11 +395,11 @@
             this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtPassword.Location = new System.Drawing.Point(313, 193);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword.Location = new System.Drawing.Point(417, 238);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(153, 36);
+            this.txtPassword.Size = new System.Drawing.Size(203, 43);
             this.txtPassword.TabIndex = 0;
             this.txtPassword.TabStop = false;
             this.txtPassword.WordWrap = false;
@@ -424,10 +410,10 @@
             this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUsername.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.txtUsername.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtUsername.Location = new System.Drawing.Point(313, 125);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUsername.Location = new System.Drawing.Point(417, 154);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(153, 36);
+            this.txtUsername.Size = new System.Drawing.Size(203, 43);
             this.txtUsername.TabIndex = 0;
             this.txtUsername.TabStop = false;
             this.txtUsername.WordWrap = false;
@@ -437,10 +423,10 @@
             this.txtEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
             this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEmail.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtEmail.Location = new System.Drawing.Point(73, 258);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEmail.Location = new System.Drawing.Point(97, 318);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(153, 36);
+            this.txtEmail.Size = new System.Drawing.Size(203, 43);
             this.txtEmail.TabIndex = 0;
             this.txtEmail.TabStop = false;
             this.txtEmail.WordWrap = false;
@@ -451,10 +437,10 @@
             this.button_register_new_user.FlatAppearance.BorderSize = 0;
             this.button_register_new_user.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
             this.button_register_new_user.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.button_register_new_user.Location = new System.Drawing.Point(298, 355);
-            this.button_register_new_user.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_register_new_user.Location = new System.Drawing.Point(397, 437);
+            this.button_register_new_user.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_register_new_user.Name = "button_register_new_user";
-            this.button_register_new_user.Size = new System.Drawing.Size(188, 58);
+            this.button_register_new_user.Size = new System.Drawing.Size(251, 71);
             this.button_register_new_user.TabIndex = 9;
             this.button_register_new_user.Text = "REGISTER";
             this.button_register_new_user.UseVisualStyleBackColor = false;
@@ -466,10 +452,9 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Lato", 40F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.label7.Location = new System.Drawing.Point(64, 22);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(85, 27);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(417, 64);
+            this.label7.Size = new System.Drawing.Size(517, 80);
             this.label7.TabIndex = 0;
             this.label7.Text = "REGISTRATION";
             // 
@@ -478,10 +463,10 @@
             this.txtLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
             this.txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLastName.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtLastName.Location = new System.Drawing.Point(73, 191);
-            this.txtLastName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLastName.Location = new System.Drawing.Point(97, 235);
+            this.txtLastName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(153, 36);
+            this.txtLastName.Size = new System.Drawing.Size(203, 43);
             this.txtLastName.TabIndex = 0;
             this.txtLastName.TabStop = false;
             this.txtLastName.WordWrap = false;
@@ -491,10 +476,10 @@
             this.txtFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(158)))), ((int)(((byte)(250)))));
             this.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFirstName.Font = new System.Drawing.Font("Lato Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtFirstName.Location = new System.Drawing.Point(73, 127);
-            this.txtFirstName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFirstName.Location = new System.Drawing.Point(97, 156);
+            this.txtFirstName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(153, 36);
+            this.txtFirstName.Size = new System.Drawing.Size(203, 43);
             this.txtFirstName.TabIndex = 0;
             this.txtFirstName.TabStop = false;
             this.txtFirstName.WordWrap = false;
@@ -505,26 +490,25 @@
             this.labelFirstName.BackColor = System.Drawing.Color.Transparent;
             this.labelFirstName.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
             this.labelFirstName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.labelFirstName.Location = new System.Drawing.Point(72, 105);
-            this.labelFirstName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelFirstName.Location = new System.Drawing.Point(96, 129);
             this.labelFirstName.Name = "labelFirstName";
-            this.labelFirstName.Size = new System.Drawing.Size(87, 19);
+            this.labelFirstName.Size = new System.Drawing.Size(107, 24);
             this.labelFirstName.TabIndex = 1;
             this.labelFirstName.Text = "First Name";
             // 
             // LogIn
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1440, 869);
+            this.ClientSize = new System.Drawing.Size(1920, 1070);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button_exit);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "LogIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";

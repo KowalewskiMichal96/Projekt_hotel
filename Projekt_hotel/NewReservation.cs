@@ -41,16 +41,34 @@ namespace Projekt_hotel
         {
             GuestLB.Items.Clear();
 
-            if (GuestSelectedLB.Items.Count > 0)
+            //if (GuestSelectedLB.Items.Count > 0)
+            //{
+            //    List<string> x = new List<string>();
+            //    for(int i = 0; i < GuestSelectedLB.Items.Count; i++)
+            //    {
+            //        Guest FromList =  GuestSelectedLB.Items[i] as Guest;
+            //        x.Add(FromList.LastName);              
+            //    }
+            //
+            //    foreach (Guest z in contextDB.Guest.Where(guest => !x.Contains(guest.LastName)))
+            //    {
+            //        GuestLB.Items.Add(z);
+            //    }
+            //}
+            if(RoomSelectedLB.Items.Count > 0)
             {
                 List<string> x = new List<string>();
-                for(int i = 0; i < GuestSelectedLB.Items.Count; i++)
-                {
-                    Guest FromList =  GuestSelectedLB.Items[i] as Guest;
-                    x.Add(FromList.LastName);              
+                for(int i = 0; i < AddedRooms.Count; i++)
+                { 
+                    for(int j = 0; j < AddedRooms[i].guests.Count; j++)
+                    {
+                        // getting all names and reload list of guest
+                        string[] name = AddedRooms[i].guests[j].Split();
+                        x.Add(name[0]);
+                    }
                 }
 
-                foreach (Guest z in contextDB.Guest.Where(guest => !x.Contains(guest.LastName)))
+                foreach(Guest z in contextDB.Guest.Where(guest => !x.Contains(guest.LastName)))
                 {
                     GuestLB.Items.Add(z);
                 }
@@ -370,10 +388,25 @@ namespace Projekt_hotel
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
-            mainForm.FillData();
+            string error3 = "Are you sure you want to abort this operation ??";
+            CustomDialog AddReservation = new CustomDialog(error3, 2);
+            AddReservation.ShowDialog();
+            if (AddReservation.DialogResult.Equals(DialogResult.Yes))
+            {
+                var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
+                mainForm.FillData();
+                this.Close();
+            }
+            else
+            {
+                
+            }
 
-            this.Close();
+
+         //var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
+         //mainForm.FillData();
+         //
+         //this.Close();
         }
 
         private void PayerLB_SelectedIndexChanged(object sender, EventArgs e)
@@ -615,6 +648,7 @@ namespace Projekt_hotel
 
                 if (AllRoomsGotGuest == true && LabelResOn.Text != "EMPTY")
                 {
+
                     textBox1.Text = "Rezerwacja dodana";
                     // dodaj rezerwacje
 
@@ -637,13 +671,27 @@ namespace Projekt_hotel
                 }
                 else if (AllRoomsGotGuest == false || LabelResOn.Text == "EMPTY")
                 {
-                    textBox1.Text = "Nie udalo sie zarezerowac";
+                    string error1 = "Failed to make a reservation, please check that every room has a guest";
+                    CustomDialog AddReservation = new CustomDialog(error1, 1);
+                    AddReservation.ShowDialog();
+                    if(AddReservation.DialogResult.Equals(DialogResult.Yes))
+                    {
+                        textBox1.Text = "kiknales yes";
+                    }
+                    else
+                    {
+                        textBox1.Text = "kilknales no";
+                    }    
+                    //textBox1.Text = "Nie udalo sie zarezerowac";
                     // wystapil blad sprawdz czy wszystkie pokoje maja przypisanego goscia
                 }
             }
             else
             {
-                textBox1.Text = "nie wybrano zadnego pokoju";
+                
+                string error2 = "Failed to make a reservation, please check that you have selected a room";
+                CustomDialog AddReservation = new CustomDialog(error2, 1);
+                AddReservation.ShowDialog();
                 // blad wypisz ze nie mozna zrobic pustej rezerwacji
             }
         }
