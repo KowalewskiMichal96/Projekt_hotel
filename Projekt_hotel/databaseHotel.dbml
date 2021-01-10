@@ -106,20 +106,10 @@
       <Column Name="Guest_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Worker_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Reservation_Invoice" Member="Invoice" ThisKey="Id" OtherKey="Reservation_ID" Type="Invoice" />
-      <Association Name="Reservation_RoomReserved" Member="RoomReserved" ThisKey="Id" OtherKey="Reservation_ID" Type="RoomReserved" />
       <Association Name="Reservation_ReservationStatus" Member="ReservationStatus" ThisKey="Id" OtherKey="Reservation_ID" Type="ReservationStatus" />
+      <Association Name="Reservation_RoomReserved" Member="RoomReserved" ThisKey="Id" OtherKey="Reservation_ID" Type="RoomReserved" />
       <Association Name="Guest_Reservation" Member="Guest" ThisKey="Guest_ID" OtherKey="Id" Type="Guest" IsForeignKey="true" />
       <Association Name="Worker_Reservation" Member="Worker" ThisKey="Worker_ID" OtherKey="Id" Type="Worker" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.RoomReserved" Member="RoomReserved">
-    <Type Name="RoomReserved">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PriceFromDate" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
-      <Column Name="Room_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Reservation_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Room_RoomReserved" Member="Room" ThisKey="Room_ID" OtherKey="Id" Type="Room" IsForeignKey="true" />
-      <Association Name="Reservation_RoomReserved" Member="Reservation" ThisKey="Reservation_ID" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ReservationStatus" Member="ReservationStatus">
@@ -137,6 +127,16 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Status_Name" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="ReservationStatusCatalog_ReservationStatus" Member="ReservationStatus" ThisKey="Id" OtherKey="ReservationStatusCatalog_ID" Type="ReservationStatus" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RoomReserved" Member="RoomReserved">
+    <Type Name="RoomReserved">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PriceFromDate" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Room_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reservation_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Room_RoomReserved" Member="Room" ThisKey="Room_ID" OtherKey="Id" Type="Room" IsForeignKey="true" />
+      <Association Name="Reservation_RoomReserved" Member="Reservation" ThisKey="Reservation_ID" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

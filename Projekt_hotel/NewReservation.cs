@@ -662,6 +662,18 @@ namespace Projekt_hotel
                     contextDB.Reservation.InsertOnSubmit(ResToSave);
                     contextDB.SubmitChanges();
 
+                    for (int i = 0; i < RoomSelectedLB.Items.Count; i++)
+                    {
+                        RoomReserved RoomToSave = new RoomReserved();
+                        RoomToSave.PriceFromDate = TakePrice();
+                        RoomToSave.Reservation_ID = (from res in contextDB.Reservation select res.Id).Max();
+                        RoomToSave.Room_ID = (from room in contextDB.Room
+                                              where room.RoomNameUnique.ToString() == RoomSelectedLB.Items[i].ToString()
+                                              select room.Id).First();
+
+                        contextDB.RoomReserved.InsertOnSubmit(RoomToSave);
+                        contextDB.SubmitChanges();
+                    }
 
 
                     var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
