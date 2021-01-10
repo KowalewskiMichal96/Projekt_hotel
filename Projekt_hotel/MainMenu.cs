@@ -41,6 +41,8 @@ namespace Projekt_hotel
             table.Columns.Add("TotalPrice", typeof(string));
             table.Columns.Add("GuestName", typeof(string));
             table.Columns.Add("WorkerId", typeof(string));
+
+
         }
         public void FillData()
         {
@@ -60,12 +62,12 @@ namespace Projekt_hotel
 
             DGView.DataSource = table;
             categoryCombobox.SelectedIndex = 0;
-
+            DGView.Columns[0].Visible = false;
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            textBox1.Text = LoggedUser.GetId().ToString() + " " + LoggedUser.GetRole();
+            //textBox1.Text = LoggedUser.GetId().ToString() + " " + LoggedUser.GetRole();
 
             FillComboBox();
             FillData();
@@ -107,8 +109,6 @@ namespace Projekt_hotel
         private void DGView_SelectionChanged(object sender, EventArgs e)
         {
             DeleteReservation.Visible = true;
-
-
         }
 
         private void EditReservation_Click(object sender, EventArgs e)
@@ -131,6 +131,43 @@ namespace Projekt_hotel
             DGViewRooms.DataSource = query; 
         }
 
-        
+        private void DeleteReservation_Click(object sender, EventArgs e)
+        {
+            if(DGView.SelectedRows.Count > 0)
+            {
+                int y = Convert.ToInt32(DGView[0, DGView.CurrentCell.RowIndex].Value);
+
+                var query1 = from roomres in contextDB.RoomReserved
+                             where roomres.Reservation_ID == y
+                             select roomres;
+                foreach (var item in query1)
+                {
+                    contextDB.RoomReserved.DeleteOnSubmit(item);
+                }
+                contextDB.SubmitChanges();
+
+                var query2 = from reservation in contextDB.Reservation
+                             where reservation.Id == y
+                             select reservation;
+
+                foreach (var item in query2)
+                {
+                    contextDB.Reservation.DeleteOnSubmit(item);
+                }
+                contextDB.SubmitChanges();
+                FillData();
+                //textBox1.Text = y.ToString();
+            }
+            else
+            {
+                // blad prosze zaznaczyc rezerwacje
+            }
+        }
+
+
+        private void GetReservationID()
+        {
+
+        }
     }
 }
