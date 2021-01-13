@@ -75,7 +75,7 @@ namespace Projekt_hotel
         }
 
 // wczytywanie wolnych pokoi
-        public static List<Rooms> LoadSampleRooms(DateTime checkIn, DateTime CheckOut)
+        public static List<Rooms> LoadSampleRooms(DateTime checkIn, DateTime CheckOut,int ResID)
         {
             databaseHotelDataContext contextDB = new databaseHotelDataContext();
             List<Rooms> outputrooms = new List<Rooms>();
@@ -86,11 +86,14 @@ namespace Projekt_hotel
                           join x in contextDB.Room
                           on s.Room_ID equals x.Id
                           where 
+                          (
                           ((s.Reservation.StartDate >= checkIn && s.Reservation.StartDate < CheckOut)
                           ||
                           (s.Reservation.EndDate > checkIn && s.Reservation.EndDate < CheckOut)
                           ||
-                          (s.Reservation.StartDate < checkIn && s.Reservation.EndDate > checkIn))
+                          (s.Reservation.StartDate < checkIn && s.Reservation.EndDate > checkIn)
+                          ) && (s.Reservation_ID != ResID)
+                          )
                           orderby s.Room_ID
                           select new { s.Room.RoomNameUnique });
 

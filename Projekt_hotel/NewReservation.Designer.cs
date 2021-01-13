@@ -61,11 +61,11 @@
             this.TimePickerEnd = new System.Windows.Forms.DateTimePicker();
             this.SearchButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.LabelResOn = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.TableLP = new System.Windows.Forms.TableLayoutPanel();
             this.TBClose = new System.Windows.Forms.Button();
             this.TBConfirm = new System.Windows.Forms.Button();
@@ -86,6 +86,7 @@
             this.DeletePB = new System.Windows.Forms.Button();
             this.DeleteGB = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -162,7 +163,7 @@
             this.GuestLB.FormattingEnabled = true;
             this.GuestLB.ItemHeight = 18;
             this.GuestLB.Location = new System.Drawing.Point(847, 334);
-            this.GuestLB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.GuestLB.Margin = new System.Windows.Forms.Padding(5);
             this.GuestLB.Name = "GuestLB";
             this.GuestLB.ScrollAlwaysVisible = true;
             this.GuestLB.Size = new System.Drawing.Size(375, 200);
@@ -224,7 +225,7 @@
             this.RoomLB.FormattingEnabled = true;
             this.RoomLB.ItemHeight = 18;
             this.RoomLB.Location = new System.Drawing.Point(848, 49);
-            this.RoomLB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.RoomLB.Margin = new System.Windows.Forms.Padding(5);
             this.RoomLB.Name = "RoomLB";
             this.RoomLB.ScrollAlwaysVisible = true;
             this.RoomLB.Size = new System.Drawing.Size(375, 200);
@@ -548,9 +549,10 @@
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = global::Projekt_hotel.Properties.Resources.tlo_5;
+            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.TableLP);
             this.panel1.Controls.Add(this.EditPB);
             this.panel1.Controls.Add(this.EditGB);
@@ -586,12 +588,26 @@
             this.panel1.Size = new System.Drawing.Size(1917, 1070);
             this.panel1.TabIndex = 16;
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("Lato Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.textBox1.Location = new System.Drawing.Point(1407, 920);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(279, 39);
+            this.textBox1.TabIndex = 48;
+            this.textBox1.TabStop = false;
+            this.textBox1.WordWrap = false;
+            // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Location = new System.Drawing.Point(1411, 633);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(375, 197);
             this.panel5.TabIndex = 47;
@@ -601,7 +617,7 @@
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.panel6.Controls.Add(this.LabelResOn);
             this.panel6.Location = new System.Drawing.Point(4, 4);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(367, 190);
             this.panel6.TabIndex = 48;
@@ -629,21 +645,6 @@
             this.label1.TabIndex = 46;
             this.label1.Text = "Reservation on";
             // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Lato Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.textBox1.Location = new System.Drawing.Point(1412, 902);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(382, 39);
-            this.textBox1.TabIndex = 43;
-            this.textBox1.TabStop = false;
-            this.textBox1.Visible = false;
-            this.textBox1.WordWrap = false;
-            // 
             // TableLP
             // 
             this.TableLP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -666,7 +667,7 @@
             this.TableLP.Controls.Add(this.CBPayment, 1, 12);
             this.TableLP.Controls.Add(this.TPDateOfBirth, 1, 11);
             this.TableLP.Location = new System.Drawing.Point(61, 62);
-            this.TableLP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TableLP.Margin = new System.Windows.Forms.Padding(4);
             this.TableLP.Name = "TableLP";
             this.TableLP.RowCount = 14;
             this.TableLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
@@ -950,6 +951,20 @@
             this.panel3.Size = new System.Drawing.Size(443, 657);
             this.panel3.TabIndex = 36;
             // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox2.Font = new System.Drawing.Font("Lato Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.textBox2.Location = new System.Drawing.Point(1407, 963);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(279, 39);
+            this.textBox2.TabIndex = 49;
+            this.textBox2.TabStop = false;
+            this.textBox2.WordWrap = false;
+            // 
             // NewReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1035,10 +1050,11 @@
         private System.Windows.Forms.Button TBClose;
         private System.Windows.Forms.Label LabelEditPerson;
         private System.Windows.Forms.ComboBox CBPayment;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label LabelResOn;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

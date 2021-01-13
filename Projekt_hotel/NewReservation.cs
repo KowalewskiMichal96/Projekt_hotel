@@ -17,13 +17,18 @@ namespace Projekt_hotel
         readonly List<SelectedRoom> AddedRooms = new List<SelectedRoom>();
         public static int SelectedButton = 0;
         public static int WorkerId = 0;
+        public static int AddOrEdit = 1;
+        public static int ReseravtionID = 0;
         public string[] ReservationOn;
 
-        public NewReservation(int WORKERID)
+        public NewReservation(int WORKERID, int RESERVATIONID, int WHATTASK)
         {
-            WorkerId = WORKERID;
+
+
             InitializeComponent();
-            LoadForm();
+            Task(WORKERID, RESERVATIONID, WHATTASK);
+
+            //LoadForm();
         }
         private void LoadPayer()
         {
@@ -41,20 +46,6 @@ namespace Projekt_hotel
         {
             GuestLB.Items.Clear();
 
-            //if (GuestSelectedLB.Items.Count > 0)
-            //{
-            //    List<string> x = new List<string>();
-            //    for(int i = 0; i < GuestSelectedLB.Items.Count; i++)
-            //    {
-            //        Guest FromList =  GuestSelectedLB.Items[i] as Guest;
-            //        x.Add(FromList.LastName);              
-            //    }
-            //
-            //    foreach (Guest z in contextDB.Guest.Where(guest => !x.Contains(guest.LastName)))
-            //    {
-            //        GuestLB.Items.Add(z);
-            //    }
-            //}
             if(RoomSelectedLB.Items.Count > 0)
             {
                 List<string> x = new List<string>();
@@ -146,10 +137,12 @@ namespace Projekt_hotel
             DateTime start = new DateTime(TimePickerStart.Value.Ticks);
             TimePickerEnd.MinDate = start.AddDays(1);
         }
-        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Getting free rooms in data
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            RoomLB.Items.Clear();
+            // RoomLB.Items.Clear();
+            // jesli data jest inna niz na rezerwacji i jesli jest to opcja edytowania
 
             DateTime checkIn;
             DateTime CheckOut;
@@ -157,11 +150,26 @@ namespace Projekt_hotel
             checkIn = TimePickerStart.Value;
             CheckOut = TimePickerEnd.Value;
 
-            List<Rooms> freeRooms = ListManager.LoadSampleRooms(checkIn, CheckOut);
-            foreach (Rooms item in freeRooms)
+            ClearAll();
+
+            if(AddOrEdit == 1)
             {
-                RoomLB.Items.Add(item.RoomName.ToString());
+                List<Rooms> freeRooms = ListManager.LoadSampleRooms(checkIn, CheckOut, 1);
+                foreach (Rooms item in freeRooms)
+                {
+                    RoomLB.Items.Add(item.RoomName.ToString());
+                }
             }
+            else if(AddOrEdit == 2)
+            {
+                // czy jestes pewny ze chcesz wszystko wycofac
+                List<Rooms> freeRooms = ListManager.LoadSampleRooms(checkIn, CheckOut, ReseravtionID);
+                foreach (Rooms item in freeRooms)
+                {
+                    RoomLB.Items.Add(item.RoomName.ToString());
+                }
+            }
+
         }
 
 
@@ -393,6 +401,7 @@ namespace Projekt_hotel
             AddReservation.ShowDialog();
             if (AddReservation.DialogResult.Equals(DialogResult.Yes))
             {
+                AddOrEdit = 1;
                 var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
                 mainForm.FillData();
                 this.Close();
@@ -649,62 +658,109 @@ namespace Projekt_hotel
                 if (AllRoomsGotGuest == true && LabelResOn.Text != "EMPTY")
                 {
 
-                    textBox1.Text = "Rezerwacja dodana";
-                    // dodaj rezerwacje
+                    Reservation ResToSave = null;
+                    RoomReserved RoomToSave = null;
 
-                    Reservation ResToSave = new Reservation();
+                    if(AddOrEdit == 1) // when adding new reservation
+                    {
+                        ResToSave = new Reservation();
+
+                        contextDB.Reservation.InsertOnSubmit(ResToSave);
+
+                    }
+                    else if(AddOrEdit == 2) // when edit old reservation
+                    {
+                        ResToSave = (from reservation in contextDB.Reservation where reservation.Id == ReseravtionID select reservation).SingleOrDefault();
+                    }
+
                     ResToSave.StartDate = TimePickerStart.Value;
                     ResToSave.EndDate = TimePickerEnd.Value;
                     ResToSave.Total_price = TakePrice();
-                    ResToSave.Guest_ID = contextDB.Guest.First(a => a.LastName == ReservationOn[0]).Id;
+                    ResToSave.Guest = contextDB.Guest.Single(c => c.Id == (from guest in contextDB.Guest 
+                                                                           where guest.LastName == ReservationOn[0] 
+                                                                           select guest.Id).Single());
                     ResToSave.Worker_ID = WorkerId;
+                    contextDB.SubmitChanges();  
+                    
+                    // save reservation
 
-                    contextDB.Reservation.InsertOnSubmit(ResToSave);
-                    contextDB.SubmitChanges();
-
-                    for (int i = 0; i < RoomSelectedLB.Items.Count; i++)
+                    if(AddOrEdit == 1) // when new reservation add new roomres
                     {
-                        RoomReserved RoomToSave = new RoomReserved();
-                        RoomToSave.PriceFromDate = TakePrice();
-                        RoomToSave.Reservation_ID = (from res in contextDB.Reservation select res.Id).Max();
-                        RoomToSave.Room_ID = (from room in contextDB.Room
-                                              where room.RoomNameUnique.ToString() == RoomSelectedLB.Items[i].ToString()
-                                              select room.Id).First();
 
-                        contextDB.RoomReserved.InsertOnSubmit(RoomToSave);
-                        contextDB.SubmitChanges();
-                    }
+                        for (int i = 0; i < RoomSelectedLB.Items.Count; i++)
+                        {
+                            RoomToSave = new RoomReserved();
+                            contextDB.RoomReserved.InsertOnSubmit(RoomToSave);
+
+                            RoomToSave.PriceFromDate = TakePrice();
+                            RoomToSave.Reservation_ID = (from res in contextDB.Reservation select res.Id).Max();
+                            RoomToSave.Room_ID = (from room in contextDB.Room
+                                                  where room.RoomNameUnique.ToString() == RoomSelectedLB.Items[i].ToString()
+                                                  select room.Id).First();
+                            contextDB.SubmitChanges();
+                        }
+                    }   // end adding new roomreservation
+                    else if(AddOrEdit == 2) // when old reservation edit/delete/add new roomres
+                    {
+                        //ad.1 wyszukac wszystkie pokoje o tej rezerwacji i warunek zrobic na pokoje z bazy danych nie listbox
+                        var query2 = (from roomres in contextDB.RoomReserved where roomres.Reservation_ID == ReseravtionID select roomres).ToList();
 
 
+                        for (int i = 0; i < RoomSelectedLB.Items.Count; i++)
+                        {
+                            if (!contextDB.RoomReserved.Any(x => x.Room.RoomNameUnique == RoomSelectedLB.Items[i].ToString() && x.Reservation_ID == ReseravtionID))
+                            {
+                                MessageBox.Show("nie istnieje w bazie danych");
+                                RoomToSave = new RoomReserved();
+                                contextDB.RoomReserved.InsertOnSubmit(RoomToSave);
+
+                                RoomToSave.PriceFromDate = TakePrice();
+                                RoomToSave.Reservation_ID = (from res in contextDB.Reservation select res.Id).Max();
+                                RoomToSave.Room_ID = (from room in contextDB.Room
+                                                      where room.RoomNameUnique.ToString() == RoomSelectedLB.Items[i].ToString()
+                                                      select room.Id).First();
+
+                            }
+                            else if (contextDB.RoomReserved.Any(x => x.Room.RoomNameUnique == RoomSelectedLB.Items[i].ToString() && x.Reservation_ID == ReseravtionID))
+                            {
+                                MessageBox.Show("istnieje w bazie danych przedluz moja rezerwacje");
+                            }
+                            contextDB.SubmitChanges();
+                        }
+
+                        for (int i = 0; i < query2.Count; i++)
+                            if(!RoomSelectedLB.Items.Contains(query2[i].Room.RoomNameUnique) && query2[i].Reservation_ID.Equals(ReseravtionID))
+                            {
+                                MessageBox.Show("nie istnieje w listboxie ale istnieje w bazie usun mnie");
+
+                                RoomToSave = query2[i];
+                                contextDB.RoomReserved.DeleteOnSubmit(RoomToSave);
+                                contextDB.SubmitChanges();
+                            }
+                           
+
+                    } // edit roomreservation
+
+
+                    // load database in Mainmenu Form and close active form
+                    AddOrEdit = 1;
                     var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
                     mainForm.FillData();
                     this.Close();
 
-                }
+                }   // end of adding and editing reservation and roomreservation
                 else if (AllRoomsGotGuest == false || LabelResOn.Text == "EMPTY")
                 {
                     string error1 = "Failed to make a reservation, please check that every room has a guest";
                     CustomDialog AddReservation = new CustomDialog(error1, 1);
                     AddReservation.ShowDialog();
-                    if(AddReservation.DialogResult.Equals(DialogResult.Yes))
-                    {
-                        textBox1.Text = "kiknales yes";
-                    }
-                    else
-                    {
-                        textBox1.Text = "kilknales no";
-                    }    
-                    //textBox1.Text = "Nie udalo sie zarezerowac";
-                    // wystapil blad sprawdz czy wszystkie pokoje maja przypisanego goscia
                 }
             }
             else
             {
-                
                 string error2 = "Failed to make a reservation, please check that you have selected a room";
                 CustomDialog AddReservation = new CustomDialog(error2, 1);
                 AddReservation.ShowDialog();
-                // blad wypisz ze nie mozna zrobic pustej rezerwacji
             }
         }
             
@@ -724,7 +780,67 @@ namespace Projekt_hotel
         private void GuestSelectedLB_DoubleClick(object sender, EventArgs e)
         {
             ReservationOn = GuestSelectedLB.SelectedItem.ToString().Split();
+            //int query2 = (from guest in contextDB.Guest where guest.LastName == ReservationOn[0] select guest.Id).SingleOrDefault();
+            //textBox1.Text = query2.ToString();
             LabelResOn.Text = string.Join(" ", ReservationOn);
         }
+
+
+        private void Task(int WORKERID, Int32 RESERVATIONID, int x)
+        {
+            WorkerId = WORKERID;
+            if(x == 1)
+            {
+                ReseravtionID = 0;
+                AddOrEdit = 1;
+                LoadForm();
+            }
+            if(x == 2)
+            {
+                ReseravtionID = RESERVATIONID;
+                FillForm();
+                AddOrEdit = x;
+            }
+        }
+
+        private void FillForm()
+        {
+
+            // wskaz termin rezerwacji
+            var queryReservation = (from reservation in contextDB.Reservation
+                                   where reservation.Id == ReseravtionID
+                                   select reservation).Single();
+
+                TimePickerStart.Value = queryReservation.StartDate;
+                TimePickerEnd.Value = queryReservation.EndDate;
+                SearchButton_Click(new object(), new EventArgs());
+                LabelResOn.Text = queryReservation.Guest.ToString();
+
+            // wypelnij listbox zarezerwowanych pokoi
+            var queryRoom = from roomres in contextDB.RoomReserved
+                        where roomres.Reservation_ID == ReseravtionID
+                        select roomres.Room.RoomNameUnique;
+            foreach (var item in queryRoom)
+            {
+                AddedRooms.Add(new SelectedRoom(item));
+                RoomSelectedLB.Items.Add(item);
+            }            
+            // teoretycznie dodaj gosci w tych pokojach
+            // gdy bedzie taka tabela aktualnie nie ma
+        } // FILL FORM
+
+        private void ClearAll()
+        {
+            AddedRooms.Clear();
+            LoadGuest();
+            LoadPayer();
+            RoomLB.Items.Clear();
+            RoomSelectedLB.Items.Clear();
+            GuestSelectedLB.Items.Clear();
+            LabelResOn.Text = "EMPTY";
+            ReservationOn = null;
+        }
+
+
     }   //PUBLIC CLASS NEWRESERVATION
 }   // NAMESPACE PROJEKT HOTEL

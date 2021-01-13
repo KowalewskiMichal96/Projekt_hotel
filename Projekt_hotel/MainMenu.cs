@@ -28,7 +28,6 @@ namespace Projekt_hotel
         {
             categoryCombobox.Items.Clear();
 
-            categoryCombobox.Items.Add("Id");
             categoryCombobox.Items.Add("StartDate");
             categoryCombobox.Items.Add("EndDate");
             categoryCombobox.Items.Add("TotalPrice");
@@ -72,6 +71,7 @@ namespace Projekt_hotel
             FillComboBox();
             FillData();
             categoryCombobox.SelectedIndex = 0;
+            DGView.Rows[0].Selected = true;
         }
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
@@ -86,7 +86,7 @@ namespace Projekt_hotel
             if(string.IsNullOrWhiteSpace(searchTextbox.Text))
             {
                 table.DefaultView.RowFilter = "";
-                DGView.Sort(DGView.Columns[categoryCombobox.SelectedIndex], ListSortDirection.Ascending);  
+                DGView.Sort(DGView.Columns[categoryCombobox.SelectedIndex+1], ListSortDirection.Ascending);  
             }
             else
             {
@@ -99,7 +99,7 @@ namespace Projekt_hotel
         
         private void AddReservation_Click(object sender, EventArgs e)
         {
-            NewReservation NR = new NewReservation(LoggedUser.GetId());
+            NewReservation NR = new NewReservation(LoggedUser.GetId(), Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value), 1);
             NR.TopMost = true;
             NR.Show();
 
@@ -108,12 +108,24 @@ namespace Projekt_hotel
 
         private void DGView_SelectionChanged(object sender, EventArgs e)
         {
-            DeleteReservation.Visible = true;
+            if(DGView.SelectedRows.Count > 0)
+            {
+                EditReservation.Visible = true;
+                DeleteReservation.Visible = true;
+            }
+            else
+            {
+                EditReservation.Visible = false;
+                DeleteReservation.Visible = false;
+            }
         }
+
 
         private void EditReservation_Click(object sender, EventArgs e)
         {
-
+            NewReservation EditReservation = new NewReservation(LoggedUser.GetId(), Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value), 2);
+            EditReservation.TopMost = true;
+            EditReservation.Show();
         }
 
         private void DGView_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -133,41 +145,42 @@ namespace Projekt_hotel
 
         private void DeleteReservation_Click(object sender, EventArgs e)
         {
+
             if(DGView.SelectedRows.Count > 0)
             {
-                int y = Convert.ToInt32(DGView[0, DGView.CurrentCell.RowIndex].Value);
+                
+                string info = "Are you sure you want to delete this Reservation?";
+                CustomDialog DeleteRes = new CustomDialog(info, 2);
+                DeleteRes.ShowDialog();
 
-                var query1 = from roomres in contextDB.RoomReserved
-                             where roomres.Reservation_ID == y
-                             select roomres;
-                foreach (var item in query1)
+                if(DeleteRes.DialogResult.Equals(DialogResult.Yes))
                 {
-                    contextDB.RoomReserved.DeleteOnSubmit(item);
-                }
-                contextDB.SubmitChanges();
+                int y = Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value);
+                    var query1 = from roomres in contextDB.RoomReserved
+                                 where roomres.Reservation_ID == y
+                                 select roomres;
+                    foreach (var item in query1)
+                    {
+                        contextDB.RoomReserved.DeleteOnSubmit(item);
+                    }
+                    contextDB.SubmitChanges();
 
-                var query2 = from reservation in contextDB.Reservation
-                             where reservation.Id == y
-                             select reservation;
+                    var query2 = from reservation in contextDB.Reservation
+                                 where reservation.Id == y
+                                 select reservation;
 
-                foreach (var item in query2)
-                {
-                    contextDB.Reservation.DeleteOnSubmit(item);
+                    foreach (var item in query2)
+                    {
+                        contextDB.Reservation.DeleteOnSubmit(item);
+                    }
+                    contextDB.SubmitChanges();
+                    FillData();
                 }
-                contextDB.SubmitChanges();
-                FillData();
-                //textBox1.Text = y.ToString();
-            }
-            else
-            {
-                // blad prosze zaznaczyc rezerwacje
             }
         }
 
 
-        private void GetReservationID()
-        {
 
-        }
+
     }
 }
