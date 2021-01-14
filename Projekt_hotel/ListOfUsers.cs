@@ -124,7 +124,6 @@ namespace Projekt_hotel
                         label8.Visible = true;
 
 
-                        ClearTable();
 
                         // przyciski
                     }
@@ -138,12 +137,16 @@ namespace Projekt_hotel
 
                         textBox4.Visible = true;
                         textBox5.Visible = true;
+                        textBox6.Visible = false;
+                        textBox7.Visible = false;
                         checkBox1.Visible = true;
+
                         label4.Visible = true;
                         label5.Visible = true;
                         label6.Visible = true;
+                        label7.Visible = false;
+                        label8.Visible = false;
 
-                        ClearTable();
                     }
                     break;
                 case "CHANGE":
@@ -165,7 +168,7 @@ namespace Projekt_hotel
                         label7.Visible = false;
                         label8.Visible = false;
 
-                        ClearTable();
+
                     }
                     break;
             }// switch end
@@ -180,7 +183,7 @@ namespace Projekt_hotel
 
         private void ViewNotToSave()
         {
-            ChangeView("ADD");
+            ChangeView("EDIT");
             listBox1.SelectedIndex = -1;
             DeleteB.Enabled = false;
             ChangeB.Enabled = false;
@@ -188,6 +191,7 @@ namespace Projekt_hotel
             listBox1.Enabled = true;
             panel2.Enabled = false;
             SearchB.Enabled = true;
+            ClearTable();
         }
 
 
@@ -249,74 +253,145 @@ namespace Projekt_hotel
 
         private void ConfirmButtonTLO_Click(object sender, EventArgs e)
         {
-            // publiczna zmienna co wybralismy edit add czy haslo
-            // i zaleznie od tego wykonac ponizsze dzialania 
-            
-            ViewNotToSave();
+            switch (Choice)
+            {
+                case 1:
+                    {
+                        //change password
+                        CheckPasswords();   
+                    }
+                    break;
+                case 2:
+                    {
+                        // edit worker
+                        CheckWorkerInfo();   
+                        // sprawdz czy dobrze wypelnione dane
+                    }
+                    break;
+                case 3:
+                    {
+                        // add worker
+                        CheckWorkerInfo();
+                        // sprawdz czy dobrze wypelnione dane
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
 
 
-        // BUTTONS TO EDIT LISTBOX ITEMS
+// BUTTONS TO EDIT LISTBOX ITEMS
 
         private void DeleteB_Click(object sender, EventArgs e)
         {
             // nalezy sprawdzic czy sa na niego rezerwacje jesli sa to mozna np przepisac na managera 
             // zapewne poki co blad podczas usuwania 
+            /*
+
             Worker WorkerToDelete = listBox1.SelectedItem as Worker;
             contextDB.Worker.DeleteOnSubmit(WorkerToDelete);
             contextDB.SubmitChanges();
-
+            */
             ViewNotToSave();
         }
 
         private void ChangeB_Click(object sender, EventArgs e)
         {
-            Choice = 1;
-            // mozna zmieniac tylko jesli jestes adminem
-            // w wiadomosci do uzytkowika ze moze zmieniac tylko i wylacznie swoje haslo
-            ChangeView("CHANGE");
-            ViewToSave();
+            ClearTable();
+            string ErrorText = "";
+            CustomDialog ErrorForm = null;
 
 
+            if (LoggedUser.GetRole() == true)
+            {
+                textBox8.Text = "Jestes Adminem";
+                Choice = 1;
+                ChangeView("CHANGE");
+                ViewToSave();
+            }
+            else if (LoggedUser.GetRole() == false)
+            {
+                Worker CheckWhoYouAre = listBox1.SelectedItem as Worker;
+                if(CheckWhoYouAre.Id == LoggedUser.GetId())
+                {
+
+                    Choice = 1;
+                    ChangeView("CHANGE");
+                    ViewToSave();
+                }
+                else if(CheckWhoYouAre.Id != LoggedUser.GetId())
+                {
+                    ErrorText = "As a user, you can change the only yourself password";
+                    ErrorForm = new CustomDialog(ErrorText,1);
+                    ErrorForm.ShowDialog();
+                }
+            }
         }
 
         private void EditB_Click(object sender, EventArgs e)
         {
-            Choice = 2;
-            ChangeView("EDIT");
-            ViewToSave();
+            string ErrorText = "";
+            CustomDialog ErrorForm = null;
 
 
-            //sprawdz czy dobre dane
-            SaveToDB(2);
-            
+            if (LoggedUser.GetRole() == true)
+            {
+                Choice = 2;
+                ChangeView("EDIT");
+                ViewToSave();
+            }
+            else if (LoggedUser.GetRole() == false)
+            {
+                Worker CheckWhoYouAre = listBox1.SelectedItem as Worker;
+                if (CheckWhoYouAre.Id == LoggedUser.GetId())
+                {
+
+                    Choice = 2;
+                    ChangeView("EDIT");
+                    ViewToSave();
+                }
+                else if (CheckWhoYouAre.Id != LoggedUser.GetId())
+                {
+                    ErrorText = "As a user, you can change the only yourself information";
+                    ErrorForm = new CustomDialog(ErrorText, 1);
+                    ErrorForm.ShowDialog();
+                }
+            }
         }
 
         private void AddB_Click(object sender, EventArgs e)
         {
             Choice = 3;
             listBox1.SelectedIndex = -1;
+            ClearTable();
             ChangeView("ADD");
             ViewToSave();
 
-
             // sprawdz czy dobre dane
-            SaveToDB(1);
+            //SaveToDB(1);
         }
+
+// Save info to database 
 
         private void SaveToDB(int EditOrAdd)
         {
+            string s = "";
             Worker WorkerToSave = null;
             if(EditOrAdd == 1)
             {
                 // Add
                 WorkerToSave = new Worker();
+                contextDB.Worker.InsertOnSubmit(WorkerToSave);
+                s = AccessOperation.EncryptPassword(textBox6.Text);
+                WorkerToSave.UserPassword = s;
+                WorkerToSave.Type = 'U';
             }
             else if(EditOrAdd == 2)
             {
                 // Edit
                 WorkerToSave = listBox1.SelectedItem as Worker;
-                contextDB.Worker.InsertOnSubmit(WorkerToSave);
             }
 
             WorkerToSave.FirstName = textBox1.Text;
@@ -324,13 +399,152 @@ namespace Projekt_hotel
             WorkerToSave.Email = textBox3.Text;
             WorkerToSave.UserLogin = textBox4.Text;
             WorkerToSave.Manager = checkBox1.Checked;
-            WorkerToSave.Type = 'U';
-
-            WorkerToSave.UserPassword = textBox6.Text;
 
             contextDB.SubmitChanges();
 
+            LoadData();
         }
+
+        private void CheckWorkerInfo()
+        {
+            string ErrorText = "";
+            CustomDialog ErrorForm = null;
+
+            if(String.IsNullOrWhiteSpace(textBox1.Text) || String.IsNullOrWhiteSpace(textBox2.Text) || String.IsNullOrWhiteSpace(textBox3.Text) || String.IsNullOrWhiteSpace(textBox4.Text))
+            {
+                ErrorText = "Check that you have not left any free fields";
+                ErrorForm = new CustomDialog(ErrorText, 1);
+                ErrorForm.ShowDialog();            
+            }
+            else
+            {
+
+                //if(contextDB.Worker.Any(x => x.UserLogin == textBox4.Text))
+
+
+                    if (Choice == 3)
+                    {
+
+                        if (contextDB.Worker.Any(x => x.UserLogin.Contains(textBox4.Text)))
+                        {
+                            textBox8.Text = "niestety istnieje juz podany login";
+                            ErrorText = "There is already a given login in the database, choose another one";
+                            ErrorForm = new CustomDialog(ErrorText, 1);
+                            ErrorForm.ShowDialog();
+                        }
+                        else
+                        {
+                            if (textBox6.Text != textBox7.Text)
+                            {
+                                ErrorText = "The given passwords do not match";
+                                ErrorForm = new CustomDialog(ErrorText, 1);
+                                ErrorForm.ShowDialog();
+                            }
+                            else
+                            {
+                                // dodaj nowego
+                                SaveToDB(1);
+                                ViewNotToSave();
+                                
+                            }
+                        }
+                    }
+                    else if(Choice == 2)
+                    {
+
+                        Worker WhoYouAre = listBox1.SelectedItem as Worker;
+                        if (contextDB.Worker.Any(x => x.UserLogin.Contains(textBox4.Text) && x.UserLogin != WhoYouAre.UserLogin))
+                        {
+textBox8.Text = "niestety istnieje juz podany login";
+                            ErrorText = "There is already a given login in the database, choose another one";
+                            ErrorForm = new CustomDialog(ErrorText, 1);
+                            ErrorForm.ShowDialog();
+                        }
+                        else
+                        {
+                            // edytuj starego
+                            SaveToDB(2);
+                            ViewNotToSave();
+                            
+                        }
+                    }
+                
+            }
+        }
+
+        private void CheckPasswords()
+        {
+            if(Choice == 1)
+            {
+                string s = "";
+                string x = "";
+                string ErrorText = "";
+                CustomDialog ErrorForm = null;
+
+                if (String.IsNullOrWhiteSpace(textBox1.Text) || String.IsNullOrWhiteSpace(textBox2.Text))
+                {
+                    ErrorText = "Make sure you fill in all the fields";
+                    ErrorForm = new CustomDialog(ErrorText, 1);
+                    ErrorForm.ShowDialog();
+
+                    textBox1.Clear();
+                    textBox2.Clear();
+                    textBox3.Clear();
+                }
+                else
+                {
+                    // sprawdz czy podane haslo jest takie samo jak w bazie danych
+
+                        Worker WorkerToSave = listBox1.SelectedItem as Worker;
+                        s = AccessOperation.EncryptPassword(textBox1.Text);
+                        var usr = contextDB.Worker.Where(c => c.UserLogin == WorkerToSave.UserLogin && c.UserPassword == s).SingleOrDefault();
+
+                        if (usr != null)
+                        {
+                            if (textBox2.Text != textBox3.Text || textBox2.Text == textBox1.Text)
+                            {
+                                ErrorText = "Check if your new password was entered correctly 2 times and if it differs from the old one";
+                                ErrorForm = new CustomDialog(ErrorText, 1);
+                                ErrorForm.ShowDialog();
+
+                                textBox1.Clear();
+                                textBox2.Clear();
+                                textBox3.Clear();
+
+                            }
+                            else if(textBox2.Text != textBox1.Text && textBox2.Text == textBox3.Text)
+                            {
+                                x = AccessOperation.EncryptPassword(textBox2.Text);        
+                                WorkerToSave.UserPassword = x;
+                                contextDB.SubmitChanges();
+
+                                
+                                ViewNotToSave();
+                            }
+                        }
+                        else
+                        {
+                            ErrorText = "To change the password you must enter the correct one first";
+                            ErrorForm = new CustomDialog(ErrorText, 1);
+                            ErrorForm.ShowDialog();
+
+                            textBox1.Clear();
+                            textBox2.Clear();
+                            textBox3.Clear();
+                        }
+                }
+            }
+        }
+
+        /*
+          zablokowac inne przyciski 
+          dodac wyszukiwania osoby po kliknieciu search
+          dodac mozliwosc dodawania nowych uzytkownikow jak sie jest administratorem
+          
+
+
+        */
+
 
     }
 }
