@@ -37,4 +37,12 @@ namespace Projekt_hotel
             return RoomNameUnique;
         }
     }
+
+    partial class Worker
+    {
+        public override string ToString()
+        {
+            return LastName + " " + FirstName;
+        }
+    }
 }

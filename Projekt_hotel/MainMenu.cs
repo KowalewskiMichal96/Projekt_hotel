@@ -181,6 +181,12 @@ namespace Projekt_hotel
 
 
 
-
+        private void lISTOFUSERSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListOfUsers LOU = new ListOfUsers(LoggedUser);
+            LOU.TopMost = true;
+            LOU.ShowDialog();
+            
+        }
     }
 }
