@@ -15,6 +15,8 @@ namespace Projekt_hotel
         readonly databaseHotelDataContext contextDB = new databaseHotelDataContext();
         readonly User LoggedUser = new User();
         public int Choice = 0;
+        public int Selected = 0;
+        List<int> x = new List<int>();
         public ListOfUsers(User user)
         {
             InitializeComponent();
@@ -26,6 +28,7 @@ namespace Projekt_hotel
 // LOAD PERSONS FROM DB
         private void LoadData()
         {
+
             listBox1.Items.Clear();
 
             var users = from worker in contextDB.Worker select worker;
@@ -179,6 +182,7 @@ namespace Projekt_hotel
             listBox1.Enabled = false;
             panel2.Enabled = true;
             SearchB.Enabled = false;
+
         }
 
         private void ViewNotToSave()
@@ -249,6 +253,16 @@ namespace Projekt_hotel
         {
             // czy na pewno chcesz porzucic zaminy ?
             ViewNotToSave();
+            AddB.Enabled = true;
+            textBox1.PasswordChar = '\0';
+            textBox2.PasswordChar = '\0';
+            textBox3.PasswordChar = '\0';
+
+            if (x.Count != 0)
+            {
+                SearchNextB.Enabled = true;
+                SearchPreviousB.Enabled = true;
+            }     
         }
 
         private void ConfirmButtonTLO_Click(object sender, EventArgs e)
@@ -286,27 +300,148 @@ namespace Projekt_hotel
 
         private void DeleteB_Click(object sender, EventArgs e)
         {
-            // nalezy sprawdzic czy sa na niego rezerwacje jesli sa to mozna np przepisac na managera 
-            // zapewne poki co blad podczas usuwania 
-            /*
+            string ErrorText = "";
+            CustomDialog ErrorForm = null;
 
-            Worker WorkerToDelete = listBox1.SelectedItem as Worker;
-            contextDB.Worker.DeleteOnSubmit(WorkerToDelete);
-            contextDB.SubmitChanges();
-            */
+            // SPRAWDZAMY CZY ADMIN
+            if (LoggedUser.GetRole() == true)
+            {
+                Worker ToCheck = listBox1.SelectedItem as Worker;
+                
+                if(ToCheck.Id == LoggedUser.GetId())
+                {
+                    ErrorText = "Are you sure you wanna delete your profile??";
+                    ErrorForm = new CustomDialog(ErrorText, 2);
+                    ErrorForm.ShowDialog();
+
+                    if(ErrorForm.DialogResult == DialogResult.Yes)
+                    {
+                        // czy jestes pewny ze chcesz usunac swoj profil ?
+                        DeleteUser(ToCheck);
+//textBox8.Text = "profil admina usuniety";
+
+                    }
+                    else if(ErrorForm.DialogResult == DialogResult.No)
+                    {
+                        ViewNotToSave();
+//textBox8.Text = "nie udalo sie usunac profilu admina";
+                    }
+                }
+                else if(ToCheck.Id != LoggedUser.GetId())
+                {
+                    ErrorText = "Are you sure you wanna delete this profile??";
+                    ErrorForm = new CustomDialog(ErrorText, 2);
+                    ErrorForm.ShowDialog();
+
+                    if (ErrorForm.DialogResult == DialogResult.Yes)
+                    {
+                        // czy jestes pewny ze chcesz usunac swoj profil ?
+                        DeleteUser(ToCheck);
+//textBox8.Text = "profil uzytkownika usuniety przez admina";
+//////////////////////////////////////////////////////////////////////////////////////////WYLOGUJ
+                    }
+                    else if (ErrorForm.DialogResult == DialogResult.No)
+                    {
+                        ViewNotToSave();
+//textBox8.Text = "nie udalo sie usunac profilu przez admina";
+                    }
+                }
+
+            }
+            else if(LoggedUser.GetRole() == false)
+            {
+                // sprawdzamy czy wybierasz siebie
+                Worker CheckWhoYouAre = listBox1.SelectedItem as Worker;
+                if (CheckWhoYouAre.Id == LoggedUser.GetId())
+                {
+                    ErrorText = "Are you sure you wanna delete your profile??";
+                    ErrorForm = new CustomDialog(ErrorText, 2);
+                    ErrorForm.ShowDialog();
+
+                    if (ErrorForm.DialogResult == DialogResult.Yes)
+                    {
+                        // czy jestes pewny ze chcesz usunac swoj profil ?
+                        
+                        DeleteUser(CheckWhoYouAre);
+//textBox8.Text = "profil pracownika usuniety";
+//////////////////////////////////////////////////////////////////////////////////////////WYLOGUJ
+                    }
+                    else if (ErrorForm.DialogResult == DialogResult.No)
+                    {
+//textBox8.Text = "nie udalo sie usunac profilu pracownika";
+                        ViewNotToSave();
+                    }
+                }
+                else if (CheckWhoYouAre.Id != LoggedUser.GetId())
+                {
+                    ErrorText = "You have no power here, ha ha ha!";
+                    ErrorForm = new CustomDialog(ErrorText, 1);
+                    ErrorForm.ShowDialog();
+                }
+            }
+
             ViewNotToSave();
+            // wyczysz search 
+        }
+
+        private void DeleteUser(Worker ToCheck)
+        {
+            // nalezy sprawdzic czy sa na niego rezerwacje jesli sa to mozna np przepisac na managera 
+            if (contextDB.Reservation.Any(res => res.Worker_ID == ToCheck.Id))
+            {
+                textBox8.Text = " sa rezerwacje na ta osobe";
+                // szukamy admina // lub managera innego niz obecny aby moc przepisac obecne rezerwacje
+                var query = contextDB.Worker.Where(user => (user.Manager == true || user.Type == 'A') && user.Id != ToCheck.Id).FirstOrDefault();
+
+                // zmieniamy rezerwacje
+                var reservations = contextDB.Reservation.Where(res => res.Worker_ID == ToCheck.Id);
+                foreach (var item in reservations)
+                {
+                    Reservation ResToSave = item;
+                    ResToSave.Worker_ID = query.Id;
+                    contextDB.SubmitChanges();
+                }
+                contextDB.Worker.DeleteOnSubmit(ToCheck);
+            }
+            else if(!contextDB.Reservation.Any(res => res.Worker_ID == ToCheck.Id))
+            {
+                // teraz mozna usunac osobe
+                contextDB.Worker.DeleteOnSubmit(ToCheck);
+            }
+            contextDB.SubmitChanges();
+            ClearAfterDelete();
+        }
+
+        private void ClearAfterDelete()
+        {
+            ViewNotToSave();
+            LoadData();
+            SearchTB.Clear();
+            SearchStatusL.Text = "Number of results: " + Selected + "/" + x.Count;
+
         }
 
         private void ChangeB_Click(object sender, EventArgs e)
         {
-            ClearTable();
+
+
+            //ClearTable();
             string ErrorText = "";
             CustomDialog ErrorForm = null;
 
 
             if (LoggedUser.GetRole() == true)
             {
-                textBox8.Text = "Jestes Adminem";
+                SearchNextB.Enabled = false;
+                SearchPreviousB.Enabled = false;
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                textBox1.PasswordChar = '*';
+                textBox2.PasswordChar = '*';
+                textBox3.PasswordChar = '*';
+
+                //textBox8.Text = "Jestes Adminem";
                 Choice = 1;
                 ChangeView("CHANGE");
                 ViewToSave();
@@ -316,6 +451,14 @@ namespace Projekt_hotel
                 Worker CheckWhoYouAre = listBox1.SelectedItem as Worker;
                 if(CheckWhoYouAre.Id == LoggedUser.GetId())
                 {
+                    SearchNextB.Enabled = false;
+                    SearchPreviousB.Enabled = false;
+                    textBox1.Clear();
+                    textBox2.Clear();
+                    textBox3.Clear();
+                    textBox1.PasswordChar = '*';
+                    textBox2.PasswordChar = '*';
+                    textBox3.PasswordChar = '*';
 
                     Choice = 1;
                     ChangeView("CHANGE");
@@ -335,18 +478,31 @@ namespace Projekt_hotel
             string ErrorText = "";
             CustomDialog ErrorForm = null;
 
+            if(string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                textBox1.PasswordChar = '\0';
+                textBox2.PasswordChar = '\0';
+                textBox3.PasswordChar = '\0';
+                FillTable();
+            }
 
             if (LoggedUser.GetRole() == true)
             {
+                SearchNextB.Enabled = false;
+                SearchPreviousB.Enabled = false;
+
                 Choice = 2;
                 ChangeView("EDIT");
                 ViewToSave();
+
             }
             else if (LoggedUser.GetRole() == false)
             {
                 Worker CheckWhoYouAre = listBox1.SelectedItem as Worker;
                 if (CheckWhoYouAre.Id == LoggedUser.GetId())
                 {
+                    SearchNextB.Enabled = false;
+                    SearchPreviousB.Enabled = false;
 
                     Choice = 2;
                     ChangeView("EDIT");
@@ -363,14 +519,25 @@ namespace Projekt_hotel
 
         private void AddB_Click(object sender, EventArgs e)
         {
-            Choice = 3;
-            listBox1.SelectedIndex = -1;
-            ClearTable();
-            ChangeView("ADD");
-            ViewToSave();
+            string ErrorText = "";
+            CustomDialog ErrorForm = null;
 
-            // sprawdz czy dobre dane
-            //SaveToDB(1);
+
+            if (LoggedUser.GetRole() == true)
+            {
+                Choice = 3;
+                listBox1.SelectedIndex = -1;
+                ClearTable();
+                ChangeView("ADD");
+                ViewToSave();
+                AddB.Enabled = false;
+            }
+            else if (LoggedUser.GetRole() == false)
+            {
+                ErrorText = "As a user, you can't add new users";
+                ErrorForm = new CustomDialog(ErrorText, 1);
+                ErrorForm.ShowDialog();
+            }
         }
 
 // Save info to database 
@@ -421,7 +588,6 @@ namespace Projekt_hotel
 
                 //if(contextDB.Worker.Any(x => x.UserLogin == textBox4.Text))
 
-
                     if (Choice == 3)
                     {
 
@@ -445,8 +611,12 @@ namespace Projekt_hotel
                                 // dodaj nowego
                                 SaveToDB(1);
                                 ViewNotToSave();
-                                
+                            if (x.Count != 0)
+                            {
+                                SearchNextB.Enabled = true;
+                                SearchPreviousB.Enabled = true;
                             }
+                        }
                         }
                     }
                     else if(Choice == 2)
@@ -455,7 +625,7 @@ namespace Projekt_hotel
                         Worker WhoYouAre = listBox1.SelectedItem as Worker;
                         if (contextDB.Worker.Any(x => x.UserLogin.Contains(textBox4.Text) && x.UserLogin != WhoYouAre.UserLogin))
                         {
-textBox8.Text = "niestety istnieje juz podany login";
+//textBox8.Text = "niestety istnieje juz podany login";
                             ErrorText = "There is already a given login in the database, choose another one";
                             ErrorForm = new CustomDialog(ErrorText, 1);
                             ErrorForm.ShowDialog();
@@ -465,7 +635,12 @@ textBox8.Text = "niestety istnieje juz podany login";
                             // edytuj starego
                             SaveToDB(2);
                             ViewNotToSave();
-                            
+                            if (x.Count != 0)
+                            {
+                                SearchNextB.Enabled = true;
+                                SearchPreviousB.Enabled = true;
+                            }
+
                         }
                     }
                 
@@ -474,10 +649,11 @@ textBox8.Text = "niestety istnieje juz podany login";
 
         private void CheckPasswords()
         {
+
             if(Choice == 1)
             {
                 string s = "";
-                string x = "";
+                string g = "";
                 string ErrorText = "";
                 CustomDialog ErrorForm = null;
 
@@ -514,12 +690,19 @@ textBox8.Text = "niestety istnieje juz podany login";
                             }
                             else if(textBox2.Text != textBox1.Text && textBox2.Text == textBox3.Text)
                             {
-                                x = AccessOperation.EncryptPassword(textBox2.Text);        
-                                WorkerToSave.UserPassword = x;
+                                g = AccessOperation.EncryptPassword(textBox2.Text);        
+                                WorkerToSave.UserPassword = g;
                                 contextDB.SubmitChanges();
 
-                                
-                                ViewNotToSave();
+                            if (x.Count != 0)
+                            {
+                                SearchNextB.Enabled = true;
+                                SearchPreviousB.Enabled = true;
+                            }
+                            textBox1.PasswordChar = '\0';
+                            textBox2.PasswordChar = '\0';
+                            textBox3.PasswordChar = '\0';
+                            ViewNotToSave();
                             }
                         }
                         else
@@ -536,15 +719,61 @@ textBox8.Text = "niestety istnieje juz podany login";
             }
         }
 
-        /*
-          zablokowac inne przyciski 
-          dodac wyszukiwania osoby po kliknieciu search
-          dodac mozliwosc dodawania nowych uzytkownikow jak sie jest administratorem
-          
+        private void SearchB_Click(object sender, EventArgs e)
+        {
+            x = new List<int>();
+            Selected = 0;
 
 
-        */
 
+            if(string.IsNullOrWhiteSpace(SearchTB.Text))
+            {
 
+            }
+            else if (!string.IsNullOrWhiteSpace(SearchTB.Text))
+            {
+                for (int i = listBox1.Items.Count - 1; i >= 0; i--)
+                {
+                    if (listBox1.Items[i].ToString().ToLower().StartsWith(SearchTB.Text.ToLower()))
+                    {
+                        x.Add(i);
+                    }
+                }
+            }
+
+            if (x.Count == 0)
+            {
+                SearchNextB.Enabled = false;
+                SearchPreviousB.Enabled = false;
+                SearchStatusL.Text = "Number of results: " + Selected + "/" + x.Count;
+            }
+            else if (x.Count > 0)
+            {
+                listBox1.SetSelected(x[Selected], true);
+                SearchStatusL.Text = "Number of results: " + (Selected + 1).ToString() + "/" + x.Count;
+                SearchNextB.Enabled = true;
+                SearchPreviousB.Enabled = true;
+            }
+        }
+
+        private void SearchNextB_Click(object sender, EventArgs e)
+        {
+            if(Selected < x.Count -1)
+            {
+                Selected += 1;
+                listBox1.SelectedIndex = x[Selected];
+                SearchStatusL.Text = "Number of results: " + (Selected + 1).ToString() + "/" + x.Count;
+            }
+        }
+
+        private void SearchPreviousB_Click(object sender, EventArgs e)
+        {
+            if(Selected > 0)
+            {
+                Selected -= 1;
+                listBox1.SelectedIndex = x[Selected];
+                SearchStatusL.Text = "Number of results: " + (Selected + 1).ToString() + "/" + x.Count;
+            }
+        }
     }
 }

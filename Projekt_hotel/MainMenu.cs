@@ -62,6 +62,8 @@ namespace Projekt_hotel
             DGView.DataSource = table;
             categoryCombobox.SelectedIndex = 0;
             DGView.Columns[0].Visible = false;
+
+
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -187,6 +189,14 @@ namespace Projekt_hotel
             LOU.TopMost = true;
             LOU.ShowDialog();
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CheckOut CO = new CheckOut(Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value));
+            CO.ShowDialog();
+
+
         }
     }
 }
