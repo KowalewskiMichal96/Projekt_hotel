@@ -907,6 +907,7 @@
             this.DeletePB.Tag = "5";
             this.DeletePB.Text = "Delete";
             this.DeletePB.UseVisualStyleBackColor = false;
+            this.DeletePB.Click += new System.EventHandler(this.DeletePB_Click);
             // 
             // DeleteGB
             // 
@@ -922,6 +923,7 @@
             this.DeleteGB.Tag = "2";
             this.DeleteGB.Text = "Delete";
             this.DeleteGB.UseVisualStyleBackColor = false;
+            this.DeleteGB.Click += new System.EventHandler(this.DeleteGB_Click);
             // 
             // panel3
             // 

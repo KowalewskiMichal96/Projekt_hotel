@@ -195,6 +195,7 @@ namespace Projekt_hotel
             listBox1.Enabled = true;
             panel2.Enabled = false;
             SearchB.Enabled = true;
+            AddB.Enabled = true;
             ClearTable();
         }
 
@@ -575,6 +576,8 @@ namespace Projekt_hotel
                 s = AccessOperation.EncryptPassword(textBox6.Text);
                 WorkerToSave.UserPassword = s;
                 WorkerToSave.Type = 'U';
+
+
             }
             else if(EditOrAdd == 2)
             {
@@ -591,6 +594,7 @@ namespace Projekt_hotel
             contextDB.SubmitChanges();
 
             LoadData();
+            ViewNotToSave();
         }
 
         private void CheckWorkerInfo()

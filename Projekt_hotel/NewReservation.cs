@@ -839,6 +839,51 @@ namespace Projekt_hotel
             ReservationOn = null;
         }
 
+        private void DeleteGB_Click(object sender, EventArgs e)
+        {
+            if(GuestLB.SelectedItems.Count > 0)
+            {
+                Guest ToCheck = GuestLB.SelectedItem as Guest;
 
+                if(!contextDB.Reservation.Any(res => res.Guest_ID.Equals(ToCheck.Id)))
+                {
+                    contextDB.Guest.DeleteOnSubmit(ToCheck);
+                    contextDB.SubmitChanges();
+                    GuestLB.Items.RemoveAt(GuestLB.SelectedIndex);
+                }
+                else
+                {
+                    string Error1 = "It is not possible to delete a guest who already has a reservation";
+                    CustomDialog Error = new CustomDialog(Error1, 1);
+                    Error.ShowDialog();
+                    // nie mozesz
+                }
+            }
+            else if(GuestLB.SelectedItems.Count == 0)
+            {
+                string Error1 = "Please select a guest";
+                CustomDialog Error = new CustomDialog(Error1, 1);
+                Error.ShowDialog();
+
+            }
+        }
+
+        private void DeletePB_Click(object sender, EventArgs e)
+        {
+            if (GuestLB.SelectedItems.Count > 0)
+            {
+                Payer ToCheck = PayerLB.SelectedItem as Payer;
+                    contextDB.Payer.DeleteOnSubmit(ToCheck);
+                    contextDB.SubmitChanges();
+                    PayerLB.Items.RemoveAt(PayerLB.SelectedIndex);
+            }
+            else if (GuestLB.SelectedItems.Count == 0)
+            {
+                string Error1 = "Please select a payer";
+                CustomDialog Error = new CustomDialog(Error1, 1);
+                Error.ShowDialog();
+
+            }
+        }
     }   //PUBLIC CLASS NEWRESERVATION
 }   // NAMESPACE PROJEKT HOTEL
