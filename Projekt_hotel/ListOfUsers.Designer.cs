@@ -33,7 +33,6 @@
             this.SearchStatusL = new System.Windows.Forms.Label();
             this.SearchPreviousB = new System.Windows.Forms.Button();
             this.SearchNextB = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
             this.ChangeB = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TableLO = new System.Windows.Forms.TableLayoutPanel();
@@ -94,7 +93,6 @@
             this.panel1.Controls.Add(this.SearchStatusL);
             this.panel1.Controls.Add(this.SearchPreviousB);
             this.panel1.Controls.Add(this.SearchNextB);
-            this.panel1.Controls.Add(this.textBox8);
             this.panel1.Controls.Add(this.ChangeB);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.DeleteB);
@@ -117,7 +115,7 @@
             this.SearchStatusL.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
             this.SearchStatusL.Location = new System.Drawing.Point(39, 42);
             this.SearchStatusL.Name = "SearchStatusL";
-            this.SearchStatusL.Size = new System.Drawing.Size(324, 36);
+            this.SearchStatusL.Size = new System.Drawing.Size(259, 29);
             this.SearchStatusL.TabIndex = 36;
             this.SearchStatusL.Text = "Number of results: 0/0";
             // 
@@ -152,20 +150,6 @@
             this.SearchNextB.Text = "Next";
             this.SearchNextB.UseVisualStyleBackColor = false;
             this.SearchNextB.Click += new System.EventHandler(this.SearchNextB_Click);
-            // 
-            // textBox8
-            // 
-            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox8.Font = new System.Drawing.Font("Lato Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.textBox8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.textBox8.Location = new System.Drawing.Point(970, 818);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(279, 39);
-            this.textBox8.TabIndex = 33;
-            this.textBox8.TabStop = false;
-            this.textBox8.WordWrap = false;
             // 
             // ChangeB
             // 
@@ -599,7 +583,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.ClientSize = new System.Drawing.Size(1875, 1159);
+            this.ClientSize = new System.Drawing.Size(1500, 927);
             this.Controls.Add(this.LabelMain);
             this.Controls.Add(this.ButtonExit);
             this.Controls.Add(this.panel1);
@@ -654,7 +638,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Button SearchPreviousB;
         private System.Windows.Forms.Button SearchNextB;
         private System.Windows.Forms.Label SearchStatusL;

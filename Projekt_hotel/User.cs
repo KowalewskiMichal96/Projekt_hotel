@@ -32,5 +32,11 @@ namespace Projekt_hotel
         {
             return IsAdmin;
         }
+
+        public void SetFree()
+        {
+            Id = 0;
+            IsAdmin = false;
+        }
     }
 }

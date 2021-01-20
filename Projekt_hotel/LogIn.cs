@@ -14,6 +14,7 @@ namespace Projekt_hotel
     public partial class LogIn : Form
     {
         readonly databaseHotelDataContext contextDC = new databaseHotelDataContext();
+        public User user = new User();
         public LogIn()
         {
             InitializeComponent();
@@ -71,8 +72,12 @@ namespace Projekt_hotel
                         z = item.Type;
                     }
                     
-                    User user = new User();
+                    //User user = new User();
                     user.SetRole(x, z);
+
+
+                    login_text.Clear();
+                    password_text.Clear();
 
                     MainMenu mm = new MainMenu(user);
                     mm.Show();

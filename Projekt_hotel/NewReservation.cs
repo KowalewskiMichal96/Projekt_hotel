@@ -710,7 +710,7 @@ namespace Projekt_hotel
                         {
                             if (!contextDB.RoomReserved.Any(x => x.Room.RoomNameUnique == RoomSelectedLB.Items[i].ToString() && x.Reservation_ID == ReseravtionID))
                             {
-                                MessageBox.Show("nie istnieje w bazie danych");
+//MessageBox.Show("nie istnieje w bazie danych");
                                 RoomToSave = new RoomReserved();
                                 contextDB.RoomReserved.InsertOnSubmit(RoomToSave);
 
@@ -723,7 +723,7 @@ namespace Projekt_hotel
                             }
                             else if (contextDB.RoomReserved.Any(x => x.Room.RoomNameUnique == RoomSelectedLB.Items[i].ToString() && x.Reservation_ID == ReseravtionID))
                             {
-                                MessageBox.Show("istnieje w bazie danych przedluz moja rezerwacje");
+//MessageBox.Show("istnieje w bazie danych przedluz moja rezerwacje");
                             }
                             contextDB.SubmitChanges();
                         }
@@ -731,7 +731,7 @@ namespace Projekt_hotel
                         for (int i = 0; i < query2.Count; i++)
                             if(!RoomSelectedLB.Items.Contains(query2[i].Room.RoomNameUnique) && query2[i].Reservation_ID.Equals(ReseravtionID))
                             {
-                                MessageBox.Show("nie istnieje w listboxie ale istnieje w bazie usun mnie");
+//MessageBox.Show("nie istnieje w listboxie ale istnieje w bazie usun mnie");
 
                                 RoomToSave = query2[i];
                                 contextDB.RoomReserved.DeleteOnSubmit(RoomToSave);
@@ -780,8 +780,6 @@ namespace Projekt_hotel
         private void GuestSelectedLB_DoubleClick(object sender, EventArgs e)
         {
             ReservationOn = GuestSelectedLB.SelectedItem.ToString().Split();
-            //int query2 = (from guest in contextDB.Guest where guest.LastName == ReservationOn[0] select guest.Id).SingleOrDefault();
-            //textBox1.Text = query2.ToString();
             LabelResOn.Text = string.Join(" ", ReservationOn);
         }
 

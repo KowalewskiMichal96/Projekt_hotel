@@ -68,12 +68,11 @@ namespace Projekt_hotel
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            //textBox1.Text = LoggedUser.GetId().ToString() + " " + LoggedUser.GetRole();
-
+            
             FillComboBox();
             FillData();
             categoryCombobox.SelectedIndex = 0;
-            DGView.Rows[0].Selected = true;
+            DGView.Rows[0].Selected = false;
         }
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
@@ -99,9 +98,9 @@ namespace Projekt_hotel
         }
 
         
-        private void AddReservation_Click(object sender, EventArgs e)
+        private void CheckInB_Click(object sender, EventArgs e)
         {
-            NewReservation NR = new NewReservation(LoggedUser.GetId(), Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value), 1);
+            NewReservation NR = new NewReservation(LoggedUser.GetId(),0, 1);
             NR.TopMost = true;
             NR.Show();
 
@@ -112,13 +111,15 @@ namespace Projekt_hotel
         {
             if(DGView.SelectedRows.Count > 0)
             {
-                EditReservation.Visible = true;
-                DeleteReservation.Visible = true;
+                CheckOutB.Enabled = true;
+                EditReservation.Enabled = true;
+                DeleteReservation.Enabled = true;
             }
             else
             {
-                EditReservation.Visible = false;
-                DeleteReservation.Visible = false;
+                CheckOutB.Enabled = false;
+                EditReservation.Enabled = false;
+                DeleteReservation.Enabled = false;
             }
         }
 
@@ -191,7 +192,7 @@ namespace Projekt_hotel
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CheckOutB_Click(object sender, EventArgs e)
         {
             CheckOut CO = new CheckOut(Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value));
             CO.ShowDialog();

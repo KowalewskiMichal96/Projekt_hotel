@@ -90,7 +90,7 @@ namespace Projekt_hotel
 
                 SolidBrush itemTextColorBrush = (isItemSelected) ? new SolidBrush(Color.FromArgb(239, 239, 239)) : new SolidBrush(Color.FromArgb(50, 50, 50));
                 g.DrawString(itemText, e.Font, itemTextColorBrush, x.GetItemRectangle(itemIndex).Location);
-
+                
 
                 // Clean up
                 backgroundColorBrush.Dispose();
@@ -337,8 +337,18 @@ namespace Projekt_hotel
                     {
                         // czy jestes pewny ze chcesz usunac swoj profil ?
                         DeleteUser(ToCheck);
-//textBox8.Text = "profil uzytkownika usuniety przez admina";
-//////////////////////////////////////////////////////////////////////////////////////////WYLOGUJ
+
+                        MessageBox.Show("You have been logged out and your account has been deleted");
+
+                        var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
+                        mainForm.Close();
+                        this.Close();
+                        var logIn = Application.OpenForms.OfType<LogIn>().Single();
+                        logIn.Show();
+                        logIn.user.SetFree();
+
+                        //textBox8.Text = "profil uzytkownika usuniety przez admina";
+                        //////////////////////////////////////////////////////////////////////////////////////////WYLOGUJ
                     }
                     else if (ErrorForm.DialogResult == DialogResult.No)
                     {
@@ -360,11 +370,22 @@ namespace Projekt_hotel
 
                     if (ErrorForm.DialogResult == DialogResult.Yes)
                     {
-                        // czy jestes pewny ze chcesz usunac swoj profil ?
                         
+                        // czy jestes pewny ze chcesz usunac swoj profil ?
+
+
                         DeleteUser(CheckWhoYouAre);
-//textBox8.Text = "profil pracownika usuniety";
-//////////////////////////////////////////////////////////////////////////////////////////WYLOGUJ
+                        MessageBox.Show("You have been logged out and your account has been deleted");
+                        
+                        var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
+                        mainForm.Close();
+                        this.Close();
+                        var logIn = Application.OpenForms.OfType<LogIn>().Single();
+                        logIn.Show();
+                        logIn.user.SetFree();
+
+                        //textBox8.Text = "profil pracownika usuniety";
+                        //////////////////////////////////////////////////////////////////////////////////////////WYLOGUJ
                     }
                     else if (ErrorForm.DialogResult == DialogResult.No)
                     {
@@ -389,7 +410,7 @@ namespace Projekt_hotel
             // nalezy sprawdzic czy sa na niego rezerwacje jesli sa to mozna np przepisac na managera 
             if (contextDB.Reservation.Any(res => res.Worker_ID == ToCheck.Id))
             {
-                textBox8.Text = " sa rezerwacje na ta osobe";
+//textBox8.Text = " sa rezerwacje na ta osobe";
                 // szukamy admina // lub managera innego niz obecny aby moc przepisac obecne rezerwacje
                 var query = contextDB.Worker.Where(user => (user.Manager == true || user.Type == 'A') && user.Id != ToCheck.Id).FirstOrDefault();
 
@@ -441,7 +462,7 @@ namespace Projekt_hotel
                 textBox2.PasswordChar = '*';
                 textBox3.PasswordChar = '*';
 
-                //textBox8.Text = "Jestes Adminem";
+//textBox8.Text = "Jestes Adminem";
                 Choice = 1;
                 ChangeView("CHANGE");
                 ViewToSave();
@@ -593,7 +614,7 @@ namespace Projekt_hotel
 
                         if (contextDB.Worker.Any(x => x.UserLogin.Contains(textBox4.Text)))
                         {
-                            textBox8.Text = "niestety istnieje juz podany login";
+//textBox8.Text = "niestety istnieje juz podany login";
                             ErrorText = "There is already a given login in the database, choose another one";
                             ErrorForm = new CustomDialog(ErrorText, 1);
                             ErrorForm.ShowDialog();

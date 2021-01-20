@@ -50,11 +50,10 @@
             this.nEWROOMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.CheckOutB = new System.Windows.Forms.Button();
             this.DeleteReservation = new System.Windows.Forms.Button();
             this.EditReservation = new System.Windows.Forms.Button();
-            this.AddReservation = new System.Windows.Forms.Button();
+            this.CheckInB = new System.Windows.Forms.Button();
             this.DGViewRooms = new System.Windows.Forms.DataGridView();
             this.categoryCombobox = new System.Windows.Forms.ComboBox();
             this.searchTextbox = new System.Windows.Forms.TextBox();
@@ -167,11 +166,10 @@
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BackgroundImage = global::Projekt_hotel.Properties.Resources.tlo_5;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.CheckOutB);
             this.panel1.Controls.Add(this.DeleteReservation);
             this.panel1.Controls.Add(this.EditReservation);
-            this.panel1.Controls.Add(this.AddReservation);
+            this.panel1.Controls.Add(this.CheckInB);
             this.panel1.Controls.Add(this.DGViewRooms);
             this.panel1.Controls.Add(this.categoryCombobox);
             this.panel1.Controls.Add(this.searchTextbox);
@@ -183,30 +181,18 @@
             this.panel1.Size = new System.Drawing.Size(1902, 1005);
             this.panel1.TabIndex = 2;
             // 
-            // button1
+            // CheckOutB
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.button1.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.button1.Location = new System.Drawing.Point(24, 184);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(290, 48);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Check Out";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.textBox1.Font = new System.Drawing.Font("Lato", 18F, System.Drawing.FontStyle.Bold);
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.textBox1.Location = new System.Drawing.Point(283, 760);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(278, 43);
-            this.textBox1.TabIndex = 13;
-            this.textBox1.TabStop = false;
-            this.textBox1.WordWrap = false;
+            this.CheckOutB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.CheckOutB.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
+            this.CheckOutB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.CheckOutB.Location = new System.Drawing.Point(24, 184);
+            this.CheckOutB.Name = "CheckOutB";
+            this.CheckOutB.Size = new System.Drawing.Size(290, 48);
+            this.CheckOutB.TabIndex = 14;
+            this.CheckOutB.Text = "Check Out";
+            this.CheckOutB.UseVisualStyleBackColor = false;
+            this.CheckOutB.Click += new System.EventHandler(this.CheckOutB_Click);
             // 
             // DeleteReservation
             // 
@@ -234,18 +220,18 @@
             this.EditReservation.UseVisualStyleBackColor = false;
             this.EditReservation.Click += new System.EventHandler(this.EditReservation_Click);
             // 
-            // AddReservation
+            // CheckInB
             // 
-            this.AddReservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.AddReservation.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
-            this.AddReservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.AddReservation.Location = new System.Drawing.Point(24, 130);
-            this.AddReservation.Name = "AddReservation";
-            this.AddReservation.Size = new System.Drawing.Size(290, 48);
-            this.AddReservation.TabIndex = 10;
-            this.AddReservation.Text = "Check In";
-            this.AddReservation.UseVisualStyleBackColor = false;
-            this.AddReservation.Click += new System.EventHandler(this.AddReservation_Click);
+            this.CheckInB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.CheckInB.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
+            this.CheckInB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.CheckInB.Location = new System.Drawing.Point(24, 130);
+            this.CheckInB.Name = "CheckInB";
+            this.CheckInB.Size = new System.Drawing.Size(290, 48);
+            this.CheckInB.TabIndex = 10;
+            this.CheckInB.Text = "Check In";
+            this.CheckInB.UseVisualStyleBackColor = false;
+            this.CheckInB.Click += new System.EventHandler(this.CheckInB_Click);
             // 
             // DGViewRooms
             // 
@@ -439,11 +425,10 @@
         private System.Windows.Forms.TextBox searchTextbox;
         private System.Windows.Forms.ComboBox categoryCombobox;
         private System.Windows.Forms.DataGridView DGViewRooms;
-        private System.Windows.Forms.Button AddReservation;
+        private System.Windows.Forms.Button CheckInB;
         private System.Windows.Forms.Button EditReservation;
         private System.Windows.Forms.Button DeleteReservation;
         private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button CheckOutB;
     }
 }
