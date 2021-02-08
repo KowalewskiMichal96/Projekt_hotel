@@ -14,70 +14,130 @@ namespace Projekt_hotel
     public partial class LogIn : Form
     {
         readonly databaseHotelDataContext contextDC = new databaseHotelDataContext();
+        bool isLogging = true;
         public User user = new User();
+
         public LogIn()
         {
             InitializeComponent();
-
-            panel1.BackColor = Color.FromArgb(155, Color.Black);
-            panel2.BackColor = Color.FromArgb(155, Color.Black);
-
-
         }
 
-// interakcje z przyciskiem exit
-        private void button_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void button_exit_MouseEnter(object sender, EventArgs e)
-        {
-            button_exit.FlatAppearance.BorderSize = 2;
-        }
-
-        private void button_exit_MouseLeave(object sender, EventArgs e)
-        {
-            button_exit.FlatAppearance.BorderSize = 0;
-        }
 
 
 // logowanie do konta z bazy danych
-        private void button_login_Click(object sender, EventArgs e)
+        private void Button_Accept_Click(object sender, EventArgs e)
+        {
+            if(isLogging == true)
+            {
+                LoginToApp();
+            }
+            else if(isLogging == false)
+            {
+                if (CheckData == true)
+                    CreateUser();
+            }
+        }
+
+        bool CheckData
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(textbox_1.Text) ||
+                    string.IsNullOrWhiteSpace(textbox_2.Text) ||
+                    string.IsNullOrWhiteSpace(textbox_3.Text) ||
+                    string.IsNullOrWhiteSpace(textbox_4.Text))
+                {
+                    labelError.Text = "MISTAKE IN NAME OR BLANK";
+                    labelError.Visible = true;
+                }
+                else if (textbox_5.Text != textbox_6.Text ||
+                    string.IsNullOrWhiteSpace(textbox_5.Text))
+                {
+                    labelError.Text = "MAKE SURE YOU ENTERED THE PASSWORD CORRECTLY";
+                    labelError.Visible = true;
+                }
+                else
+                {
+                    // Is there already such a user
+                    bool exist = (from worker in contextDC.Worker
+                                  where worker.UserLogin == textbox_4.Text
+                                  select worker)
+                                  .Any();
+
+                    if (exist == false)
+                    {
+                        return true;
+                    }
+                    else if (exist == true)
+                    {
+                        labelError.Text = "A USER WITH THAT NAME ALREADY EXSIST";
+                        labelError.Visible = true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        private void CreateUser()
+        {
+            string s = AccessOperation.EncryptPassword(textbox_5.Text);
+
+            Worker newWorker = new Worker()
+            {
+                FirstName = textbox_1.Text,
+                LastName = textbox_2.Text,
+                Email = textbox_3.Text,
+                Manager = false,
+                UserLogin = textbox_4.Text,
+                UserPassword = s,
+                Type = 'U'
+            };
+
+            contextDC.Worker.InsertOnSubmit(newWorker);
+            contextDC.SubmitChanges();
+
+            string info = "Registration Successfully";
+            CustomDialog RegistrationSucessfully = new CustomDialog(info, 1);
+            RegistrationSucessfully.ShowDialog();
+
+            ChangeFunction();
+        }
+
+        private void LoginToApp()
         {
             try
             {
-                // sprawdzanie hasla 
-
+                // check password
                 string s;
-                s = AccessOperation.EncryptPassword(password_text.Text);
-                var usr = contextDC.Worker.Where(c => c.UserLogin == login_text.Text && c.UserPassword == s).Single();
+                s = AccessOperation.EncryptPassword(textbox_2.Text);
+                var usr = contextDC.Worker.Where(c => c.UserLogin == textbox_1.Text && c.UserPassword == s).Single();
 
-                if(usr != null)
+                if (usr != null)
                 {
                     int x = 0;
                     char z = 'U';
 
 
-                    var query = from worker in contextDC.Worker
-                                where worker.UserLogin.Equals(login_text.Text)
-                                select new
-                                {
-                                    worker.Id,
-                                    worker.Type
-                                };
-                    foreach (var item in query)
-                    {
-                        x = item.Id;
-                        z = item.Type;
-                    }
-                    
+                    //var query = from worker in contextDC.Worker
+                    //            where worker.UserLogin.Equals(textbox_1.Text)
+                    //            select new
+                    //            {
+                    //                worker.Id,
+                    //                worker.Type
+                    //            };
+                    x = usr.Id;
+                    z = usr.Type;
+                    //foreach (var item in query)
+                    //{
+                    //    x = item.Id;
+                    //    z = item.Type;
+                    //}
+
                     //User user = new User();
                     user.SetRole(x, z);
 
 
-                    login_text.Clear();
-                    password_text.Clear();
+                    ClearButtons();
 
                     MainMenu mm = new MainMenu(user);
                     mm.Show();
@@ -86,94 +146,88 @@ namespace Projekt_hotel
             }
             catch (Exception)
             {
-                login_text.Clear();
-                password_text.Clear();
+                ClearButtons();
 
-                //string error1 = "Username or Password is invaild !";
-                //CustomDialog Error = new CustomDialog(error1,1);
-                //Error.ShowDialog();
-                MessageBox.Show("Username or Password is invaild !", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string error = "Username or Password is invaild !\nPlease try again.";
+                CustomDialog Error = new CustomDialog(error, 1);
+                Error.ShowDialog();
+
             }
-            /*if (login_text.Text == "qwerty" && password_text.Text == "qwerty")
+        }
+
+
+        void ClearButtons()
+        {
+            textbox_1.Clear();
+            textbox_2.Clear();
+            textbox_3.Clear();
+            textbox_4.Clear();
+            textbox_5.Clear();
+            textbox_6.Clear();
+        }
+        private void ChangeFunction()
+        {
+            // change the panel appearance depending on the active mode
+            ClearButtons();
+            labelError.Visible = false;
+
+            if (isLogging == true)
             {
+                isLogging = false;
+
+                label_1.Text = "First Name";
+                label_2.Text = "Last Name";
+                Button_Change.Text = "Cancel";
+                Button_Accept.Text = "Register";
+                label_Title.Text = "User Registration";
+
+
+                label_3.Visible = true;
+                label_4.Visible = true;
+                label_5.Visible = true;
+                label_6.Visible = true;
+                textbox_2.PasswordChar = '\0';
+
+                textbox_3.Visible = true;
+                textbox_4.Visible = true;
+                textbox_5.Visible = true;
+                textbox_6.Visible = true;
+            }
+            else if (isLogging == false)
+            {
+                isLogging = true;
+
+                label_1.Text = "Login";
+                label_2.Text = "Password";
+                Button_Change.Text = "Register";
+                Button_Accept.Text = "Log In";
+                label_Title.Text = "User Login";
+
+                label_3.Visible = false;
+                label_4.Visible = false;
+                label_5.Visible = false;
+                label_6.Visible = false;
+
+                textbox_2.PasswordChar = '*';
+                textbox_3.Visible = false;
+                textbox_4.Visible = false;
+                textbox_5.Visible = false;
+                textbox_6.Visible = false;
+            }
+        }
+        private void Button_Change_Click(object sender, EventArgs e)
+        {
+            ChangeFunction();
+        }
+        private void textbox_1_Enter(object sender, EventArgs e)
+        {
+            if (labelError.Visible == true)
                 labelError.Visible = false;
-                MainMenu mm = new MainMenu();
-                this.Hide();
-                mm.Show();
-            }
-            else
-            {
-                labelError.Visible = true;
-
-            }*/
         }
-
-// przejscie do okna rejestracji
-        private void button_register_Click(object sender, EventArgs e)
+        private void Button_Exit_Click(object sender, EventArgs e)
         {
-            login_text.Clear();
-            password_text.Clear();
-            panel1.Visible = false;
-            panel2.Visible = true;
+            Application.Exit();
         }
 
-// rejestracja uzytkownika do bazy danych za pomoca przycisku w oknie nr2
-        private void button_register_new_user_Click(object sender, EventArgs e)
-        {
-            if(string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text) || string.IsNullOrWhiteSpace(txtEmail.Text)  || string.IsNullOrWhiteSpace(txtUsername.Text))
-            {
-                labelRegisterError.Text = "MISTAKE IN NAME OR BLANK";
-                labelRegisterError.Visible = true;
-            }
-            else if(txtPassword.Text != txtConfirmPassword.Text || string.IsNullOrWhiteSpace(txtPassword.Text))
-            {
-                labelRegisterError.Text = "MAKE SURE YOU ENTERED THE PASSWORD CORRECTLY";
-                labelRegisterError.Visible = true;
-            }
-            else
-            {
-                // sprawdzanie czy taki uzytkownik zostal juz stworzony
-
-
-                // szyfrowanie 
-
-                string s;
-                s = AccessOperation.EncryptPassword(txtPassword.Text);
-                // przekazanie danych do bazy danych
-                Worker newWorker = new Worker()
-                {
-                    FirstName = txtFirstName.Text,
-                    LastName = txtLastName.Text,
-                    Email = txtEmail.Text,
-                    Manager = false,
-                    UserLogin = txtUsername.Text,
-                    UserPassword = s,
-                    Type = 'U'
-                };
-
-                contextDC.Worker.InsertOnSubmit(newWorker);
-                contextDC.SubmitChanges();
-
-
-                MessageBox.Show("Registration Successfully", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                panel2.Visible = false;
-                panel1.Visible = true;
-            }
-            
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            txtConfirmPassword.Clear();
-            txtEmail.Clear();
-            txtFirstName.Clear();
-            txtLastName.Clear();
-            txtPassword.Clear();
-            txtUsername.Clear();
-
-            panel2.Visible = false;
-            panel1.Visible = true;
-        }
     }
 }
