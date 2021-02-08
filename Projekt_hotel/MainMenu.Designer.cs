@@ -59,6 +59,7 @@
             this.searchTextbox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.DGView = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGViewRooms)).BeginInit();
@@ -67,6 +68,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mENUToolStripMenuItem,
@@ -74,7 +76,7 @@
             this.toolStripTextBox1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1902, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1902, 36);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,36 +89,37 @@
             this.toolStripSeparator3,
             this.lOGOUTToolStripMenuItem});
             this.mENUToolStripMenuItem.Name = "mENUToolStripMenuItem";
-            this.mENUToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.mENUToolStripMenuItem.Size = new System.Drawing.Size(83, 32);
             this.mENUToolStripMenuItem.Text = "MENU";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(221, 6);
             // 
             // cHECKINToolStripMenuItem
             // 
             this.cHECKINToolStripMenuItem.Name = "cHECKINToolStripMenuItem";
-            this.cHECKINToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.cHECKINToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.cHECKINToolStripMenuItem.Text = "CHECK IN";
             // 
             // cHECKOUTToolStripMenuItem
             // 
             this.cHECKOUTToolStripMenuItem.Name = "cHECKOUTToolStripMenuItem";
-            this.cHECKOUTToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.cHECKOUTToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.cHECKOUTToolStripMenuItem.Text = "CHECK OUT";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(221, 6);
             // 
             // lOGOUTToolStripMenuItem
             // 
             this.lOGOUTToolStripMenuItem.Name = "lOGOUTToolStripMenuItem";
-            this.lOGOUTToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.lOGOUTToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.lOGOUTToolStripMenuItem.Text = "LOGOUT";
+            this.lOGOUTToolStripMenuItem.Click += new System.EventHandler(this.LogoutToolStripMenuItem_Click);
             // 
             // oPTIONToolStripMenuItem
             // 
@@ -126,40 +129,40 @@
             this.nEWUSERToolStripMenuItem,
             this.nEWROOMToolStripMenuItem});
             this.oPTIONToolStripMenuItem.Name = "oPTIONToolStripMenuItem";
-            this.oPTIONToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.oPTIONToolStripMenuItem.Size = new System.Drawing.Size(100, 32);
             this.oPTIONToolStripMenuItem.Text = "OPTION";
             // 
             // lISTOFUSERSToolStripMenuItem
             // 
             this.lISTOFUSERSToolStripMenuItem.Name = "lISTOFUSERSToolStripMenuItem";
-            this.lISTOFUSERSToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.lISTOFUSERSToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
             this.lISTOFUSERSToolStripMenuItem.Text = "LIST OF USERS";
-            this.lISTOFUSERSToolStripMenuItem.Click += new System.EventHandler(this.lISTOFUSERSToolStripMenuItem_Click);
+            this.lISTOFUSERSToolStripMenuItem.Click += new System.EventHandler(this.ListOfUsersToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(228, 6);
             // 
             // nEWUSERToolStripMenuItem
             // 
             this.nEWUSERToolStripMenuItem.Name = "nEWUSERToolStripMenuItem";
-            this.nEWUSERToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.nEWUSERToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
             this.nEWUSERToolStripMenuItem.Text = "NEW USER";
             // 
             // nEWROOMToolStripMenuItem
             // 
             this.nEWROOMToolStripMenuItem.Name = "nEWROOMToolStripMenuItem";
-            this.nEWROOMToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.nEWROOMToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
             this.nEWROOMToolStripMenuItem.Text = "NEW ROOM";
             // 
             // toolStripTextBox1
             // 
             this.toolStripTextBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(32, 24);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(38, 32);
             this.toolStripTextBox1.Text = "X";
-            this.toolStripTextBox1.Click += new System.EventHandler(this.toolStripTextBox1_Click);
+            this.toolStripTextBox1.Click += new System.EventHandler(this.ToolStripTextBox1_Click);
             // 
             // panel1
             // 
@@ -176,9 +179,9 @@
             this.panel1.Controls.Add(this.searchButton);
             this.panel1.Controls.Add(this.DGView);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 28);
+            this.panel1.Location = new System.Drawing.Point(0, 36);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1902, 1005);
+            this.panel1.Size = new System.Drawing.Size(1902, 997);
             this.panel1.TabIndex = 2;
             // 
             // CheckOutB
@@ -323,7 +326,7 @@
             this.searchButton.TabIndex = 6;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = false;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // DGView
             // 
@@ -381,6 +384,20 @@
             this.DGView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGView_RowEnter);
             this.DGView.SelectionChanged += new System.EventHandler(this.DGView_SelectionChanged);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.Font = new System.Drawing.Font("Lato", 16F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.label1.Location = new System.Drawing.Point(851, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 33);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Witaj";
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -388,6 +405,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -430,5 +448,6 @@
         private System.Windows.Forms.Button DeleteReservation;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button CheckOutB;
+        private System.Windows.Forms.Label label1;
     }
 }

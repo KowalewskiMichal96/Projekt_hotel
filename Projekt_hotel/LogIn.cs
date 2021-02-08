@@ -19,6 +19,7 @@ namespace Projekt_hotel
 
         public LogIn()
         {
+
             InitializeComponent();
         }
 
@@ -114,34 +115,14 @@ namespace Projekt_hotel
 
                 if (usr != null)
                 {
-                    int x = 0;
-                    char z = 'U';
-
-
-                    //var query = from worker in contextDC.Worker
-                    //            where worker.UserLogin.Equals(textbox_1.Text)
-                    //            select new
-                    //            {
-                    //                worker.Id,
-                    //                worker.Type
-                    //            };
-                    x = usr.Id;
-                    z = usr.Type;
-                    //foreach (var item in query)
-                    //{
-                    //    x = item.Id;
-                    //    z = item.Type;
-                    //}
-
-                    //User user = new User();
-                    user.SetRole(x, z);
-
-
+                    user.SetData(usr.Id, usr.Type, usr.UserLogin);  
                     ClearButtons();
 
-                    MainMenu mm = new MainMenu(user);
-                    mm.Show();
+                    MainMenu main_menu = new MainMenu(user);
+                    main_menu.Show();
                     this.Hide();
+
+
                 }
             }
             catch (Exception)

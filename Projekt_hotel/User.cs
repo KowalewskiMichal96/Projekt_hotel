@@ -11,15 +11,17 @@ namespace Projekt_hotel
     {
         private int Id;
         private bool IsAdmin;
+        private string Name;
 
-        public void SetRole(int ID, char X)
+        public void SetData(int ID, char ROLE, string NAME)
         {
             Id = ID;
-            if(X == 'U')
+            Name = NAME;
+            if(ROLE == 'U')
             {
                 IsAdmin = false;
             }
-            else if(X == 'A')
+            else if(ROLE == 'A')
             {
                 IsAdmin = true;
             }
@@ -32,11 +34,17 @@ namespace Projekt_hotel
         {
             return IsAdmin;
         }
+        public string GetName()
+        {
+            return Name;
+        }
 
         public void SetFree()
         {
             Id = 0;
             IsAdmin = false;
+            Name = "";
+
         }
     }
 }

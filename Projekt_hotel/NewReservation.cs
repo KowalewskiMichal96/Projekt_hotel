@@ -403,7 +403,7 @@ namespace Projekt_hotel
             {
                 AddOrEdit = 1;
                 var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
-                mainForm.FillData();
+                mainForm.RefreshData();
                 this.Close();
             }
             else
@@ -745,7 +745,7 @@ namespace Projekt_hotel
                     // load database in Mainmenu Form and close active form
                     AddOrEdit = 1;
                     var mainForm = Application.OpenForms.OfType<MainMenu>().Single();
-                    mainForm.FillData();
+                    mainForm.RefreshData();
                     this.Close();
 
                 }   // end of adding and editing reservation and roomreservation
