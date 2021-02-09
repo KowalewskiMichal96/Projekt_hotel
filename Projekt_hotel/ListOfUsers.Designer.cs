@@ -33,7 +33,7 @@
             this.SearchStatusL = new System.Windows.Forms.Label();
             this.SearchPreviousB = new System.Windows.Forms.Button();
             this.SearchNextB = new System.Windows.Forms.Button();
-            this.ChangeB = new System.Windows.Forms.Button();
+            this.changeButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TableLO = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,12 +55,12 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.ConfirmButtonTLO = new System.Windows.Forms.Button();
             this.CancelButtonTLO = new System.Windows.Forms.Button();
-            this.DeleteB = new System.Windows.Forms.Button();
-            this.EditB = new System.Windows.Forms.Button();
-            this.AddB = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.editButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
             this.SearchTB = new System.Windows.Forms.TextBox();
-            this.SearchB = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.listOfWorkers = new System.Windows.Forms.ListBox();
             this.LabelMain = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -93,14 +93,14 @@
             this.panel1.Controls.Add(this.SearchStatusL);
             this.panel1.Controls.Add(this.SearchPreviousB);
             this.panel1.Controls.Add(this.SearchNextB);
-            this.panel1.Controls.Add(this.ChangeB);
+            this.panel1.Controls.Add(this.changeButton);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.DeleteB);
-            this.panel1.Controls.Add(this.EditB);
-            this.panel1.Controls.Add(this.AddB);
+            this.panel1.Controls.Add(this.deleteButton);
+            this.panel1.Controls.Add(this.editButton);
+            this.panel1.Controls.Add(this.addButton);
             this.panel1.Controls.Add(this.SearchTB);
-            this.panel1.Controls.Add(this.SearchB);
-            this.panel1.Controls.Add(this.listBox1);
+            this.panel1.Controls.Add(this.searchButton);
+            this.panel1.Controls.Add(this.listOfWorkers);
             this.panel1.Location = new System.Drawing.Point(4, 58);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.MinimumSize = new System.Drawing.Size(1491, 863);
@@ -153,19 +153,19 @@
             // 
             // ChangeB
             // 
-            this.ChangeB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.ChangeB.Enabled = false;
-            this.ChangeB.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
-            this.ChangeB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.ChangeB.Location = new System.Drawing.Point(464, 652);
-            this.ChangeB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ChangeB.Name = "ChangeB";
-            this.ChangeB.Size = new System.Drawing.Size(235, 39);
-            this.ChangeB.TabIndex = 20;
-            this.ChangeB.Tag = "1";
-            this.ChangeB.Text = "Change Password";
-            this.ChangeB.UseVisualStyleBackColor = false;
-            this.ChangeB.Click += new System.EventHandler(this.ChangeB_Click);
+            this.changeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.changeButton.Enabled = false;
+            this.changeButton.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.changeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.changeButton.Location = new System.Drawing.Point(464, 652);
+            this.changeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.changeButton.Name = "ChangeB";
+            this.changeButton.Size = new System.Drawing.Size(235, 39);
+            this.changeButton.TabIndex = 20;
+            this.changeButton.Tag = "1";
+            this.changeButton.Text = "Change Password";
+            this.changeButton.UseVisualStyleBackColor = false;
+            this.changeButton.Click += new System.EventHandler(this.ChangeB_Click);
             // 
             // panel2
             // 
@@ -471,50 +471,50 @@
             // 
             // DeleteB
             // 
-            this.DeleteB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.DeleteB.Enabled = false;
-            this.DeleteB.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
-            this.DeleteB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.DeleteB.Location = new System.Drawing.Point(464, 609);
-            this.DeleteB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DeleteB.Name = "DeleteB";
-            this.DeleteB.Size = new System.Drawing.Size(235, 39);
-            this.DeleteB.TabIndex = 18;
-            this.DeleteB.Tag = "1";
-            this.DeleteB.Text = "Delete";
-            this.DeleteB.UseVisualStyleBackColor = false;
-            this.DeleteB.Click += new System.EventHandler(this.DeleteB_Click);
+            this.deleteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.deleteButton.Enabled = false;
+            this.deleteButton.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.deleteButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.deleteButton.Location = new System.Drawing.Point(464, 609);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deleteButton.Name = "DeleteB";
+            this.deleteButton.Size = new System.Drawing.Size(235, 39);
+            this.deleteButton.TabIndex = 18;
+            this.deleteButton.Tag = "1";
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteB_Click);
             // 
             // EditB
             // 
-            this.EditB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.EditB.Enabled = false;
-            this.EditB.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
-            this.EditB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.EditB.Location = new System.Drawing.Point(464, 695);
-            this.EditB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.EditB.Name = "EditB";
-            this.EditB.Size = new System.Drawing.Size(235, 39);
-            this.EditB.TabIndex = 17;
-            this.EditB.Tag = "1";
-            this.EditB.Text = "Edit";
-            this.EditB.UseVisualStyleBackColor = false;
-            this.EditB.Click += new System.EventHandler(this.EditB_Click);
+            this.editButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.editButton.Enabled = false;
+            this.editButton.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.editButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.editButton.Location = new System.Drawing.Point(464, 695);
+            this.editButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.editButton.Name = "EditB";
+            this.editButton.Size = new System.Drawing.Size(235, 39);
+            this.editButton.TabIndex = 17;
+            this.editButton.Tag = "1";
+            this.editButton.Text = "Edit";
+            this.editButton.UseVisualStyleBackColor = false;
+            this.editButton.Click += new System.EventHandler(this.EditB_Click);
             // 
             // AddB
             // 
-            this.AddB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.AddB.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
-            this.AddB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.AddB.Location = new System.Drawing.Point(464, 738);
-            this.AddB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.AddB.Name = "AddB";
-            this.AddB.Size = new System.Drawing.Size(235, 41);
-            this.AddB.TabIndex = 16;
-            this.AddB.Tag = "1";
-            this.AddB.Text = "Add";
-            this.AddB.UseVisualStyleBackColor = false;
-            this.AddB.Click += new System.EventHandler(this.AddB_Click);
+            this.addButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.addButton.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.addButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.addButton.Location = new System.Drawing.Point(464, 738);
+            this.addButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addButton.Name = "AddB";
+            this.addButton.Size = new System.Drawing.Size(235, 41);
+            this.addButton.TabIndex = 16;
+            this.addButton.Tag = "1";
+            this.addButton.Text = "Add";
+            this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Click += new System.EventHandler(this.AddB_Click);
             // 
             // SearchTB
             // 
@@ -532,40 +532,40 @@
             // 
             // SearchB
             // 
-            this.SearchB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.SearchB.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
-            this.SearchB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.SearchB.Location = new System.Drawing.Point(464, 78);
-            this.SearchB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.SearchB.Name = "SearchB";
-            this.SearchB.Size = new System.Drawing.Size(151, 39);
-            this.SearchB.TabIndex = 11;
-            this.SearchB.Tag = "1";
-            this.SearchB.Text = "Search";
-            this.SearchB.UseVisualStyleBackColor = false;
-            this.SearchB.Click += new System.EventHandler(this.SearchB_Click);
+            this.searchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.searchButton.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Bold);
+            this.searchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.searchButton.Location = new System.Drawing.Point(464, 78);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchButton.Name = "SearchB";
+            this.searchButton.Size = new System.Drawing.Size(151, 39);
+            this.searchButton.TabIndex = 11;
+            this.searchButton.Tag = "1";
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.SearchB_Click);
             // 
-            // listBox1
+            // ListOfWorkers
             // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.listBox1.Font = new System.Drawing.Font("Lato", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.listBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.listBox1.ItemHeight = 30;
-            this.listBox1.Items.AddRange(new object[] {
+            this.listOfWorkers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.listOfWorkers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listOfWorkers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.listOfWorkers.Font = new System.Drawing.Font("Lato", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.listOfWorkers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.listOfWorkers.ItemHeight = 30;
+            this.listOfWorkers.Items.AddRange(new object[] {
             "asdsadas",
             "dsadas",
             "ola raczynska"});
-            this.listBox1.Location = new System.Drawing.Point(43, 129);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.listBox1.MinimumSize = new System.Drawing.Size(415, 692);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(415, 692);
-            this.listBox1.Sorted = true;
-            this.listBox1.TabIndex = 3;
-            this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox_DrawItem);
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listOfWorkers.Location = new System.Drawing.Point(43, 129);
+            this.listOfWorkers.Margin = new System.Windows.Forms.Padding(0);
+            this.listOfWorkers.MinimumSize = new System.Drawing.Size(415, 692);
+            this.listOfWorkers.Name = "ListOfWorkers";
+            this.listOfWorkers.Size = new System.Drawing.Size(415, 692);
+            this.listOfWorkers.Sorted = true;
+            this.listOfWorkers.TabIndex = 3;
+            this.listOfWorkers.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListOfWorkers_DrawItem);
+            this.listOfWorkers.SelectedIndexChanged += new System.EventHandler(this.ListOfWorkers_SelectedIndexChanged);
             // 
             // LabelMain
             // 
@@ -610,8 +610,8 @@
         private System.Windows.Forms.Button ButtonExit;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label LabelMain;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button SearchB;
+        private System.Windows.Forms.ListBox listOfWorkers;
+        private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel TableLO;
         private System.Windows.Forms.Label label1;
@@ -623,9 +623,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button DeleteB;
-        private System.Windows.Forms.Button EditB;
-        private System.Windows.Forms.Button AddB;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.TextBox SearchTB;
         private System.Windows.Forms.Button CancelButtonTLO;
         private System.Windows.Forms.Button ConfirmButtonTLO;
@@ -633,7 +633,7 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button ChangeB;
+        private System.Windows.Forms.Button changeButton;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox7;

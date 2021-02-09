@@ -15,7 +15,7 @@ namespace Projekt_hotel
     {
         readonly databaseHotelDataContext contextDC = new databaseHotelDataContext();
         bool isLogging = true;
-        public User user = new User();
+
 
         public LogIn()
         {
@@ -115,12 +115,12 @@ namespace Projekt_hotel
 
                 if (usr != null)
                 {
-                    user.SetData(usr.Id, usr.Type, usr.UserLogin);  
+                    User user = new User(usr.Id, usr.Type, usr.UserLogin);
                     ClearButtons();
 
-                    MainMenu main_menu = new MainMenu(user);
-                    main_menu.Show();
-                    this.Hide();
+                   MainMenu main_menu = new MainMenu(user);
+                   main_menu.Show();
+                   this.Hide();
 
 
                 }

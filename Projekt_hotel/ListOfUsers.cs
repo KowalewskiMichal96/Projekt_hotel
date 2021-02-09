@@ -13,10 +13,17 @@ namespace Projekt_hotel
     public partial class ListOfUsers : Form
     {
         readonly databaseHotelDataContext contextDB = new databaseHotelDataContext();
-        readonly User LoggedUser = new User();
-        public int Choice = 0;
-        public int Selected = 0;
-        List<int> x = new List<int>();
+        readonly User LoggedUser;
+
+
+        public byte Choice = 0;
+
+        // list of searched persons
+        List<byte> x;
+        // indicates how many people were found and which one is selected
+        public byte Selected = 0;
+
+
         public ListOfUsers(User user)
         {
             InitializeComponent();
@@ -25,80 +32,59 @@ namespace Projekt_hotel
         }
 
 
-// LOAD PERSONS FROM DB
+        // loading data into the listbox and table_layout
         private void LoadData()
         {
 
-            listBox1.Items.Clear();
+            listOfWorkers.Items.Clear();
 
-            var users = from worker in contextDB.Worker select worker;
+            var users = from worker in contextDB.Worker 
+                        select worker;
 
             foreach (var item in users)
             {
-                listBox1.Items.Add(item);
+                listOfWorkers.Items.Add(item);
             }
-        Choice = 0;
+            Choice = 0;
+        }
+        private void FillTable()
+        {
+            Worker selectedWorker = listOfWorkers.SelectedItem as Worker;
+
+            textBox1.Text = selectedWorker.FirstName;
+            textBox2.Text = selectedWorker.LastName;
+            textBox3.Text = selectedWorker.Email;
+            textBox4.Text = selectedWorker.UserLogin;
+            textBox5.Text = selectedWorker.Type == 'U' ? "User" : "Admin";
+            checkBox1.Checked = selectedWorker.Manager == true ? true : false;
         }
 
-// CLOSE THIS FORM
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        // change the appearance of the form and fill in the employee's data when worker is selected
+        private void ListOfWorkers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems.Count > 0)
+            if (listOfWorkers.SelectedItems.Count > 0)
             {
                 ChangeView("EDIT");
                 FillTable();
 
-                // jesli wybrales to mozesz usunac/ zmienic haslo/ edytowac
-                SearchB.Enabled = true;
-                DeleteB.Enabled = true;
-                ChangeB.Enabled = true;
-                EditB.Enabled = true;
+                searchButton.Enabled = true;
+                deleteButton.Enabled = true;
+                changeButton.Enabled = true;
+                editButton.Enabled = true;
             }
-            else if (listBox1.SelectedItems.Count < 1)
+            else if (listOfWorkers.SelectedItems.Count < 1)
             {
-                SearchB.Enabled = false;
-                DeleteB.Enabled = false;
-                ChangeB.Enabled = false;
-                EditB.Enabled = false;
+                searchButton.Enabled = false;
+                deleteButton.Enabled = false;
+                changeButton.Enabled = false;
+                editButton.Enabled = false;
 
             }
         }
 
-// CHANGE VIEW OF LISTBOX
-        private void ListBox_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            ListBox x = sender as ListBox;
-            e.DrawBackground();
 
-            bool isItemSelected = ((e.State & DrawItemState.Selected) == DrawItemState.Selected);
-            int itemIndex = e.Index;
-            if (itemIndex >= 0 && itemIndex < x.Items.Count)
-            {
-                Graphics g = e.Graphics;
-
-                // Background Color
-                SolidBrush backgroundColorBrush = new SolidBrush((isItemSelected) ? Color.FromArgb(50, 50, 50) : Color.FromArgb(239, 239, 239));
-                g.FillRectangle(backgroundColorBrush, e.Bounds);
-
-                // Set text color
-                string itemText = x.Items[itemIndex].ToString();
-
-                SolidBrush itemTextColorBrush = (isItemSelected) ? new SolidBrush(Color.FromArgb(239, 239, 239)) : new SolidBrush(Color.FromArgb(50, 50, 50));
-                g.DrawString(itemText, e.Font, itemTextColorBrush, x.GetItemRectangle(itemIndex).Location);
-                
-
-                // Clean up
-                backgroundColorBrush.Dispose();
-                itemTextColorBrush.Dispose();
-            }
-
-            e.DrawFocusRectangle();
-        }
 
 
 // CHANGE VIEW OF FORM
@@ -125,10 +111,6 @@ namespace Projekt_hotel
                         label6.Visible = true;
                         label7.Visible = true;
                         label8.Visible = true;
-
-
-
-                        // przyciski
                     }
                     break;
                 case "EDIT":
@@ -159,7 +141,7 @@ namespace Projekt_hotel
                         label2.Text = "New Password";
                         label3.Text = "Repeate Password";
 
-                        listBox1.Enabled = false;
+                        listOfWorkers.Enabled = false;
                         textBox4.Visible = false;
                         textBox5.Visible = false;
                         textBox6.Visible = false;
@@ -170,70 +152,13 @@ namespace Projekt_hotel
                         label6.Visible = false;
                         label7.Visible = false;
                         label8.Visible = false;
-
-
                     }
                     break;
-            }// switch end
-        }
-
-        private void ViewToSave()
-        {
-            listBox1.Enabled = false;
-            panel2.Enabled = true;
-            SearchB.Enabled = false;
-
-        }
-
-        private void ViewNotToSave()
-        {
-            ChangeView("EDIT");
-            listBox1.SelectedIndex = -1;
-            DeleteB.Enabled = false;
-            ChangeB.Enabled = false;
-            EditB.Enabled = false;
-            listBox1.Enabled = true;
-            panel2.Enabled = false;
-            SearchB.Enabled = true;
-            AddB.Enabled = true;
-            ClearTable();
-        }
-
-
-// GETTING DATA TO TABLELAYOUT
-        private void FillTable()
-        {
-
-            Worker SelectedWorker = listBox1.SelectedItem as Worker;
-
-            textBox1.Text = SelectedWorker.FirstName;
-            textBox2.Text = SelectedWorker.LastName;
-            textBox3.Text = SelectedWorker.Email;
-            textBox4.Text = SelectedWorker.UserLogin;
-            textBox5.Text = Type(SelectedWorker);
-            
-            if(SelectedWorker.Manager == true)
-            {
-                checkBox1.Checked = true;
-            }
-            else if(SelectedWorker.Manager == false)
-            {
-                checkBox1.Checked = false;
             }
         }
 
-        string Type(Worker x)
-        {
-            string t = "";
 
-            if (x.Type == 'u' || x.Type == 'U')
-                t = "User";
-            else if (x.Type == 'a' || x.Type == 'A')
-                t = "Admin";
-            return t;
-        }
-
-// CLEAR TABLELAYOUT
+// clear table_layout
         private void ClearTable()
         {
             textBox1.Clear();
@@ -245,7 +170,6 @@ namespace Projekt_hotel
             textBox7.Clear();
             checkBox1.Checked = false;
 
-
         }
 
 
@@ -253,17 +177,17 @@ namespace Projekt_hotel
         private void CancelButtonTLO_Click(object sender, EventArgs e)
         {
             // czy na pewno chcesz porzucic zaminy ?
-            ViewNotToSave();
-            AddB.Enabled = true;
+            DataChangeOff();
+            addButton.Enabled = true;
             textBox1.PasswordChar = '\0';
             textBox2.PasswordChar = '\0';
             textBox3.PasswordChar = '\0';
 
-            if (x.Count != 0)
-            {
+           //if (x.Count != 0)
+           //{
                 SearchNextB.Enabled = true;
                 SearchPreviousB.Enabled = true;
-            }     
+            //}     
         }
 
         private void ConfirmButtonTLO_Click(object sender, EventArgs e)
@@ -307,7 +231,7 @@ namespace Projekt_hotel
             // SPRAWDZAMY CZY ADMIN
             if (LoggedUser.GetRole() == true)
             {
-                Worker ToCheck = listBox1.SelectedItem as Worker;
+                Worker ToCheck = listOfWorkers.SelectedItem as Worker;
                 
                 if(ToCheck.Id == LoggedUser.GetId())
                 {
@@ -324,7 +248,7 @@ namespace Projekt_hotel
                     }
                     else if(ErrorForm.DialogResult == DialogResult.No)
                     {
-                        ViewNotToSave();
+                        DataChangeOff();
 //textBox8.Text = "nie udalo sie usunac profilu admina";
                     }
                 }
@@ -346,14 +270,13 @@ namespace Projekt_hotel
                         this.Close();
                         var logIn = Application.OpenForms.OfType<LogIn>().Single();
                         logIn.Show();
-                        logIn.user.SetFree();
 
                         //textBox8.Text = "profil uzytkownika usuniety przez admina";
                         //////////////////////////////////////////////////////////////////////////////////////////WYLOGUJ
                     }
                     else if (ErrorForm.DialogResult == DialogResult.No)
                     {
-                        ViewNotToSave();
+                        DataChangeOff();
 //textBox8.Text = "nie udalo sie usunac profilu przez admina";
                     }
                 }
@@ -362,7 +285,7 @@ namespace Projekt_hotel
             else if(LoggedUser.GetRole() == false)
             {
                 // sprawdzamy czy wybierasz siebie
-                Worker CheckWhoYouAre = listBox1.SelectedItem as Worker;
+                Worker CheckWhoYouAre = listOfWorkers.SelectedItem as Worker;
                 if (CheckWhoYouAre.Id == LoggedUser.GetId())
                 {
                     ErrorText = "Are you sure you wanna delete your profile??";
@@ -383,15 +306,15 @@ namespace Projekt_hotel
                         this.Close();
                         var logIn = Application.OpenForms.OfType<LogIn>().Single();
                         logIn.Show();
-                        logIn.user.SetFree();
-
+                        
+                        
                         //textBox8.Text = "profil pracownika usuniety";
                         //////////////////////////////////////////////////////////////////////////////////////////WYLOGUJ
                     }
                     else if (ErrorForm.DialogResult == DialogResult.No)
                     {
 //textBox8.Text = "nie udalo sie usunac profilu pracownika";
-                        ViewNotToSave();
+                        DataChangeOff();
                     }
                 }
                 else if (CheckWhoYouAre.Id != LoggedUser.GetId())
@@ -402,7 +325,7 @@ namespace Projekt_hotel
                 }
             }
 
-            ViewNotToSave();
+            DataChangeOff();
             // wyczysz search 
         }
 
@@ -436,7 +359,7 @@ namespace Projekt_hotel
 
         private void ClearAfterDelete()
         {
-            ViewNotToSave();
+            DataChangeOff();
             LoadData();
             SearchTB.Clear();
             SearchStatusL.Text = "Number of results: " + Selected + "/" + x.Count;
@@ -466,11 +389,11 @@ namespace Projekt_hotel
 //textBox8.Text = "Jestes Adminem";
                 Choice = 1;
                 ChangeView("CHANGE");
-                ViewToSave();
+                DataChangeEnabled();
             }
             else if (LoggedUser.GetRole() == false)
             {
-                Worker CheckWhoYouAre = listBox1.SelectedItem as Worker;
+                Worker CheckWhoYouAre = listOfWorkers.SelectedItem as Worker;
                 if(CheckWhoYouAre.Id == LoggedUser.GetId())
                 {
                     SearchNextB.Enabled = false;
@@ -484,7 +407,7 @@ namespace Projekt_hotel
 
                     Choice = 1;
                     ChangeView("CHANGE");
-                    ViewToSave();
+                    DataChangeEnabled();
                 }
                 else if(CheckWhoYouAre.Id != LoggedUser.GetId())
                 {
@@ -515,12 +438,12 @@ namespace Projekt_hotel
 
                 Choice = 2;
                 ChangeView("EDIT");
-                ViewToSave();
+                DataChangeEnabled();
 
             }
             else if (LoggedUser.GetRole() == false)
             {
-                Worker CheckWhoYouAre = listBox1.SelectedItem as Worker;
+                Worker CheckWhoYouAre = listOfWorkers.SelectedItem as Worker;
                 if (CheckWhoYouAre.Id == LoggedUser.GetId())
                 {
                     SearchNextB.Enabled = false;
@@ -528,7 +451,7 @@ namespace Projekt_hotel
 
                     Choice = 2;
                     ChangeView("EDIT");
-                    ViewToSave();
+                    DataChangeEnabled();
                 }
                 else if (CheckWhoYouAre.Id != LoggedUser.GetId())
                 {
@@ -548,11 +471,11 @@ namespace Projekt_hotel
             if (LoggedUser.GetRole() == true)
             {
                 Choice = 3;
-                listBox1.SelectedIndex = -1;
+                listOfWorkers.SelectedIndex = -1;
                 ClearTable();
                 ChangeView("ADD");
-                ViewToSave();
-                AddB.Enabled = false;
+                DataChangeEnabled();
+                addButton.Enabled = false;
             }
             else if (LoggedUser.GetRole() == false)
             {
@@ -582,7 +505,7 @@ namespace Projekt_hotel
             else if(EditOrAdd == 2)
             {
                 // Edit
-                WorkerToSave = listBox1.SelectedItem as Worker;
+                WorkerToSave = listOfWorkers.SelectedItem as Worker;
             }
 
             WorkerToSave.FirstName = textBox1.Text;
@@ -594,7 +517,7 @@ namespace Projekt_hotel
             contextDB.SubmitChanges();
 
             LoadData();
-            ViewNotToSave();
+            DataChangeOff();
         }
 
         private void CheckWorkerInfo()
@@ -635,7 +558,8 @@ namespace Projekt_hotel
                             {
                                 // dodaj nowego
                                 SaveToDB(1);
-                                ViewNotToSave();
+                                DataChangeOff();
+
                             if (x.Count != 0)
                             {
                                 SearchNextB.Enabled = true;
@@ -647,10 +571,10 @@ namespace Projekt_hotel
                     else if(Choice == 2)
                     {
 
-                        Worker WhoYouAre = listBox1.SelectedItem as Worker;
+                        Worker WhoYouAre = listOfWorkers.SelectedItem as Worker;
                         if (contextDB.Worker.Any(x => x.UserLogin.Contains(textBox4.Text) && x.UserLogin != WhoYouAre.UserLogin))
                         {
-//textBox8.Text = "niestety istnieje juz podany login";
+//textBox8.Text = " istnieje juz podany login";
                             ErrorText = "There is already a given login in the database, choose another one";
                             ErrorForm = new CustomDialog(ErrorText, 1);
                             ErrorForm.ShowDialog();
@@ -659,14 +583,16 @@ namespace Projekt_hotel
                         {
                             // edytuj starego
                             SaveToDB(2);
-                            ViewNotToSave();
-                            if (x.Count != 0)
-                            {
-                                SearchNextB.Enabled = true;
-                                SearchPreviousB.Enabled = true;
-                            }
+                            DataChangeOff();
+                            SearchNextB.Enabled = true;
+                            SearchPreviousB.Enabled = true;
+                        //if (x.Count != 0)
+                        //{
+                        //    SearchNextB.Enabled = true;
+                        //    SearchPreviousB.Enabled = true;
+                        //}
 
-                        }
+                    }
                     }
                 
             }
@@ -682,7 +608,7 @@ namespace Projekt_hotel
                 string ErrorText = "";
                 CustomDialog ErrorForm = null;
 
-                if (String.IsNullOrWhiteSpace(textBox1.Text) || String.IsNullOrWhiteSpace(textBox2.Text))
+                if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text))
                 {
                     ErrorText = "Make sure you fill in all the fields";
                     ErrorForm = new CustomDialog(ErrorText, 1);
@@ -696,7 +622,7 @@ namespace Projekt_hotel
                 {
                     // sprawdz czy podane haslo jest takie samo jak w bazie danych
 
-                        Worker WorkerToSave = listBox1.SelectedItem as Worker;
+                        Worker WorkerToSave = listOfWorkers.SelectedItem as Worker;
                         s = AccessOperation.EncryptPassword(textBox1.Text);
                         var usr = contextDB.Worker.Where(c => c.UserLogin == WorkerToSave.UserLogin && c.UserPassword == s).SingleOrDefault();
 
@@ -727,7 +653,7 @@ namespace Projekt_hotel
                             textBox1.PasswordChar = '\0';
                             textBox2.PasswordChar = '\0';
                             textBox3.PasswordChar = '\0';
-                            ViewNotToSave();
+                            DataChangeOff();
                             }
                         }
                         else
@@ -743,25 +669,46 @@ namespace Projekt_hotel
                 }
             }
         }
+        // save modes
+        private void DataChangeEnabled()
+        {
+            listOfWorkers.Enabled = false;
+            searchButton.Enabled = false;
+            panel2.Enabled = true;
 
+        }
+        private void DataChangeOff()
+        {
+            ChangeView("EDIT");
+            listOfWorkers.SelectedIndex = -1;
+
+            deleteButton.Enabled = false;
+            changeButton.Enabled = false;
+            editButton.Enabled = false;
+            panel2.Enabled = false;
+
+            listOfWorkers.Enabled = true;
+            searchButton.Enabled = true;
+            addButton.Enabled = true;
+
+            ClearTable();
+        }
+
+
+        // searching for an employee in the listbox
         private void SearchB_Click(object sender, EventArgs e)
         {
-            x = new List<int>();
+            x = new List<byte>();
             Selected = 0;
 
-
-
-            if(string.IsNullOrWhiteSpace(SearchTB.Text))
+            // find a person with the same name
+             if (!string.IsNullOrWhiteSpace(SearchTB.Text))
             {
-
-            }
-            else if (!string.IsNullOrWhiteSpace(SearchTB.Text))
-            {
-                for (int i = listBox1.Items.Count - 1; i >= 0; i--)
+                for (int i = listOfWorkers.Items.Count - 1; i >= 0; i--)
                 {
-                    if (listBox1.Items[i].ToString().ToLower().StartsWith(SearchTB.Text.ToLower()))
+                    if (listOfWorkers.Items[i].ToString().ToLower().StartsWith(SearchTB.Text.ToLower()))
                     {
-                        x.Add(i);
+                        x.Add((byte)i);
                     }
                 }
             }
@@ -774,31 +721,68 @@ namespace Projekt_hotel
             }
             else if (x.Count > 0)
             {
-                listBox1.SetSelected(x[Selected], true);
+                listOfWorkers.SetSelected(x[Selected], true);
                 SearchStatusL.Text = "Number of results: " + (Selected + 1).ToString() + "/" + x.Count;
                 SearchNextB.Enabled = true;
                 SearchPreviousB.Enabled = true;
             }
         }
-
         private void SearchNextB_Click(object sender, EventArgs e)
         {
             if(Selected < x.Count -1)
             {
                 Selected += 1;
-                listBox1.SelectedIndex = x[Selected];
+                listOfWorkers.SelectedIndex = x[Selected];
                 SearchStatusL.Text = "Number of results: " + (Selected + 1).ToString() + "/" + x.Count;
             }
         }
-
         private void SearchPreviousB_Click(object sender, EventArgs e)
         {
             if(Selected > 0)
             {
                 Selected -= 1;
-                listBox1.SelectedIndex = x[Selected];
+                listOfWorkers.SelectedIndex = x[Selected];
                 SearchStatusL.Text = "Number of results: " + (Selected + 1).ToString() + "/" + x.Count;
             }
+        }
+
+
+        // change view of listbox
+        private void ListOfWorkers_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            ListBox this_listbox = sender as ListBox;
+            e.DrawBackground();
+
+            bool isItemSelected = ((e.State & DrawItemState.Selected) == DrawItemState.Selected);
+            int itemIndex = e.Index;
+            if (itemIndex >= 0 && itemIndex < this_listbox.Items.Count)
+            {
+                Graphics g = e.Graphics;
+
+                // Background Color
+                SolidBrush backgroundColorBrush = new SolidBrush((isItemSelected) ? Color.FromArgb(50, 50, 50) : Color.FromArgb(239, 239, 239));
+                g.FillRectangle(backgroundColorBrush, e.Bounds);
+
+                // Set text color
+                string itemText = this_listbox.Items[itemIndex].ToString();
+
+                SolidBrush itemTextColorBrush = (isItemSelected) ? new SolidBrush(Color.FromArgb(239, 239, 239)) : new SolidBrush(Color.FromArgb(50, 50, 50));
+                g.DrawString(itemText, e.Font, itemTextColorBrush, this_listbox.GetItemRectangle(itemIndex).Location);
+
+
+                // Clean up
+                backgroundColorBrush.Dispose();
+                itemTextColorBrush.Dispose();
+            }
+
+            e.DrawFocusRectangle();
+        }
+
+
+        // close this form
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

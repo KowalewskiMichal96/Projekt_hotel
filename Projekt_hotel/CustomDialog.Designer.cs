@@ -38,7 +38,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.panel1.BackColor = System.Drawing.Color.Gray;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.LabelInformation);
             this.panel1.Controls.Add(this.label1);
@@ -56,7 +56,7 @@
             this.LabelInformation.Location = new System.Drawing.Point(55, 100);
             this.LabelInformation.MaximumSize = new System.Drawing.Size(450, 0);
             this.LabelInformation.Name = "LabelInformation";
-            this.LabelInformation.Size = new System.Drawing.Size(380, 66);
+            this.LabelInformation.Size = new System.Drawing.Size(394, 68);
             this.LabelInformation.TabIndex = 3;
             this.LabelInformation.Text = "you wanna leave your actually reservation ??";
             // 
@@ -66,7 +66,7 @@
             this.label1.Font = new System.Drawing.Font("Lato", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(174, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 45);
+            this.label1.Size = new System.Drawing.Size(181, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "Attention";
             // 

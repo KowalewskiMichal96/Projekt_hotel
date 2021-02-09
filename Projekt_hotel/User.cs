@@ -13,19 +13,13 @@ namespace Projekt_hotel
         private bool IsAdmin;
         private string Name;
 
-        public void SetData(int ID, char ROLE, string NAME)
+        public User(int ID, char ROLE, string NAME)
         {
             Id = ID;
             Name = NAME;
-            if(ROLE == 'U')
-            {
-                IsAdmin = false;
-            }
-            else if(ROLE == 'A')
-            {
-                IsAdmin = true;
-            }
-        }
+            IsAdmin = ROLE == 'A' ?  true : false;
+        } 
+
         public int GetId()
         {
             return Id;
@@ -39,12 +33,5 @@ namespace Projekt_hotel
             return Name;
         }
 
-        public void SetFree()
-        {
-            Id = 0;
-            IsAdmin = false;
-            Name = "";
-
-        }
     }
 }

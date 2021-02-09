@@ -14,7 +14,7 @@ namespace Projekt_hotel
     {
         readonly databaseHotelDataContext contextDB = new databaseHotelDataContext();
         readonly DataTable table = new DataTable();
-        readonly User LoggedUser = new User();
+        readonly User LoggedUser;
         List<Reservations> allReservations;
         
         public MainMenu(User user)
@@ -200,7 +200,6 @@ namespace Projekt_hotel
         // closing the interface
         private void LogoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoggedUser.SetFree();
             this.Close();
 
             //find working form 
