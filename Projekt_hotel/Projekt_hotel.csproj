@@ -126,6 +126,12 @@
     <Compile Include="ReservationDialog.Designer.cs">
       <DependentUpon>ReservationDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="RoomEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoomEditor.Designer.cs">
+      <DependentUpon>RoomEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelectedRoom.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="User.cs" />
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReservationDialog.resx">
       <DependentUpon>ReservationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoomEditor.resx">
+      <DependentUpon>RoomEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="databaseHotel.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
