@@ -177,8 +177,10 @@ namespace Projekt_hotel
         // data management
         private void CheckInB_Click(object sender, EventArgs e)
         {
-            NewReservation NR = new NewReservation(LoggedUser.GetId(),0, 1);
-            NR.ShowDialog();
+           ReservationDialog RD = new ReservationDialog(LoggedUser.GetId(), 0, 0);
+           RD.ShowDialog();
+          //NewReservation NR = new NewReservation(LoggedUser.GetId(),0, 1);
+          //NR.ShowDialog();
         }
         private void CheckOutB_Click(object sender, EventArgs e)
         {
@@ -187,8 +189,10 @@ namespace Projekt_hotel
         }
         private void EditReservation_Click(object sender, EventArgs e)
         {
-            NewReservation EditReservation = new NewReservation(LoggedUser.GetId(), Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value), 2);
-            EditReservation.ShowDialog();
+            ReservationDialog RD = new ReservationDialog(LoggedUser.GetId(), Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value), 1);
+            RD.ShowDialog();
+           //NewReservation EditReservation = new NewReservation(LoggedUser.GetId(), Convert.ToInt32(DGView[0, DGView.CurrentRow.Index].Value), 2);
+           //EditReservation.ShowDialog();
         }
         private void ListOfUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {

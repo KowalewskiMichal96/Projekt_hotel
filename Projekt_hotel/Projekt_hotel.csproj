@@ -120,6 +120,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssistanceClasses.cs" />
     <Compile Include="Receipt.cs" />
+    <Compile Include="ReservationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservationDialog.Designer.cs">
+      <DependentUpon>ReservationDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelectedRoom.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="User.cs" />
@@ -156,6 +162,9 @@
     </Compile>
     <EmbeddedResource Include="RaportReceipt.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReservationDialog.resx">
+      <DependentUpon>ReservationDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="databaseHotel.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>

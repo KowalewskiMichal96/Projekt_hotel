@@ -630,6 +630,7 @@
             // TableLP
             // 
             this.TableLP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.TableLP.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.TableLP.ColumnCount = 3;
             this.TableLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this.TableLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -648,7 +649,7 @@
             this.TableLP.Controls.Add(this.LabelEditPerson, 1, 1);
             this.TableLP.Controls.Add(this.CBPayment, 1, 12);
             this.TableLP.Controls.Add(this.TPDateOfBirth, 1, 11);
-            this.TableLP.Location = new System.Drawing.Point(61, 62);
+            this.TableLP.Location = new System.Drawing.Point(641, 62);
             this.TableLP.Margin = new System.Windows.Forms.Padding(4);
             this.TableLP.Name = "TableLP";
             this.TableLP.RowCount = 14;
