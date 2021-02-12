@@ -63,17 +63,6 @@
       <Association Name="Payer_Invoice" Member="Invoice" ThisKey="Id" OtherKey="Payer_ID" Type="Invoice" />
     </Type>
   </Table>
-  <Table Name="dbo.Room" Member="Room">
-    <Type Name="Room">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RoomNameUnique" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Hotel_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RoomType_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Room_RoomReserved" Member="RoomReserved" ThisKey="Id" OtherKey="Room_ID" Type="RoomReserved" />
-      <Association Name="Hotel_Room" Member="Hotel" ThisKey="Hotel_ID" OtherKey="Id" Type="Hotel" IsForeignKey="true" />
-      <Association Name="RoomType_Room" Member="RoomType" ThisKey="RoomType_ID" OtherKey="Id" Type="RoomType" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.RoomType" Member="RoomType">
     <Type Name="RoomType">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -135,8 +124,20 @@
       <Column Name="PriceFromDate" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
       <Column Name="Room_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Reservation_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Room_RoomReserved" Member="Room" ThisKey="Room_ID" OtherKey="Id" Type="Room" IsForeignKey="true" />
       <Association Name="Reservation_RoomReserved" Member="Reservation" ThisKey="Reservation_ID" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
+      <Association Name="Room_RoomReserved" Member="Room" ThisKey="Room_ID" OtherKey="Id" Type="Room" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Room" Member="Room">
+    <Type Name="Room">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoomNameUnique" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Hotel_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoomType_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Room_RoomReserved" Member="RoomReserved" ThisKey="Id" OtherKey="Room_ID" Type="RoomReserved" />
+      <Association Name="Hotel_Room" Member="Hotel" ThisKey="Hotel_ID" OtherKey="Id" Type="Hotel" IsForeignKey="true" />
+      <Association Name="RoomType_Room" Member="RoomType" ThisKey="RoomType_ID" OtherKey="Id" Type="RoomType" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -91,6 +91,7 @@
             // Panel_Reservation
             // 
             this.Panel_Reservation.BackColor = System.Drawing.Color.Transparent;
+            this.Panel_Reservation.Controls.Add(this.Panel_Guest);
             this.Panel_Reservation.Controls.Add(this.SelectGuest);
             this.Panel_Reservation.Controls.Add(this.panel3);
             this.Panel_Reservation.Controls.Add(this.searchButton);
@@ -561,7 +562,7 @@
             // Panel_Guest
             // 
             this.Panel_Guest.Controls.Add(this.TableLP);
-            this.Panel_Guest.Location = new System.Drawing.Point(12, 91);
+            this.Panel_Guest.Location = new System.Drawing.Point(526, 103);
             this.Panel_Guest.Name = "Panel_Guest";
             this.Panel_Guest.Size = new System.Drawing.Size(573, 864);
             this.Panel_Guest.TabIndex = 1;
@@ -789,7 +790,6 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = global::Projekt_hotel.Properties.Resources.tlo_5;
             this.ClientSize = new System.Drawing.Size(1917, 1028);
-            this.Controls.Add(this.Panel_Guest);
             this.Controls.Add(this.Panel_Reservation);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimumSize = new System.Drawing.Size(1917, 1028);

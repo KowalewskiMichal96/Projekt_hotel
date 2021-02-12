@@ -220,6 +220,10 @@ namespace Projekt_hotel
             Application.Exit();
         }
 
-
+        private void NewRoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RoomEditor re = new RoomEditor();
+            re.ShowDialog();
+        }
     }
 }

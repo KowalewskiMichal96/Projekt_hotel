@@ -95,29 +95,29 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(202, 6);
             // 
             // cHECKINToolStripMenuItem
             // 
             this.cHECKINToolStripMenuItem.Name = "cHECKINToolStripMenuItem";
-            this.cHECKINToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
+            this.cHECKINToolStripMenuItem.Size = new System.Drawing.Size(205, 32);
             this.cHECKINToolStripMenuItem.Text = "CHECK IN";
             // 
             // cHECKOUTToolStripMenuItem
             // 
             this.cHECKOUTToolStripMenuItem.Name = "cHECKOUTToolStripMenuItem";
-            this.cHECKOUTToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
+            this.cHECKOUTToolStripMenuItem.Size = new System.Drawing.Size(205, 32);
             this.cHECKOUTToolStripMenuItem.Text = "CHECK OUT";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(202, 6);
             // 
             // lOGOUTToolStripMenuItem
             // 
             this.lOGOUTToolStripMenuItem.Name = "lOGOUTToolStripMenuItem";
-            this.lOGOUTToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
+            this.lOGOUTToolStripMenuItem.Size = new System.Drawing.Size(205, 32);
             this.lOGOUTToolStripMenuItem.Text = "LOGOUT";
             this.lOGOUTToolStripMenuItem.Click += new System.EventHandler(this.LogoutToolStripMenuItem_Click);
             // 
@@ -155,6 +155,7 @@
             this.nEWROOMToolStripMenuItem.Name = "nEWROOMToolStripMenuItem";
             this.nEWROOMToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
             this.nEWROOMToolStripMenuItem.Text = "NEW ROOM";
+            this.nEWROOMToolStripMenuItem.Click += new System.EventHandler(this.NewRoomToolStripMenuItem_Click);
             // 
             // toolStripTextBox1
             // 

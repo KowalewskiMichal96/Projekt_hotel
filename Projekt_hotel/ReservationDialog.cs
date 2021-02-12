@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -173,10 +174,42 @@ namespace Projekt_hotel
             if(roomsListbox.SelectedItems.Count > 0)
             {
                 SelectRoom.Enabled = true;
+                LoadViewOfRoom();
             }
             else
             {
                 SelectRoom.Enabled = false;
+            }
+        }
+        void LoadViewOfRoom()
+        {
+            Room roomToLoad = contextDB.Room.FirstOrDefault(x => x.RoomNameUnique == roomsListbox.SelectedItem.ToString()) as Room;
+
+            try
+            {
+                var st = (from room in contextDB.Room where room.RoomNameUnique == roomToLoad.RoomNameUnique select room).First();
+                if (st.Data != null)
+                    pictureBox1.Image = ConvertByteArrayToImage(st.Data.ToArray());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            labelRoomName.Text = roomToLoad.RoomNameUnique;
+            labelMax.Text = roomToLoad.RoomType.Capacity.ToString();
+            roomToLoad.RoomNameUnique.ToCharArray();
+            labelFloor.Text = roomToLoad.RoomNameUnique[1].ToString();
+            labelType.Text = roomToLoad.RoomType.RoomName;
+
+        }
+        public Image ConvertByteArrayToImage(byte[] data)
+        {
+            using (MemoryStream ms = new MemoryStream(data))
+            {
+                Image returnImage = Image.FromStream(ms);
+                return returnImage;
+
             }
         }
         private void roomsSelectedListbox_SelectedIndexChanged(object sender, EventArgs e)

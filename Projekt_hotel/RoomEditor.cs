@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,6 @@ namespace Projekt_hotel
         {
             InitializeComponent();
         }
-
 
 
 
@@ -54,6 +54,7 @@ namespace Projekt_hotel
             e.DrawFocusRectangle();
         }
 
+
         // Loading data
         void LoadForm()
         {
@@ -73,32 +74,40 @@ namespace Projekt_hotel
         {
             LoadForm();
         }
-
-
         private void listOfRooms_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(listOfRooms.SelectedItems.Count > 0)
             {
+                addButton.Enabled = true;
                 selectButton.Enabled = true;
                 deleteButton.Enabled = true;
             }
             else
             {
+                addButton.Enabled = true;
                 selectButton.Enabled = false;
                 deleteButton.Enabled = false;
             }
         }
+
+
 
         // actions on the rooms
         private void addButton_Click(object sender, EventArgs e)
         {
             panelInformation.Enabled = true;
             listOfRooms.Enabled = false;
+            addButton.Enabled = false;
+            selectButton.Enabled = false;
+            deleteButton.Enabled = false;
         }
         private void selectButton_Click(object sender, EventArgs e)
         {
             panelInformation.Enabled = true;
             listOfRooms.Enabled = false;
+            addButton.Enabled = false;
+            selectButton.Enabled = false;
+            deleteButton.Enabled = false;
 
             LoadRoom();
         }
@@ -109,11 +118,17 @@ namespace Projekt_hotel
             {
                 contextDB.Room.DeleteOnSubmit(toCheck);
                 contextDB.SubmitChanges();
+
+                addButton.Enabled = false;
+                selectButton.Enabled = false;
+                deleteButton.Enabled = false;
+
+                LoadForm();
             }
             else
             {
                 CustomDialog cd = new CustomDialog("it is not possible to delete a room with reservations", 1);
-                cd.Show();
+                cd.ShowDialog();
             }
         }
         void LoadRoom()
@@ -121,71 +136,116 @@ namespace Projekt_hotel
             Room toLoad = listOfRooms.SelectedItem as Room;
 
             textBox1.Text = toLoad.RoomNameUnique;
-            categoryCombobox.SelectedItem = toLoad.RoomType;
+            categoryCombobox.Text = toLoad.RoomType.RoomName;
 
-
+            LoadImageFromDatabase();
         }
 
 
 
-        private void loadButton_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Filter = "Image files (*.jpg)|*.jpg|(*.png)|*.png|(*.gif)|*.gif";
-            openFileDialog1.ShowDialog();
-            pictureBox1.BackgroundImage = Image.FromFile(openFileDialog1.FileName);
-        }
 
 
-
+        // actions on the PanelInformation
         private void CancelButtonTLO_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
             categoryCombobox.SelectedIndex = -1;
-            pictureBox1.BackgroundImage.Dispose();
-            panelInformation.Enabled = false;
+            pictureBox1.Image = null;
             listOfRooms.Enabled = true;
+            listOfRooms.SelectedIndex = -1;
+            
         }
         private void ConfirmButtonTLO_Click(object sender, EventArgs e)
         {
+            CustomDialog cd;
             if(!string.IsNullOrWhiteSpace(textBox1.Text) && (categoryCombobox.SelectedIndex != -1))
             {
-                if(pictureBox1.BackgroundImage != null)
+                if(pictureBox1.Image != null)
                 {
-                    /*
+                    
                     try
                     {
                         MemoryStream ms = new MemoryStream();
-                        pictureBox1.BackgroundImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        Room roomToSave;
+                        pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                         byte[] arrImage = ms.ToArray();
 
-                        MyPictures newPicture = new MyPictures();
 
-                        newPicture.FileName = textBox1.Text;
-                        newPicture.Data = arrImage;
+                        if(contextDB.Room.Any(x => x.RoomNameUnique == textBox1.Text.ToUpper().ToString()))
+                        {
+                            roomToSave = listOfRooms.SelectedItem as Room;
+                        }
+                        else
+                        {
+                             roomToSave = new Room();
+                            contextDB.Room.InsertOnSubmit(roomToSave);
+                        }
 
-                        picDB.MyPictures.InsertOnSubmit(newPicture);
-                        picDB.SubmitChanges();
+                        RoomType helper = contextDB.RoomType.Where(x => x.RoomName == categoryCombobox.SelectedItem.ToString()).FirstOrDefault();
+
+                        roomToSave.RoomNameUnique = textBox1.Text;
+                        roomToSave.Hotel_ID = 1;
+                        roomToSave.RoomType_ID = helper.Id;
+                        roomToSave.Data = arrImage;
+
+                        contextDB.SubmitChanges();
+
+                        addButton.Enabled = false;
+                        selectButton.Enabled = false;
+                        deleteButton.Enabled = false;
+
+                        textBox1.Clear();
+                        categoryCombobox.SelectedIndex = -1;
+                        pictureBox1.Image = null;
+
+                        panelInformation.Enabled = false;
+                        LoadForm();
+                        listOfRooms.Enabled = true;
 
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    */
+                    
                 }
                 else
                 {
-                    // wczytaj jakies zdjecie
+                    cd = new CustomDialog("try to load image", 1);
+                    cd.ShowDialog();
                 }
             }
             else
             {
-                // wyplenij dane
+                cd = new CustomDialog("fill in the data", 1);
+                cd.ShowDialog();
             }
         }
 
-        /*
-        // konwertuj zdjecie
+        
+
+        // Load image to form
+        void LoadImageFromDatabase()
+        {
+                try
+                {
+                    var st = (from room in contextDB.Room where room.RoomNameUnique == listOfRooms.SelectedItem.ToString() select room).First();
+                if (st.Data != null)
+                    pictureBox1.Image = ConvertByteArrayToImage(st.Data.ToArray());
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+        }
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Image files (*.jpg)|*.jpg|(*.png)|*.png|(*.gif)|*.gif";
+            openFileDialog1.ShowDialog();
+            pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+        }
         public Image ConvertByteArrayToImage(byte[] data)
         {
             using (MemoryStream ms = new MemoryStream(data))
@@ -196,28 +256,9 @@ namespace Projekt_hotel
             }
         }
 
-        // Load image to form
-        private void btnLoadFromDB_Click(object sender, EventArgs e)
-        {
-            if(!string.IsNullOrWhiteSpace(textBox2.Text))
-            {
-                try
-                {
-                    var st = (from pic in picDB.MyPictures where pic.FileName == textBox2.Text select pic).First();
-                    pictureBox2.Image = ConvertByteArrayToImage(st.Data.ToArray());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
-
-        */
 
 
-
-
+        // Exit from Room Editor
         private void ButtonExit_Click(object sender, EventArgs e)
         {
             this.Close();
